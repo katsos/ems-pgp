@@ -1,0 +1,16 @@
+.DS_Store
+.idea
+
+# npm
+node_modules
+npm-debug.log
+
+# Python / Django
+.venv
+*.pyc
+
+# dev env
+webpack-stats.json
+_root/db\.sqlite3
+_root/static/wp_bundles/
+_root/*/migrations
