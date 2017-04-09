@@ -20,9 +20,27 @@ class SearchInput extends React.Component {
     this.name = 'header__search';
     this.state = {value: ''};
 
+    this.addEventListener_Ctrl_S();
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleIconClick = this.handleIconClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.inputElement = document.body.querySelector(`#${this.name}`);
+  }
+
+  addEventListener_Ctrl_S() {
+    /* don't add listener if we don't know the platform */
+    if (!navigator.platform) return;
+
+    document.addEventListener('keydown', event => {
+      if (((navigator.platform.startsWith('Mac') && event.metaKey) || event.ctrlKey) && event.keyCode === 83) {
+        event.preventDefault();
+        this.inputElement.focus();
+      }
+    });
   }
 
   handleInputChange(event) {
@@ -35,6 +53,9 @@ class SearchInput extends React.Component {
     this.submit();
   }
 
+  /**
+   * If input is not empty submit query and return focus to the input field whatever its value is.
+   */
   handleIconClick() {
     if (this.state.value.length) this.submit();
   }
@@ -53,7 +74,7 @@ class SearchInput extends React.Component {
                value={this.state.value}
                onChange={this.handleInputChange}
         />
-        <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor={this.name} onClick={this.handleSubmit}>
+        <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor={this.name} onClick={this.handleIconClick}>
           <i className="material-icons">search</i>
         </label>
       </form>
