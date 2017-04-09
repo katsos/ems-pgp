@@ -6,10 +6,10 @@
     2. `source ./.venv/bin/activate`
     3. `pip3 install -r ./requirements.txt`
 2. Create node enviroment running: `yarn install`
-3. Create database
+3. Create & populate database
     1. `cd ./_root`
-    2. `./manage.py makemigrations`
-    3. `./manage.py migrate`
+    2. `./manage.py migrate`
+    3. `./manage.py loaddata ./api/fixtures/<entity>.json`
 
 ### Run for development
 1. `npm start`
