@@ -2,6 +2,11 @@
 import os
 import sys
 
+# use PyMySQL as connector instead of MySQL-python
+# http://stackoverflow.com/questions/34777755/how-to-config-django-using-pymysql-as-driver
+import pymysql
+pymysql.install_as_MySQLdb()
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
     try:
