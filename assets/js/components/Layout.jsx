@@ -7,12 +7,10 @@ import Main from './Main';
 export default class Layout extends React.Component {
   render() {
     return (
-      <div className="mdl-layout__container">
-        <div className="mdl-layout mdl-js-layout">
-          <Header/>
-          <Drawer/>
-          <Main/>
-        </div>
+      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <Header/>
+        <Drawer/>
+        <Main/>
       </div>
     )
   }
