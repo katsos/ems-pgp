@@ -23,7 +23,7 @@
   "homepage": "https://github.com/katsos/ems-pgp#readme",
   "dependencies": {
     "material-design-lite": "1.3.0",
-    "prop-types": "15.5.4",
+    "prop-types": "15.5.7",
     "react": "15.5.0",
     "react-dom": "15.5.0",
     "react-router": "4.0.0",
@@ -42,7 +42,6 @@
     "node-sass": "4.5.2",
     "sass-loader": "6.0.3",
     "style-loader": "0.16.1",
-    "webpack": "2.3.2",
-    "webpack-bundle-tracker": "0.2.0"
+    "webpack": "2.3.2"
   }
 }

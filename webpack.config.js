@@ -1,8 +1,7 @@
 const path = require("path");
-const destinationPath = path.resolve('./_root/static/wp_bundles/');
+const destinationPath = path.resolve('./static/');
 
 const webpack = require('webpack');
-const BundleTracker = require('webpack-bundle-tracker');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin(`[name].css`);
 
@@ -16,10 +15,7 @@ module.exports = {
       filename: "bundle.js",
   },
 
-  plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
-    extractCSS,
-  ],
+  plugins: [extractCSS],
 
   module: {
     rules: [
