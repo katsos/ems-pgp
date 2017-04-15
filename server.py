@@ -1,6 +1,6 @@
 from flask import Flask
 
-from server_modules.router import route
+from server_modules import Router
 from server_modules.database import Database
 
 app = Flask(
@@ -12,7 +12,7 @@ app = Flask(
 
 Database.init(app)
 Database.db.create_all()
-route(app)
+Router.route(app)
 
 if __name__ == "__main__":
     app.run(debug=True)
