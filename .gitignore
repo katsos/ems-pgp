@@ -10,5 +10,5 @@ npm-debug.log
 .venv
 *.pyc
 
-# dev env
-static
+# generated
+public/static
