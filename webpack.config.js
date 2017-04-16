@@ -1,5 +1,5 @@
 const path = require("path");
-const destinationPath = path.resolve('./static/');
+const destinationPath = path.resolve('./public/');
 
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');

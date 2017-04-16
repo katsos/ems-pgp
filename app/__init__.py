@@ -4,12 +4,13 @@ from flask_migrate import Migrate
 from app.router import route
 from app.database import Database, db
 
-PUBLIC_FOLDER = '../public'
+STATIC_FOLDER = '../public'
+STATIC_URL_PATH = '/static'
 
 app = Flask(
     __name__,
-    static_url_path='', # request files inside of static folder without prefixes
-    static_folder=PUBLIC_FOLDER
+    static_url_path=STATIC_URL_PATH,
+    static_folder=STATIC_FOLDER
 )
 app.config.from_object('config')
 

@@ -1,4 +1,4 @@
-from flask import abort, request, render_template
+from flask import render_template
 
 from app.auth.views import auth
 
@@ -8,6 +8,6 @@ def route(app):
 
     # Serve frontend app
     @app.route('/', methods=['GET'])
-    @app.route('/<path:path>', methods=['GET'])
-    def index(path=None):
+    @app.route('/<path:ignored>', methods=['GET'])
+    def index(ignored=None):
         return render_template('index.html')
