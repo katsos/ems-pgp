@@ -1,16 +1,22 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 from app.router import route
-from app.database.Database import Database
+from app.database import Database
+
+PUBLIC_FOLDER = '../public'
 
 app = Flask(
     __name__,
     static_url_path='', # request files inside of static folder without prefixes
-    static_folder='public/static',
-    template_folder='public/templates'
+    static_folder=PUBLIC_FOLDER
 )
+app.config.from_object('config')
 
-db = Database.get_instance(app)
+db = SQLAlchemy(app)
+Database.check_connection()
+
+from app.models import *
+db.create_all() # migrate db schema
+
 route(app)
-
-db.create_all()

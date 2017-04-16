@@ -1,9 +1,10 @@
 from flask import abort, jsonify, Blueprint, request
 
-from app.utils import data_is_valid
+from app.utils import data_is_valid, is_json
 from .controllers import is_user_authenticated
 
 auth = Blueprint('auth', __name__)
+auth.before_request(is_json)
 
 
 @auth.route('/login', methods=['POST'])
