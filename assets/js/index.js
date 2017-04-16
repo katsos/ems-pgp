@@ -6,9 +6,9 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import 'material-design-lite/dist/material.indigo-red.min.css';
 import 'material-design-lite';
 /* Import custom styles */
-import '../scss/style.scss';
 
 import Layout from './components/Layout';
+import '../scss/styles.scss';
 
 const appElement = document.getElementById('react-app');
 

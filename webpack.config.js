@@ -3,7 +3,7 @@ const destinationPath = path.resolve('./public/');
 
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCSS = new ExtractTextPlugin(`[name].css`);
+const extractCSS = new ExtractTextPlugin(`styles.css`);
 
 module.exports = {
   cache: true,
