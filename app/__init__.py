@@ -1,8 +1,8 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 from app.router import route
-from app.database import Database
+from app.database import Database, db
 
 PUBLIC_FOLDER = '../public'
 
@@ -13,10 +13,9 @@ app = Flask(
 )
 app.config.from_object('config')
 
-db = SQLAlchemy(app)
 Database.check_connection()
+db.init_app(app)
+migrate = Migrate(app, db)
 
 from app.models import *
-db.create_all() # migrate db schema
-
 route(app)

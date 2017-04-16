@@ -16,7 +16,7 @@ def login():
 
     response = is_user_authenticated(request_data)
     response_json = jsonify(response)
-    return response_json if response['token'] else abort(400, response_json)
+    return response_json if 'token' in response else abort(400, response_json)
 
 
 @auth.route('/logout', methods=['POST'])
