@@ -11,9 +11,6 @@ export default class Main extends React.Component {
     return (
       <main className="mdl-layout__content">
         <Route exact path="/" component={Dashboard}/>
-              <Route path="/student/:id" component={Student}/>
-        <Route exact path="/students" component={Students}/>
-              <Route path="/students/new" component={StudentsNew}/>
       </main>
     )
   }

@@ -1,0 +1,15 @@
+.login-page {
+  height: 100vh;
+
+  .sign-in {
+    $width: 150px;
+    $height: 45px;
+
+    position: absolute;
+    top: calc(50% - #{$height}/2);
+    left: calc(50% - #{$width}/2);
+
+    width: $width;
+    height: $height;
+  }
+}
