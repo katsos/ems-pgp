@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
+import './utils';
+
 import LoginPage from './pages/LoginPage';
 import Layout from './components/Layout';
 
