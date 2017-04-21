@@ -1,4 +1,5 @@
 import React from 'react';
+import findDOMNode from 'react-dom/lib/findDOMNode'
 
 import Header from './Header';
 import Drawer from './Drawer';
@@ -10,20 +11,30 @@ export default class Layout extends React.Component {
 
     this.isUserLoggedIn = sessionStorage.googleAuth;
     if (!this.isUserLoggedIn) location.href = '/login';
+
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
   componentDidMount() {
-    /* Initialize google auth2 */
-    gapi.load('auth2', () => gapi.auth2.init());
+    this._initializeGoogleAuth();
+  }
+
+  _initializeGoogleAuth() {
+      gapi.load('auth2', () => gapi.auth2.init());
+  }
+
+  toggleDrawer() {
+    this.layoutNodeElement = findDOMNode(this);
+    this.layoutNodeElement.MaterialLayout.toggleDrawer();
   }
 
   render() {
-
     if (!this.isUserLoggedIn) return null;
+
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <Header/>
-        <Drawer/>
+        <Drawer toggleDrawer={this.toggleDrawer}/>
         <Main/>
       </div>
     )

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
+
 import SignOut from "./SignOut";
 
 const NAV_LINKS = {
@@ -8,10 +9,18 @@ const NAV_LINKS = {
 };
 
 export default class Drawer extends React.Component {
+
   render() {
 
     const navLinks = Object.keys(NAV_LINKS).map((name, id) => {
-     return <Link className="mdl-navigation__link" to={NAV_LINKS[name]} key={id}>{name}</Link>
+     return (
+       <Link
+         className="mdl-navigation__link"
+         to={NAV_LINKS[name]}
+         key={id}
+         onClick={this.props.toggleDrawer}
+       >{name}</Link>
+     )
     });
 
     return (
