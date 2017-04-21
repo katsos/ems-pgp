@@ -11,10 +11,17 @@ export default class SignOut extends React.Component {
 
   handleClick() {
     gapi.auth2.getAuthInstance().signOut()
-      .then(() =>  location.pathname = '/login');
+      .then(() =>  {
+        sessionStorage.removeItem('googleAuth');
+        sessionStorage.removeItem('googleProfile');
+
+        location.pathname = '/login'
+      });
   }
 
   render() {
-    return <a className={this.props.className} onClick={this.handleClick} href="#">{this.props.text}</a>
+    const className = this.props.className + ' clickable';
+
+    return <a className={className} onClick={this.handleClick}>{this.props.text}</a>
   }
 }
