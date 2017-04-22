@@ -1,16 +1,15 @@
+from sqlalchemy.orm import relationship
+
 from app.database import db
 
 
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(32), unique=True)
-    email = db.Column(db.String(64), unique=True)
-    token = db.Column(db.String(256))
+    email = db.Column(db.String(128), primary_key=True)
+    google_user = relationship('Google_User', uselist=False)
 
-    def __init__(self, username, email):
-        self.username = username
+    def __init__(self, email):
         self.email = email
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.email

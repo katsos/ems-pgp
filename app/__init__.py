@@ -18,5 +18,7 @@ Database.check_connection()
 db.init_app(app)
 migrate = Migrate(app, db)
 
-from app.models import *
+from app.models.user import User
+from app.models.google_user import GoogleUser
+
 route(app)
