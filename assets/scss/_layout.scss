@@ -1,3 +1,29 @@
 a.clickable:hover {
   cursor: pointer;
 }
+
+.drawer-user {
+  border-bottom: 1px solid lightgrey;
+  padding: 10px 4px;
+
+  &__photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  &__email {
+    float: right;
+    word-wrap: break-word;
+
+    width: 100%;
+    max-width: 158px;
+    margin-top: 20px;
+  }
+
+  &__logout.mdl-button {
+    display: block;
+    width: 110px;
+    margin: 0 auto;
+  }
+}

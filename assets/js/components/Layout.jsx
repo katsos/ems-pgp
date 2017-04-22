@@ -20,7 +20,7 @@ export default class Layout extends React.Component {
   }
 
   _initializeGoogleAuth() {
-      gapi.load('auth2', () => gapi.auth2.init());
+    gapi.load('auth2', () => gapi.auth2.init());
   }
 
   toggleDrawer() {

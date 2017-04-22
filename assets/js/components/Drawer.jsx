@@ -1,35 +1,33 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 
-import SignOut from "./SignOut";
+import DrawerUser from "./DrawerUser";
 
 const NAV_LINKS = {
   Home: '/',
   Students: '/students',
 };
 
-export default class Drawer extends React.Component {
+export default function Drawer(props) {
+  return (
+    <div className="mdl-layout__drawer">
+      <DrawerUser/>
+      <nav className="mdl-navigation">
+        {NavLinks(props.toggleDrawer)}
+      </nav>
+    </div>
+  );
+}
 
-  render() {
-
-    const navLinks = Object.keys(NAV_LINKS).map((name, id) => {
+function NavLinks(toggleDrawer) {
+  return Object.keys(NAV_LINKS).map((name, id) => {
      return (
        <Link
          className="mdl-navigation__link"
          to={NAV_LINKS[name]}
          key={id}
-         onClick={this.props.toggleDrawer}
+         onClick={toggleDrawer}
        >{name}</Link>
      )
-    });
-
-    return (
-      <div className="mdl-layout__drawer">
-        <nav className="mdl-navigation">
-          {navLinks}
-          <SignOut className="mdl-navigation__link" text="Logout"/>
-        </nav>
-      </div>
-    )
-  }
+  });
 }

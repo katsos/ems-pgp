@@ -20,7 +20,12 @@ export default class LoginPage extends React.Component {
         const googleProfile = googleUser.getBasicProfile();
         const googleAuth = googleUser.getAuthResponse();
 
-        sessionStorage.setItem('googleProfile', JSON.stringify(googleProfile));
+        sessionStorage.setItem('googleProfile', JSON.stringify({
+          id: googleProfile.getId(),
+          fullname: googleProfile.getName(),
+          email: googleProfile.getEmail(),
+          imgUrl: googleProfile.getImageUrl()
+        }));
         sessionStorage.setItem('googleAuth', JSON.stringify(googleAuth));
 
         /* redirect user to "index" page */
@@ -28,7 +33,7 @@ export default class LoginPage extends React.Component {
       },
       onfailure(response) {
         console.error(response);
-        
+
         const error = response.error.split('_').join(' ').capitalize();
         alert(error);
       }
