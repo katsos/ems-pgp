@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Http from '../Http';
+
 export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -17,19 +19,24 @@ export default class LoginPage extends React.Component {
       height: 55,
       longtitle: true,
       onsuccess(googleUser) {
-        const googleProfile = googleUser.getBasicProfile();
-        const googleAuth = googleUser.getAuthResponse();
+        const email = googleUser.getBasicProfile().getEmail();
+        const token = googleUser.getAuthResponse().id_token;
 
-        sessionStorage.setItem('googleProfile', JSON.stringify({
-          id: googleProfile.getId(),
-          fullname: googleProfile.getName(),
-          email: googleProfile.getEmail(),
-          imgUrl: googleProfile.getImageUrl()
-        }));
-        sessionStorage.setItem('googleAuth', JSON.stringify(googleAuth));
+        Http.post('/auth/login', {email, token})
+          .then(response => response.json())
+          .then(json => {
+            console.log(json.user);
+            console.log('User has been authenticated successfully!');
 
-        /* redirect user to "index" page */
-        location.href = location.origin;
+            // store user data to sessionStorage
+
+            /* redirect user to "index" page */
+            // location.href = location.origin;
+          })
+          .catch(response => {
+            alert('There was an error while your authentication. ' +
+              'Ask your IT department to verify that you are using the correct email.');
+          });
       },
       onfailure(response) {
         console.error(response);

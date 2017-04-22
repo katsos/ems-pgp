@@ -17,5 +17,8 @@ class GoogleUser(db.Model):
         self.token = token
         self.image_url = image_url
 
+    def __setitem__(self, key, value):
+        self.__dict__[key] = value
+
     def __repr__(self):
         return '<User %r>' % self.email

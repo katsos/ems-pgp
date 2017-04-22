@@ -1,7 +1,7 @@
 from flask import abort, jsonify, Blueprint, request
 
 from app.utils import data_is_valid, is_json
-from .controllers import is_user_authenticated
+from .controllers import user_exists, get_google_user_data, import_update_user_data
 
 auth = Blueprint('auth', __name__)
 auth.before_request(is_json)
@@ -11,12 +11,24 @@ auth.before_request(is_json)
 def login():
     request_data = request.get_json()
 
-    if not data_is_valid(request_data, ['username', 'password']):
-        abort(422) # Unprocessable Entity
+    if not data_is_valid(request_data, ['email', 'token']):
+        abort(422)  # Unprocessable Entity
 
-    response = is_user_authenticated(request_data)
-    response_json = jsonify(response)
-    return response_json if 'token' in response else abort(400, response_json)
+    email = request_data['email']
+    token = request_data['token']
+
+    if not user_exists(email):
+        abort(400)  # bad request
+
+    google_user_data = get_google_user_data(token)
+
+    if not google_user_data:
+        abort(400)  # bad request
+
+    if not import_update_user_data(google_user_data, token):
+        abort(500, 'There was a problem storing user\'s data in database')
+
+    return jsonify({'user': google_user_data})
 
 
 @auth.route('/logout', methods=['POST'])
