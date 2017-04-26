@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin(`styles.css`);
 
 module.exports = {
+  devtool: 'cheap-module-eval-source-map',
   cache: true,
   context: __dirname,
   entry: './assets/js/index',
