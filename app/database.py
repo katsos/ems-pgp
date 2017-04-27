@@ -1,4 +1,4 @@
-import sys, MySQLdb
+import sys, pymysql
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -14,7 +14,7 @@ class Database():
     @staticmethod
     def check_connection():
         try:
-            db = MySQLdb.connect(
+            db = pymysql.connect(
                 Database.host,
                 Database.username,
                 Database.password,
@@ -28,6 +28,6 @@ class Database():
                 print("Database connection successful!")
             else:
                 print("Database connection failed!")
-        except MySQLdb.Error as error:
+        except pymysql.Error as error:
             print("Database connection failed with error " + str(error))
             sys.exit(1)
