@@ -1,24 +1,21 @@
 import sys, pymysql
 from flask_sqlalchemy import SQLAlchemy
 
+from config import DATABASE as config
+
 db = SQLAlchemy()
 
 
-class Database():
-    dbms = 'mysql'
-    username = 'root'
-    password = ''
-    host = 'localhost'
-    db_name = 'thesis'
+class Database:
 
     @staticmethod
     def check_connection():
         try:
             db = pymysql.connect(
-                Database.host,
-                Database.username,
-                Database.password,
-                Database.db_name
+                config['host'],
+                config['username'],
+                config['password'],
+                config['db_name']
             )
             cursor = db.cursor()
             cursor.execute("SELECT VERSION()")
