@@ -12,4 +12,5 @@ npm-debug.log
 *.pyc
 
 # generated
+migrations
 public

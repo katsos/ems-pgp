@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_migrate import Migrate
 
 from app.router import route
 from app.database import Database, db
@@ -16,7 +15,6 @@ app.config.from_object('config')
 
 Database.check_connection()
 db.init_app(app)
-migrate = Migrate(app, db)
 
 from app.models.user import User
 from app.models.google_user import GoogleUser
