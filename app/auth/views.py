@@ -18,12 +18,12 @@ def login():
     token = request_data['token']
 
     if not user_exists(email):
-        abort(400)  # bad request
+        abort(400, 'The email your provided isn\'t valid.')  # bad request
 
     google_user_data = get_google_user_data(token)
 
     if not google_user_data:
-        abort(400)  # bad request
+        abort(400, 'Google\'s token integrity test failed.')  # bad request
 
     if not import_update_user_data(google_user_data, token):
         abort(500, 'There was a problem storing user\'s data in database')
