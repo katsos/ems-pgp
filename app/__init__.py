@@ -16,7 +16,6 @@ app.config.from_object('config')
 Database.check_connection()
 db.init_app(app)
 
-from app.models.user import User
-from app.models.google_user import GoogleUser
+from app.models import User, GoogleUser
 
 route(app)
