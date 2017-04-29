@@ -1,27 +1,29 @@
 import React from 'react';
+import Redirect from 'react-router-dom/Redirect';
 
 export default class SignOut extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {isUserLoggedIn: true};
     this.className = (props.classes) ? props.classes.join(' ') : '';
-
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
     gapi.auth2.getAuthInstance().signOut()
-      .then(() =>  {
-        sessionStorage.removeItem('googleAuth');
-        sessionStorage.removeItem('googleProfile');
+      .then(this._logoutUser());
+  }
 
-        location.pathname = '/login'
-      });
+  _logoutUser() {
+    sessionStorage.removeItem('user');
+    this.setState({isUserLoggedIn: false});
   }
 
   render() {
-    const className = this.props.className + ' clickable';
+    if (!this.state.isUserLoggedIn) return <Redirect to="/login"/>;
 
-    return <a className={className} onClick={this.handleClick}>{this.props.text}</a>
+    const className = this.props.className + ' clickable';
+    return <a className={className} onClick={this.handleClick}>{this.props.text}</a>;
   }
 }

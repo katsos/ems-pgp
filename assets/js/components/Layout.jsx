@@ -1,5 +1,6 @@
 import React from 'react';
-import findDOMNode from 'react-dom/lib/findDOMNode'
+import Redirect from 'react-router-dom/Redirect';
+import findDOMNode from 'react-dom/lib/findDOMNode';
 
 import Header from './Header';
 import Drawer from './Drawer';
@@ -9,9 +10,9 @@ export default class Layout extends React.Component {
   constructor(props) {
     super(props);
 
-    this.isUserLoggedIn = sessionStorage.googleAuth;
-    if (!this.isUserLoggedIn) location.href = '/login';
-
+    this.sessionStorageUser = sessionStorage.getItem('user');
+    this.state = {isUserLoggedIn: (!!this.sessionStorageUser)};
+    window.user = JSON.parse(this.sessionStorageUser);
     this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
@@ -29,7 +30,7 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    if (!this.isUserLoggedIn) return null;
+    if (!this.state.isUserLoggedIn) return <Redirect to="/login"/>;
 
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
