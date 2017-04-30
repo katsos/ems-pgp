@@ -1,7 +1,9 @@
 from flask import abort, jsonify, Blueprint, request
+from jsonschema import validate, ValidationError
 
-from app.utils import data_is_valid, is_json
-from .controllers import user_exists, get_google_user_data, import_update_user_data
+from app.utils import is_json
+from auth.schemas import login_schema
+from auth.controllers import user_exists, get_google_user_data, import_update_user_data
 
 auth = Blueprint('auth', __name__)
 auth.before_request(is_json)
@@ -11,7 +13,9 @@ auth.before_request(is_json)
 def login():
     request_data = request.get_json()
 
-    if not data_is_valid(request_data, ['email', 'token']):
+    try:
+        validate(request_data, login_schema)
+    except ValidationError:
         abort(422)  # Unprocessable Entity
 
     email = request_data['email']

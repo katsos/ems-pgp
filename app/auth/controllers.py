@@ -1,4 +1,5 @@
 from oauth2client import client, crypt
+from oauth2client.crypt import AppIdentityError
 
 from app.database import db
 from app.models.user import User
@@ -16,11 +17,10 @@ def get_google_user_data(token):
         info = client.verify_id_token(token, CLIENT_ID)
 
         if info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-            raise crypt.AppIdentityError("Wrong issuer.")
+            raise AppIdentityError("Wrong issuer.")
 
-        print(info)
         return info
-    except:
+    except AppIdentityError:
         return None
 
 
