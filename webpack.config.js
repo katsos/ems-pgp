@@ -12,8 +12,8 @@ module.exports = {
   entry: './assets/js/index',
 
   output: {
-      path: destinationPath,
-      filename: "bundle.js",
+    path: destinationPath,
+    filename: "bundle.js",
   },
 
   plugins: [extractCSS],
@@ -24,7 +24,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options:{
+        options: {
           cacheDirectory: true,
           presets: ['react', 'es2015'],
           plugins: ['react-html-attrs', 'transform-object-rest-spread']
