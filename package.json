@@ -26,8 +26,8 @@
     "prop-types": "15.5.7",
     "react": "15.5.0",
     "react-dom": "15.5.0",
-    "react-router": "4.0.0",
-    "react-router-dom": "4.0.0"
+    "react-router": "4.1.1",
+    "react-router-dom": "4.1.1"
   },
   "devDependencies": {
     "babel-core": "6.24.0",
