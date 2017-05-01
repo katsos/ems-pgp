@@ -1,3 +1,28 @@
+%elevated-box {
+  background-color: $color-white;
+  padding: 15px;
+  border: 1px solid $color-grey-border;
+
+  color: $color-grey-border; // this is for coloring the box-shadow
+  box-shadow: 0 0 10px 1px;
+
+  > * {
+    color: $color-black-text;
+  }
+}
+
+.layout {
+  background-color: $color-grey-body-bg;
+
+  .layout__content {
+    @extend %elevated-box;
+
+    margin: 20px auto;
+    width: 100%;
+    max-width: 1240px;
+  }
+}
+
 a.clickable:hover {
   cursor: pointer;
 }

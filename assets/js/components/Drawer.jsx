@@ -5,6 +5,7 @@ import DrawerUser from "./DrawerUser";
 
 const NAV_LINKS = {
   Home: '/',
+  Programs: '/programs',
   Students: '/students',
 };
 

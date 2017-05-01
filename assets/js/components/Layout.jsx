@@ -33,7 +33,7 @@ export default class Layout extends React.Component {
     if (!this.state.isUserLoggedIn) return <Redirect to="/login"/>;
 
     return (
-      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header layout">
         <Header/>
         <Drawer toggleDrawer={this.toggleDrawer}/>
         <Main/>
