@@ -21,23 +21,29 @@ export default class Programs extends React.Component {
     ];
   }
 
-  _getProgramsList() {
-    return this.programsList.map((program, index) => {
-      return (
-        <li key={index}>
-          <Link to={`/programs/${program.id}`}>{program.name}</Link>
-        </li>
-      );
-    });
-  }
+  // _getProgramsList() {
+  //   return this.programsList.map((program, index) => {
+  //     return (
+  //       <li key={index}>
+  //         <Link to={`/programs/${program.id}`}>{program.name}</Link>
+  //       </li>
+  //     );
+  //   });
+  // }
 
   render() {
     return (
-      <div className="programs">
-        Programs list EXACTLY here!asdf
-        <ul className="programs__list">
-          {this._getProgramsList()}
-        </ul>
+      <div className="programs mdl-grid">
+        <div className="programs__action mdl-cell mdl-button mdl-js-button mdl-button--primary">
+          <i class="material-icons mdl-48">add</i>
+          <span>Add new program</span>
+        </div>
+        <div className="programs__action mdl-cell mdl-button mdl-js-button mdl-button--primary">
+          <span>View all active programs</span>
+        </div>
+        <div className="programs__action mdl-cell mdl-button mdl-js-button mdl-button--primary">
+          <span>View finished programs</span>
+        </div>
       </div>
     )
   }

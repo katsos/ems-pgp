@@ -1,0 +1,21 @@
+.mdl-button.programs__action {
+  height: 280px;
+  padding: 0;
+  border: 1px solid $color-grey-border;
+
+  i, span {
+    display: block;
+    position: absolute;
+    width: 100%;
+  }
+
+  i {
+    top: 15%;
+    font-size: 126px;
+  }
+
+  span {
+    bottom: 0;
+    font-size: 24px;
+  }
+}
