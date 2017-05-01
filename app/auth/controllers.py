@@ -9,7 +9,7 @@ CLIENT_ID = "976520229359-f2v2c0th5uoa1nd7p1aiij364tjp7uqj.apps.googleuserconten
 
 
 def user_exists(email):
-    return True if User.query.get(email) else False
+    return True if User.query.filter(User.email == email).first() else False
 
 
 def get_google_user_data(token):
