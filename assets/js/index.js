@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import './utils';
 
-import LoginPage from './pages/LoginPage';
+import LoginPage from './components/pages/LoginPage';
 import Layout from './components/Layout';
 
 /* Import Material Design Lite */

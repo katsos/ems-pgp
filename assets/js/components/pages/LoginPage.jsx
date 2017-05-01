@@ -1,7 +1,7 @@
 import React from 'react';
 import Redirect from 'react-router-dom/Redirect';
 
-import Http from '../Http';
+import Http from '../../Http';
 
 export default class LoginPage extends React.Component {
   constructor(props) {
