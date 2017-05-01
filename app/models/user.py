@@ -1,13 +1,13 @@
-from sqlalchemy.orm import relationship
-
 from app.database import db
 
 
 class User(db.Model):
-    __tablename__ = 'users'
-    email = db.Column(db.String(128), primary_key=True)
-    google_user_email = relationship('GoogleUser', uselist=False)
-    test = db.Column(db.Numeric)
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(128), unique=True)
+
+    google_user_email = db.relationship('GoogleUser', uselist=False)
+    programs = db.relationship('Program', backref='user')
 
     def __repr__(self):
         return '<User %r>' % self.email
