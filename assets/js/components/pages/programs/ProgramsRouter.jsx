@@ -3,13 +3,15 @@ import {Route, Switch} from 'react-router-dom';
 
 import ProgramsIndex from "./ProgramsIndex";
 import ProgramsList from "./ProgramsList";
+import ProgramPage from "./ProgramPage";
 
 export const ROUTER_PREFIX = '/programs';
 
-export default function ProgramsRouter(props) {
+export default function ProgramsRouter() {
   return (
     <Switch>
-      <Route exact path={`${ROUTER_PREFIX}/active`} component={ProgramsList}/>
+      <Route path={`${ROUTER_PREFIX}/active`} component={ProgramsList}/>
+      <Route path={`${ROUTER_PREFIX}/:id`} component={ProgramPage}/>
       <Route component={ProgramsIndex}/>
     </Switch>
   )

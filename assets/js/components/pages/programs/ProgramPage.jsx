@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Program extends React.Component {
+export default class ProgramPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -8,9 +8,8 @@ export default class Program extends React.Component {
   }
 
   render() {
-
     return (
-      <div className="programs">
+      <div className="program">
         Program {this.programId}
       </div>
     )
