@@ -1,5 +1,6 @@
 .mdl-button.programs__action {
-  height: 280px;
+  $button-height: 280px;
+  height: $button-height;
   padding: 0;
   border: 1px solid $color-grey-border;
 
@@ -10,12 +11,13 @@
   }
 
   i {
-    top: 15%;
-    font-size: 126px;
+    $font-size: 120px;
+    top: calc(#{$button-height} / 6);
+    font-size: $font-size;
   }
 
   span {
     bottom: 0;
-    font-size: 24px;
+    font-size: 22px;
   }
 }

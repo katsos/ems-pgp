@@ -20,6 +20,9 @@
     margin: 20px auto;
     width: 100%;
     max-width: 1240px;
+
+    /* Overwrite flex-grow */
+    flex-grow:0;
   }
 }
 
