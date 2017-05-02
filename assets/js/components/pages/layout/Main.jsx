@@ -1,8 +1,8 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-import Dashboard from './Dashboard';
-import ProgramsRouter from "./pages/programs/ProgramsRouter";
+import Dashboard from '../../Dashboard';
+import ProgramsRouter from "../programs/ProgramsRouter";
 
 export default class Main extends React.Component {
   render() {

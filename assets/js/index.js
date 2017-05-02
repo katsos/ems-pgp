@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './utils';
 
 import LoginPage from './components/pages/LoginPage';
-import Layout from './components/Layout';
+import LayoutPage from "./components/pages/layout/LayoutPage";
 
 /* Import Material Design Lite */
 import 'material-design-lite/dist/material.indigo-red.min.css';
@@ -19,7 +19,7 @@ ReactDOM.render(
   <Router>
     <Switch>
       <Route path="/login" component={LoginPage}/>
-      <Route component={Layout}/>
+      <Route component={LayoutPage}/>
     </Switch>
   </Router>
 , appElement);

@@ -6,7 +6,7 @@ import Header from './Header';
 import Drawer from './Drawer';
 import Main from './Main';
 
-export default class Layout extends React.Component {
+export default class LayoutPage extends React.Component {
   constructor(props) {
     super(props);
 
