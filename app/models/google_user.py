@@ -3,7 +3,6 @@ from app.models.user import User
 
 
 class GoogleUser(db.Model):
-    __tablename__ = 'google_user'
     fullname = db.Column(db.String(128))
     email = db.Column(db.String(128), db.ForeignKey(User.email), primary_key=True)
     email_verified = db.Column(db.Boolean)
