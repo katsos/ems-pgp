@@ -15,6 +15,10 @@ class Program(db.Model):
     admin_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     students = db.relationship('Student', backref='program')
 
+    __table_args__ = (
+        db.UniqueConstraint('title', 'year', name='program_title_year'),
+    )
+
     def __init__(self, title, year):
         self.title = title
         self.year = year
