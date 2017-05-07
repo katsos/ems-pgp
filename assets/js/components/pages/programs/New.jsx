@@ -23,32 +23,50 @@ export default class New extends React.Component {
   _handleFormSubmit(event) {
     event.preventDefault();
 
+    // TODO: add modal to confirm that the addition was intentional
+
     const formData = serializeForm(event.currentTarget);
-    // Http.post('/programs/new', formData);
+    Http.post('/api/programs', formData)
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        // TODO: navigate to new programs' page
+      })
+      .catch(response => {
+        alert(response);
+      })
   }
 
   render() {
     return (
       <div>
-        <form className="mdl-card" onSubmit={this._handleFormSubmit} >
+        <form className="mdl-card" onSubmit={this._handleFormSubmit}>
 
           <div className="mdl-card__title">Add a new program</div>
 
           <div className="mdl-card__supporting-text">
             <FormInput id='title'
-               onChange={this._handleChange}
+                       hasAutofocus
+                       isRequired
+                       onChange={this._handleChange}
             />
             <FormInput id='year'
-              type='number'
-              defaultValue={this.currentYear}
-              onChange={this._handleChange}
+                       type='number'
+                       defaultValue={this.currentYear}
+                       onChange={this._handleChange}
             />
           </div>
 
-         <div className="mdl-card__actions">
-           <input type='reset' value='Reset'/>
-           <input type='submit' value='Add'/>
-         </div>
+          <div className="mdl-card__actions mdl-card__actions--right">
+            <input type='submit'
+                   className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                   value='Add'
+            />
+            <input type='reset'
+                   className="mdl-button mdl-js-button mdl-button--accent"
+                   value='Reset'
+            />
+          </div>
 
         </form>
       </div>

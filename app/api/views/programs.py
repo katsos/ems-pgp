@@ -1,27 +1,49 @@
-from flask import Blueprint
+from flask import abort, Blueprint, request, jsonify
 from flask.views import MethodView
+from jsonschema import validate, ValidationError
+
+from app.api.controllers import add_program
 
 
 class ProgramAPI(MethodView):
     def get(self, id):
         return '{ \'errors\': [] }'
 
-    def post(self):
-        # create a new user
-        pass
+    def post(self, id):
+        request_data = request.get_json()
 
-    def delete(self, user_id):
-        # delete a single user
-        pass
+        try:
+            validate(request_data, post_schema)
+        except ValidationError:
+            abort(422)  # Unprocessable Entity
 
-    def put(self, user_id):
-        # update a single user
-        pass
+        title = request_data['title']
+        year = request_data['year']
 
+        # TODO: restriction on title-year
+        program = add_program(title, year)
+
+        return jsonify(
+            id=program.id,
+            title=program.title,
+            year=program.year,
+            creation_date=str(program.creation_date),
+        )
 
 programs_view = ProgramAPI.as_view('user_api')
 
 programs_blueprint = Blueprint('apo.programs', __name__)
+# TODO: add restriction - only secretary can see the programs api
 
 programs_blueprint.add_url_rule('', defaults={'id': None},
-                 view_func=programs_view, methods=['GET'])
+                                view_func=programs_view, methods=['GET', 'POST'])
+
+
+post_schema = {
+    "type": "object",
+    "properties": {
+        "title": {"type": "string"},
+        "year": {"type": "number"}
+    },
+    "required": ["title", "year"]
+}
