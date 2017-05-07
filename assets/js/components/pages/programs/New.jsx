@@ -10,6 +10,8 @@ export default class New extends React.Component {
     super(props);
     this.state = {value: ''};
 
+    this.currentYear = new Date().getFullYear();
+
     this._handleChange = this._handleChange.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
@@ -27,13 +29,28 @@ export default class New extends React.Component {
 
   render() {
     return (
-      <div className="programs-new">
-        <h3>Add a new program</h3>
+      <div>
+        <form className="mdl-card" onSubmit={this._handleFormSubmit} >
 
-        <form onSubmit={this._handleFormSubmit}>
-          <FormInput id='title'/>
+          <div className="mdl-card__title">Add a new program</div>
+
+          <div className="mdl-card__supporting-text">
+            <FormInput id='title'
+               onChange={this._handleChange}
+            />
+            <FormInput id='year'
+              type='number'
+              defaultValue={this.currentYear}
+              onChange={this._handleChange}
+            />
+          </div>
+
+         <div className="mdl-card__actions">
+           <input type='reset' value='Reset'/>
+           <input type='submit' value='Add'/>
+         </div>
+
         </form>
-
       </div>
     )
   }
