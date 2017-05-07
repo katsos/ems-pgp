@@ -5,7 +5,7 @@ from app.api import api_programs_blueprint
 
 
 def route(app):
-    app.register_blueprint(api_programs_blueprint, url_prefix='/api/programs/')
+    app.register_blueprint(api_programs_blueprint, url_prefix='/api/programs')
     app.register_blueprint(auth, url_prefix='/auth/')
 
     # Serve frontend app
