@@ -7,7 +7,8 @@ export function serializeForm(node) {
 
   const data = {};
   for (const input of inputs) {
-    Object.assign(data, {[input.id] : input.value});
+    const value = (input.type === 'number') ? Number(input.value) : input.value;
+    Object.assign(data, {[input.id] : value});
   }
 
   return data;
