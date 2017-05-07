@@ -6,7 +6,7 @@ class Student(db.Model):
     first_name = db.Column(db.String(128), nullable=False)
     last_name = db.Column(db.String(128), nullable=False)
 
-    program_id = db.Column(db.Integer, db.ForeignKey('program.id'))
+    program_id = db.Column(db.ForeignKey('program.id'))
 
     def __repr__(self):
         return '<Student %r>' % self.id
