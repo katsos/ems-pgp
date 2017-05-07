@@ -16,6 +16,6 @@ app.config.from_object('config')
 Database.check_connection()
 db.init_app(app)
 
-from app.models import GoogleUser, Program, User
+from app.models import *
 
 route(app)
