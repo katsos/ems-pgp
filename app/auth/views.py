@@ -9,7 +9,7 @@ auth = Blueprint('auth', __name__)
 auth.before_request(is_json)
 
 
-@auth.route('/login', methods=['POST'])
+@auth.route('login', methods=['POST'])
 def login():
     request_data = request.get_json()
 
@@ -35,6 +35,6 @@ def login():
     return jsonify({'user': google_user_data})
 
 
-@auth.route('/logout', methods=['POST'])
+@auth.route('logout', methods=['POST'])
 def logout():
-    return 'logout'
+    return 'logout' # TODO: add logout functionality
