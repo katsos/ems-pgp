@@ -7,3 +7,7 @@ def add_program(title, year):
     db.session.add(program)
     db.session.commit()
     return program
+
+
+def get_all_programs():
+    return Program.query.all()

@@ -25,3 +25,14 @@ class Program(db.Model):
 
     def __repr__(self):
         return '<Program %r>' % self.id
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'year': self.year
+        }
+
+    @staticmethod
+    def list_to_json(programs):
+        return [p.to_json() for p in programs]

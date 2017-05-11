@@ -2,14 +2,22 @@ from flask import abort, Blueprint, request, jsonify
 from flask.views import MethodView
 from jsonschema import validate, ValidationError
 
-from app.api.controllers import add_program
+from app.models import Program
+from app.api.controllers import add_program, get_all_programs
 
 
 class ProgramAPI(MethodView):
-    def get(self, id):
-        return '{ \'errors\': [] }'
+    @staticmethod
+    def get(id):
 
-    def post(self, id):
+        # TODO: add session authentication, if user has the right to see this list
+
+        programs = get_all_programs()
+
+        return jsonify(programs=Program.list_to_json(programs))
+
+    @staticmethod
+    def post(id):
         request_data = request.get_json()
 
         try:
