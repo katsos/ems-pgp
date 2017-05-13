@@ -25,24 +25,26 @@ export default class ProgramsList extends React.Component {
   }
 
   _renderList() {
-    return this.programs.map(program => {
+    const listItems = this.programs.map(program => {
       return (
-        <ul>
-          <li key={program.id}>
-            <Link to={`${ROUTER_PREFIX}/${program.id}`}>{program.title}</Link>
-          </li>
-        </ul>
+        <li key={program.id}>
+          <Link to={`${ROUTER_PREFIX}/${program.id}`}>{program.title}</Link>
+        </li>
       );
     });
+
+    return <ul>{listItems}</ul>
   }
 
   render() {
     if (this.state.isLoading) return <h3>Programs list is loading...</h3>;
 
     return (
-      <div className="programs mdl-grid">
-        <h3>Active Programs</h3>
-        {this._renderList()}
+      <div className="programs-list mdl-grid">
+        <h3 className="programs-list__title">Active Programs</h3>
+        <div className="programs-list__list">
+          {this._renderList()}
+        </div>
       </div>
     )
   }
