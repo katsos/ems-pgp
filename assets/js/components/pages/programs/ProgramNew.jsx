@@ -5,7 +5,7 @@ import Http from '../../../Http';
 import FormInput from '../../FormInput';
 import {serializeForm} from "../../../utils";
 
-export default class New extends React.Component {
+export default class ProgramNew extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
