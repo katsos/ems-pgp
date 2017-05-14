@@ -9,10 +9,10 @@ from app.api.controllers import add_program, get_all_programs
 class ProgramAPI(MethodView):
     @staticmethod
     def get(id):
-
         # TODO: add session authentication, if user has the right to see this list
 
-        programs = get_all_programs()
+        state = request.args.get('state')
+        programs = get_all_programs(state)
 
         return jsonify(programs=Program.list_to_json(programs))
 

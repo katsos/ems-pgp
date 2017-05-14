@@ -9,5 +9,12 @@ def add_program(title, year):
     return program
 
 
-def get_all_programs():
-    return Program.query.all()
+def get_all_programs(state):
+    if state is None:
+        return Program.query.all()
+
+    if state == 'active':
+        return Program.query.filter(Program.end_date is not None).all()
+
+    if state == 'finished':
+        return Program.query.filter(Program.end_date is None).all()
