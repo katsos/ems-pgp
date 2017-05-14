@@ -4,7 +4,7 @@ SECRET_KEY = 'super duper secret'
 DATABASE = dict(
     dbms='mysql',
     username='root',
-    password='',
+    password='root',
     host='localhost',
     db_name='thesis'
 )
