@@ -8,6 +8,7 @@ export default class ProgramsList extends React.Component {
   constructor(props) {
     super(props);
 
+    this.listState = this.props.location.pathname.split('/').pop();
     this.state = {isLoading: true};
   }
 
@@ -16,7 +17,12 @@ export default class ProgramsList extends React.Component {
   }
 
   _fetchPrograms() {
-    return Http.get('/api/programs')
+    let url = '/api/programs';
+
+    if (this.listState === 'active' || this.listState === 'finished')
+      url += `?state=${this.listState}`;
+
+    return Http.get(url)
       .then(response => response.json())
       .then(function (data) {
         this.programs = data.programs;
@@ -37,7 +43,11 @@ export default class ProgramsList extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <h3>Programs list is loading...</h3>;
+    if (this.state.isLoading)
+      return <h3>Programs list is loading...</h3>;
+
+    if (this.programs.length === 0)
+      return <h3>There are no {this.listState} programs available!</h3>;
 
     return (
       <div className="programs-list mdl-grid">
