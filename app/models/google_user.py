@@ -8,15 +8,8 @@ class GoogleUser(db.Model):
     token = db.Column(db.String(2048))
     image_url = db.Column(db.String(1024))
 
-    def __init__(self, fullname, email, email_verified, token, image_url):
-        self.fullname = fullname
+    def __init__(self, email):
         self.email = email
-        self.email_verified = email_verified
-        self.token = token
-        self.image_url = image_url
-
-    def __setitem__(self, key, value):
-        self.__dict__[key] = value
 
     def __repr__(self):
         return '<GoogleUser %r>' % self.email

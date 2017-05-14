@@ -1,8 +1,9 @@
-from flask import abort, jsonify, Blueprint, request
+from flask import abort, Blueprint, request, redirect, url_for
+from flask_login import login_user, logout_user
 from jsonschema import validate, ValidationError
 
 from .schemas import login_schema
-from .controllers import user_exists, get_google_user_data, import_update_user_data
+from .controllers import get_user, get_google_user_data
 
 auth = Blueprint('auth', __name__)
 
@@ -19,20 +20,24 @@ def login():
     email = request_data['email']
     token = request_data['token']
 
-    if not user_exists(email):
+    user = get_user(email)
+
+    if user is None:
         abort(400, 'The email your provided isn\'t valid.')  # bad request
 
     google_user_data = get_google_user_data(token)
 
-    if not google_user_data:
+    if google_user_data is None:
         abort(400, 'Google\'s token integrity test failed.')  # bad request
 
-    if not import_update_user_data(google_user_data, token):
+    if not user.set_google_user(google_user_data, token):
         abort(500, 'There was a problem storing user\'s data in database')
 
-    return jsonify({'user': google_user_data})
+    login_user(user)
+    return redirect(url_for(''))
 
 
 @auth.route('logout', methods=['POST'])
 def logout():
-    return 'logout' # TODO: add logout functionality
+    logout_user()
+    return redirect(url_for('login'))
