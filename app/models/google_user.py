@@ -19,4 +19,4 @@ class GoogleUser(db.Model):
         self.__dict__[key] = value
 
     def __repr__(self):
-        return '<User %r>' % self.email
+        return '<GoogleUser %r>' % self.email
