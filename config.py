@@ -1,4 +1,5 @@
 DEBUG = True
+SECRET_KEY = 'super duper secret'
 
 DATABASE = dict(
     dbms='mysql',
