@@ -1,10 +1,9 @@
 from app.database import db
-from app.models.user import User
 
 
 class GoogleUser(db.Model):
     fullname = db.Column(db.String(128))
-    email = db.Column(db.String(128), db.ForeignKey(User.email), primary_key=True)
+    email = db.Column(db.String(128), db.ForeignKey('user.email'), primary_key=True)
     email_verified = db.Column(db.Boolean)
     token = db.Column(db.String(2048))
     image_url = db.Column(db.String(1024))
