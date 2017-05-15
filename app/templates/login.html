@@ -62,12 +62,8 @@
 
         fetch('/auth/login', fetchOptions)
             .then(response => {
-                if (response.status === 200)
-                    return response.json();
-                else
-                    throw response;
+                if (response.status === 200) location.pathname = '';
             })
-            .then(data => console.log(data.user))
             .catch(response => {
                 console.error(response);
                 alert('There was an error while your authentication. ' +

@@ -1,5 +1,4 @@
-from flask import abort, Blueprint, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask import abort, Blueprint, request, session
 from jsonschema import validate, ValidationError
 
 from .schemas import login_schema
@@ -33,11 +32,12 @@ def login():
     if not user.set_google_user(google_user_data, token):
         abort(500, 'There was a problem storing user\'s data in database')
 
-    login_user(user)
-    return redirect(url_for(''))
+    session['token'] = token
+    return '{}'
 
 
 @auth.route('logout', methods=['POST'])
 def logout():
-    logout_user()
-    return redirect(url_for('login'))
+    session.pop('token', None)
+    return '{}'
+

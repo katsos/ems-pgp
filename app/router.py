@@ -1,8 +1,7 @@
-from flask import render_template
-from flask_login import login_required
+from flask import render_template, redirect, url_for, session
 
-from app.auth.views import auth
 from app.api import api_programs_blueprint
+from app.auth.views import auth
 
 
 def route(app):
@@ -11,11 +10,16 @@ def route(app):
 
     @app.route('/login', methods=['GET'])
     def login():
-        return render_template('login.html')
+        if session.get('token') is not None:
+            redirect(url_for('user'))
+        else:
+            return render_template('login.html')
 
     # Serve frontend app
     @app.route('/', methods=['GET'])
     @app.route('/<path:ignored>', methods=['GET'])
-    @login_required
     def index(ignored=None):
+        if session.get('token') is None:
+            redirect(url_for('login'))
+
         return render_template('index.html')
