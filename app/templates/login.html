@@ -40,7 +40,14 @@
         onsuccess(googleUser) {
             const email = googleUser.getBasicProfile().getEmail();
             const token = googleUser.getAuthResponse().id_token;
-            sendAuthTokenToServer(email, token);
+            sendAuthTokenToServer(email, token)
+                .then(response => {
+                    sessionStorage.setItem('user_auth', JSON.stringify({email, token}));
+                    if (response.status === 200) location.pathname = '';
+                })
+                .catch(response => {
+                    console.error(response);
+                });
         },
         onfailure(response) {
             console.error(response);
@@ -50,7 +57,7 @@
     });
 
     function sendAuthTokenToServer(email, token) {
-        const fetchOptions = {
+        return fetch('/auth/login', {
             method: 'POST',
             mode: 'same-origin',
             headers: {
@@ -58,17 +65,7 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({email, token})
-        };
-
-        fetch('/auth/login', fetchOptions)
-            .then(response => {
-                if (response.status === 200) location.pathname = '';
-            })
-            .catch(response => {
-                console.error(response);
-                alert('There was an error while your authentication. ' +
-                    'Ask your IT department to verify that you are using the correct email.');
-            });
+        });
     }
 
 </script>
