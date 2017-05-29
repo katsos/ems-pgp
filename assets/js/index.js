@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
+/* register not exported functions onto window */
 import './utils';
 
-import LoginPage from './components/pages/LoginPage';
 import LayoutPage from "./components/pages/layout/LayoutPage";
 
 /* Import Material Design Lite */
@@ -17,9 +17,6 @@ const appElement = document.getElementById('react-app');
 
 ReactDOM.render(
   <Router>
-    <Switch>
-      <Route path="/login" component={LoginPage}/>
-      <Route component={LayoutPage}/>
-    </Switch>
+    <Route component={LayoutPage}/>
   </Router>
 , appElement);
