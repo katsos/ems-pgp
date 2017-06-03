@@ -46,7 +46,7 @@ export default class LayoutPage extends React.Component {
 
   render() {
     if (!this.state.isUserLoggedIn) return location.pathname = 'login';
-    if (!this.state.isUserLoaded) return <LoadingAnimation/>;
+    // if (!this.state.isUserLoaded) return <LoadingAnimation/>;
 
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header layout">
