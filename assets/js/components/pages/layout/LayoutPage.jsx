@@ -1,11 +1,10 @@
-import React from 'react';
 import findDOMNode from 'react-dom/lib/findDOMNode';
 
 import Http from '../../../Http';
 import Header from './Header';
 import Drawer from './Drawer';
 import Main   from './Main';
-import LoadingAnimation from "../../LoadingAnimation";
+import LoadingAnimation from '../../LoadingAnimation';
 
 export default class LayoutPage extends React.Component {
   constructor(props) {
