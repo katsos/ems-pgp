@@ -10,25 +10,27 @@ export default class LayoutPage extends React.Component {
   constructor(props) {
     super(props);
 
-    window.user = {
-      auth: JSON.parse(sessionStorage.getItem('user_auth'))
+    window.user = {};
+    window.user['auth'] = JSON.parse(sessionStorage.getItem('user_auth'));
+
+    this.state = {
+      isUserLoggedIn: (!!window.user.auth),
+      isUserLoaded: false
     };
-    this.state = {isUserLoggedIn: (!!window.user.auth)};
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
   componentWillMount() {
-    this.state.isUserLoaded = false;
-    if (!window.user.auth) return;
+    if (!this.state.isUserLoggedIn) return location.pathname = 'login';
 
     Http.get(`/api/users?email=${window.user.auth.email}`)
-      .then(response => {
-        // debugger;
+      .then(response => response.json())
+      .then(data => {
+        Object.assign(window.user, data);
+        this.setState({isUserLoaded: true});
       })
-      .catch(response => {
-        // debugger;
-      });
+      .catch(response => console.error(response));
   }
 
   componentDidMount() {
@@ -45,8 +47,7 @@ export default class LayoutPage extends React.Component {
   }
 
   render() {
-    if (!this.state.isUserLoggedIn) return location.pathname = 'login';
-    // if (!this.state.isUserLoaded) return <LoadingAnimation/>;
+    if (!this.state.isUserLoaded) return <LoadingAnimation/>;
 
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header layout">
