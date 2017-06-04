@@ -1,4 +1,4 @@
-from flask import abort, Blueprint, request, session
+from flask import abort, Blueprint, request, session, jsonify
 from jsonschema import validate, ValidationError
 
 from .schemas import login_schema
@@ -33,7 +33,7 @@ def login():
         abort(500, 'There was a problem storing user\'s data in database')
 
     session['token'] = token
-    return '{}'
+    return jsonify(user.to_json())
 
 
 @auth.route('logout', methods=['POST'])
