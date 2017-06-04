@@ -1,1 +1,2 @@
-from .views.programs import programs_blueprint as api_programs_blueprint
+from .views.programs import programs_bp
+from .views.users import users_bp

@@ -29,3 +29,10 @@ class User(db.Model):
             return self
         except InvalidRequestError:
             return None
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'google_user': self.google_user.to_json()
+        }

@@ -13,3 +13,11 @@ class GoogleUser(db.Model):
 
     def __repr__(self):
         return '<GoogleUser %r>' % self.email
+
+    def to_json(self):
+        return {
+            'fullname': self.fullname,
+            'email_verified': self.email_verified,
+            'token': self.token,
+            'image_url': self.image_url
+        }
