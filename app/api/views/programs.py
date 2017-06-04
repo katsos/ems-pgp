@@ -7,8 +7,8 @@ from app.api.controllers import add_program, get_all_programs
 programs_bp = Blueprint('programs', __name__)
 
 
-@programs_bp.route('<int:id>', methods=['GET'])
-def get(id):
+@programs_bp.route('', methods=['GET'])
+def get():
     # TODO: add session authentication, if user has the right to see this list
 
     state = request.args.get('state')
