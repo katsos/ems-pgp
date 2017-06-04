@@ -34,10 +34,3 @@ def login():
 
     session['token'] = token
     return jsonify(user.to_json())
-
-
-@auth.route('logout', methods=['POST'])
-def logout():
-    session.pop('token', None)
-    return '{}'
-

@@ -4,5 +4,5 @@ export default function LogoutButton(props) {
 
 function logoutUser() {
   sessionStorage.removeItem('user_auth');
-  location.pathname = 'auth/logout';
+  location.pathname = 'logout';
 }

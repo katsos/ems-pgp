@@ -16,6 +16,11 @@ def route(app):
         else:
             return render_template('login.html')
 
+    @app.route('/logout', methods=['POST'])
+    def logout():
+        session.pop('token', None)
+        return redirect(url_for('login'))
+
     # Serve frontend app
     @app.route('/', methods=['GET'])
     @app.route('/<path:ignored>', methods=['GET'])
