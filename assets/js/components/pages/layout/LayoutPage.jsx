@@ -15,7 +15,8 @@ export default class LayoutPage extends React.Component {
 
     this.state = {
       isUserLoggedIn: (!!window.user.auth),
-      isUserLoaded: false
+      isUserLoaded: false,
+      isGoogleAuthInitialized: false
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -38,7 +39,10 @@ export default class LayoutPage extends React.Component {
   }
 
   _initializeGoogleAuth() {
-    gapi.load('auth2', () => gapi.auth2.init());
+    gapi.load('auth2', () => {
+      gapi.auth2.init();
+      this.setState({isGoogleAuthInitialized: true})
+    });
   }
 
   toggleDrawer() {
@@ -47,7 +51,7 @@ export default class LayoutPage extends React.Component {
   }
 
   render() {
-    if (!this.state.isUserLoaded) return <LoadingAnimation/>;
+    if (!this.state.isUserLoaded && !this.state.isGoogleAuthInitialized) return <LoadingAnimation/>;
 
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header layout">
