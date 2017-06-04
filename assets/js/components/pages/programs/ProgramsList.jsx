@@ -24,10 +24,14 @@ export default class ProgramsList extends React.Component {
 
     return Http.get(url)
       .then(response => response.json())
-      .then(function (data) {
+      .then(data => {
         this.programs = data.programs;
         this.setState({isLoading: false});
-      }.bind(this));
+      })
+      .catch(response => {
+        console.error(response);
+        this.setState({errorEncountered: true});
+      });
   }
 
   _renderList() {
@@ -43,8 +47,11 @@ export default class ProgramsList extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading)
+    if (this.state.isLoading) {
       return <h3>Programs list is loading...</h3>;
+    } else if (this.state.errorEncountered) {
+      return <h3>There was an error while loading programs.</h3>
+    }
 
     if (this.programs.length === 0)
       return <h3>There are no {this.listState} programs available!</h3>;
