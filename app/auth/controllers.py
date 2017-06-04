@@ -1,9 +1,7 @@
-from oauth2client import client, crypt
+from oauth2client import client
 from oauth2client.crypt import AppIdentityError
 
-from app.database import db
 from app.models.user import User
-from app.models.google_user import GoogleUser
 
 CLIENT_ID = "976520229359-f2v2c0th5uoa1nd7p1aiij364tjp7uqj.apps.googleusercontent.com"
 
