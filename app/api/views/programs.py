@@ -17,8 +17,8 @@ def get():
     return jsonify(programs=Program.list_to_json(programs))
 
 
-@programs_bp.route('<int:id>', methods=['POST'])
-def post(id):
+@programs_bp.route('', methods=['POST'])
+def post():
     request_data = request.get_json()
 
     try:
@@ -29,7 +29,6 @@ def post(id):
     title = request_data['title']
     year = request_data['year']
 
-    # TODO: restriction on title-year
     program = add_program(title, year)
 
     return jsonify(
