@@ -3,7 +3,8 @@ String.prototype.capitalize = function () {
 };
 
 export function serializeForm(node) {
-  const inputs = node.querySelectorAll('input:not([type="submit"])'); // exempt submit input
+  const buttonClass = 'mdl-button';
+  const inputs = node.querySelectorAll(`input:not(.${buttonClass})`); // get all inputs except buttons
 
   const data = {};
   for (const input of inputs) {
