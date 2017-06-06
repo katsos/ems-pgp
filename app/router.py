@@ -5,8 +5,8 @@ from app.auth.views import auth
 
 
 def route(app):
-    app.register_blueprint(programs_bp, url_prefix='/api/programs')
-    app.register_blueprint(users_bp, url_prefix='/api/users')
+    app.register_blueprint(programs_bp, url_prefix='/api/programs/')
+    app.register_blueprint(users_bp, url_prefix='/api/users/')
     app.register_blueprint(auth, url_prefix='/auth/')
 
     @app.route('/login', methods=['GET'])
