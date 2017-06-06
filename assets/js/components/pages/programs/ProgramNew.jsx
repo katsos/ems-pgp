@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Http from '../../../Http';
-
 import FormInput from '../../FormInput';
 import {serializeForm} from "../../../utils";
 
@@ -22,18 +21,14 @@ export default class ProgramNew extends React.Component {
 
   _handleFormSubmit(event) {
     event.preventDefault();
-
     // TODO: add modal to confirm that the addition was intentional
 
     const formData = serializeForm(event.currentTarget);
     Http.post('/api/programs', formData)
       .then(response => response.json())
-      .then(json => {
-        console.log(json);
-        // TODO: navigate to new programs' page
-      })
+      .then(data => this.props.history.push(`/programs/${data.id}`))
       .catch(response => {
-        alert(response);
+        console.error(response);
       })
   }
 
