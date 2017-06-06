@@ -8,13 +8,16 @@ programs_bp = Blueprint('programs', __name__)
 
 
 @programs_bp.route('', methods=['GET'])
-def get():
-    # TODO: add session authentication, if user has the right to see this list
-
+def get_all():
     state = request.args.get('state')
     programs = get_all_programs(state)
-
     return jsonify(programs=Program.list_to_json(programs))
+
+
+@programs_bp.route('<int:id>', methods=['GET'])
+def get(id):
+    program = Program.query.get(id)
+    return jsonify(program.to_json())
 
 
 @programs_bp.route('', methods=['POST'])
