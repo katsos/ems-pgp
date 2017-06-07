@@ -51,7 +51,7 @@ export default class LayoutPage extends React.Component {
   }
 
   render() {
-    if (!this.state.isUserLoaded && !this.state.isGoogleAuthInitialized) return <LoadingAnimation/>;
+    if (!this.state.isUserLoaded || !this.state.isGoogleAuthInitialized) return <LoadingAnimation/>;
 
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header layout">
