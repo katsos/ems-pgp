@@ -9,7 +9,7 @@
 
 ### Install for development
 1. Create python's virtual enviroment
-    1. `python -m venv <env-name>` or `virtualenv -p python3 <env-name>`
+    1. `python3 -m venv <env-name>` or `virtualenv -p python3 <env-name>`
     2. `source ./<env-name>/bin/activate` for unix systems  
     or `.\<env-name>\Scripts\activate` for Windows machines  
     (you may need to run `Set-ExecutionPolicy Bypass` first)
