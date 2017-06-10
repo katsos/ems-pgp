@@ -60,7 +60,7 @@ function ActionsList({actions}) {
     return (
       <li className="mdl-list__item" key={action}>
         <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={actions[action]}>
-          {action}
+          {action.camelCaseToSentence()}
         </button>
       </li>
     );
