@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function LogoutButton(props) {
   return <a onClick={logoutUser}>{props.children}</a>;
 }

@@ -31,13 +31,6 @@ module.exports = {
         }
       },
       {
-          test: require.resolve('react'),
-          use: [{
-              loader: 'expose-loader',
-              options: 'React'
-          }]
-      },
-      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },

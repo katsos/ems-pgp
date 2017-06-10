@@ -1,3 +1,4 @@
+import React from 'react';
 import LogoutButton from "../../LogoutButton";
 
 export default function DrawerUser(props) {
