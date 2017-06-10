@@ -27,3 +27,23 @@
     width: 100%;
   }
 }
+
+.program {
+  &__title {
+    float: left;
+    margin: 0 0 10px;
+  }
+
+  &__edit {
+    float: right;
+  }
+
+  &__actions {
+    clear: both;
+    float: right;
+
+    button {
+      width: 100%;
+    }
+  }
+}

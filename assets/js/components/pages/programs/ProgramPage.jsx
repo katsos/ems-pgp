@@ -8,6 +8,12 @@ export default class ProgramPage extends React.Component {
     super(props);
 
     this.program = {id: props.match.params.id};
+    this._addStudent = this._addStudent.bind(this);
+    this._editProgram = this._editProgram.bind(this);
+
+    this.actions = {
+      addStudent: this._addStudent
+    };
   }
 
   componentWillMount() {
@@ -24,13 +30,45 @@ export default class ProgramPage extends React.Component {
       });
   }
 
+  _editProgram() {
+    throw Error('Not implemented yet!');
+  }
+
+  _addStudent() {
+    throw Error('Not implemented yet!');
+  }
+
   render() {
     if (this.state.isLoading) return <LoadingAnimation/>;
 
     return (
       <div className="program">
-        Program {this.program.title}
+        <h2 className="program__title">{this.program.title}</h2>
+        <button className="mdl-button mdl-js-button mdl-button--primary program__edit" onClick={this._editProgram}>
+          <i className="material-icons">mode_edit</i> Edit Program
+        </button>
+        <div className="program__actions">
+          <ActionsList actions={this.actions}/>
+        </div>
       </div>
     )
   }
+}
+
+function ActionsList({actions}) {
+  const list = Object.keys(actions).map(action => {
+    return (
+      <li className="mdl-list__item" key={action}>
+        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={actions[action]}>
+          {action}
+        </button>
+      </li>
+    );
+  });
+
+  return (
+    <ul className="mdl-list">
+      {list}
+    </ul>
+  )
 }
