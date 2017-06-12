@@ -33,13 +33,7 @@ def post():
     year = request_data['year']
 
     program = add_program(title, year)
-
-    return jsonify(
-        id=program.id,
-        title=program.title,
-        year=program.year,
-        creation_date=str(program.creation_date),
-    )
+    return jsonify(program.to_json())
 
 
 post_schema = {

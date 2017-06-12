@@ -30,7 +30,8 @@ class Program(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'year': self.year
+            'year': self.year,
+            'students': [student.to_json() for student in self.students]
         }
 
     @staticmethod
