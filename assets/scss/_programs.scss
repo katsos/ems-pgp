@@ -38,12 +38,8 @@
     float: right;
   }
 
-  &__actions {
+  &__infos {
     clear: both;
-    float: right;
-
-    button {
-      width: 100%;
-    }
+    float: left;
   }
 }
