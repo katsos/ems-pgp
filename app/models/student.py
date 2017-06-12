@@ -10,3 +10,11 @@ class Student(db.Model):
 
     def __repr__(self):
         return '<Student %r>' % self.id
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'program_id': self.program_id
+        }
