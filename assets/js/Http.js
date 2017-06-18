@@ -1,6 +1,6 @@
 const DEFAULT_OPTIONS = {
   headers: {
-		'Accept': 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
   mode: 'same-origin'
@@ -13,7 +13,7 @@ export default class Http {
    * @param params {Object} - parameters as object with key-value pairs for url parameters
    * @returns {Promise}
    */
-  static get(url, params=[]) {
+  static get(url, params = []) {
     let paramsString = Object.keys(params)
       .reduce((str, current) => `${str}${current}=${params[current]}&`, '?');
 
