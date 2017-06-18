@@ -20,6 +20,13 @@ def get(id):
     return jsonify(program.to_json())
 
 
+@programs_bp.route('<int:id>/students', methods=['GET'])
+def get_students(id):
+    program = Program.query.get(id).to_json()
+    students = program['students']
+    return jsonify(students)
+
+
 @programs_bp.route('', methods=['POST'])
 def post():
     request_data = request.get_json()

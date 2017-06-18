@@ -16,7 +16,7 @@ export default function ProgramsRouter() {
       <Route path={`${ROUTER_PREFIX}/active`} component={ProgramsList}/>
       <Route path={`${ROUTER_PREFIX}/finished`} component={ProgramsList}/>
       <Route exact path={`${ROUTER_PREFIX}/:id`} component={ProgramPage}/>
-            <Route path={`${ROUTER_PREFIX}/:id/students`} component={ProgramStudents}/>
+            <Route path={`${ROUTER_PREFIX}/:programId/students`} component={ProgramStudents}/>
       <Route component={ProgramsIndex}/>
     </Switch>
   )

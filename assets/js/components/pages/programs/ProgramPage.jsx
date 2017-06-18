@@ -40,7 +40,7 @@ export default class ProgramPage extends React.Component {
           <i className="material-icons">mode_edit</i> Edit Program
         </button>
         <div className="program__infos">
-          <Link to={`${this.props.match.url}/students`}>{this.program.students.length} students enrolled</Link>
+          <Link to={`${this.props.match.url}/students`} students={this.program.students}>{this.program.students.length} students enrolled</Link>
           <div>Temporary infos table placeholder</div>
         </div>
       </div>
