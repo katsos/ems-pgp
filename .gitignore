@@ -1,16 +1,1 @@
-# os
-.DS_Store
-.idea
-.vscode
-
-# npm
-node_modules
-npm-debug.log
-
-# Python
 .venv
-*.pyc
-
-# generated
-migrations
-public
