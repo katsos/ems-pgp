@@ -1,5 +1,5 @@
 import React from 'react';
-import findDOMNode from 'react-dom/lib/findDOMNode';
+import { findDOMNode } from 'react-dom';
 
 import Http from '../../../Http';
 import Header from './Header';
