@@ -1,5 +1,9 @@
+#project
 .venv
 .idea
+
+# Python
+__pycache__
 
 # npm
 node_modules
