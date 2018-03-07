@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Economic management system for PostGraduate programs",
   "scripts": {
-    "start": "webpack --config webpack.config.js --watch",
+    "start": "parcel ./assets/js/index.js -d ./static/bundle.js",
     "clean": "rm -Rf node_modules"
   },
   "repository": {
