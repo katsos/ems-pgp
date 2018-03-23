@@ -12,7 +12,6 @@ const NAV_LINKS = {
 export default function Drawer(props) {
   return (
     <div className="mdl-layout__drawer">
-      <DrawerUser/>
       <nav className="mdl-navigation">
         {NavLinks(props.toggleDrawer)}
       </nav>
