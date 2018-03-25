@@ -1,49 +1,54 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import LoadingAnimation from "../../LoadingAnimation";
+import Program from '../../../models/Program';
 
-export default class ProgramPage extends React.Component {
+class ProgramPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoading: false,
+      isLoading: true,
+      program: null,
+      error: null,
     };
-    this.program = {id: props.match.params.id};
     // this._editProgram = this._editProgram.bind(this);
   }
 
-  // componentWillMount() {
-  //   this.setState({isLoading: true});
-  //
-  //   Http.get(`/api/programs/${this.program.id}`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       this.program = data;
-  //       this.setState({isLoading: false});
-  //     })
-  //     .catch(response => {
-  //       alert(response);
-  //     });
-  // }
-  //
+  componentDidMount() {
+    const { id } = this.props.match.params;
+
+    Program.get(id)
+      .then(program => this.setState({ program }))
+      .catch((httpResponse) => {
+        const { response } = httpResponse;
+        console.error(httpResponse);
+        if (response.status === 404) {
+          this.setState({ error: `Program with id ${id} not found!` })
+        }
+      })
+      .finally(() => this.setState({ isLoading: false }));
+  }
+
   // _editProgram() {
   //   throw Error('Not implemented yet!');
   // }
 
   render() {
     if (this.state.isLoading) return <LoadingAnimation/>;
-    this.program = { title: 'title', year: 2018, students: [] }; // DEV
 
+    if (this.state.error) return <h3>{this.state.error}</h3>;
+
+    const { title, year, students = [] } = this.state.program;
     return (
       <div className="program">
-        <h2 className="program__title">{this.program.title}</h2> <span>{this.program.year}</span>
-        {/*<button className="mdl-button mdl-js-button mdl-button--primary program__edit" onClick={this._editProgram}>*/}
-          {/*<i className="material-icons">mode_edit</i> Edit Program*/}
-        {/*</button>*/}
+        <h2 className="program__title">{title}</h2> <span>{year}</span>
+        <button className="mdl-button mdl-js-button mdl-button--primary program__edit" onClick={this._editProgram}>
+          <i className="material-icons">mode_edit</i> Edit Program
+        </button>
         <div className="program__infos">
-          <Link to={`${this.props.match.url}/students`} students={this.program.students}>
-            {this.program.students.length} students enrolled
+          <Link to={`${this.props.match.url}/students`} students={students}>
+            {students.length} students enrolled
           </Link>
           <div>Temporary infos table placeholder</div>
         </div>
@@ -51,3 +56,5 @@ export default class ProgramPage extends React.Component {
     )
   }
 }
+
+export default ProgramPage;

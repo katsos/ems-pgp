@@ -5,6 +5,11 @@ const apiPrograms = axios.create({
 });
 
 class Program {
+  static get(id) {
+    return apiPrograms.get(`${id}/`)
+      .then(({ data: program }) => program);
+  }
+
   static getAll() {
     return apiPrograms.get()
       .then(({ data: programs }) => programs);
@@ -12,7 +17,7 @@ class Program {
 
   static create(args) {
     return apiPrograms.post('', args)
-      .then(({ data: program}) => program);
+      .then(({ data: program }) => program);
   }
 }
 
