@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Program from "../../../models/Program";
 import LoadingAnimation from "../../LoadingAnimation";
 
@@ -43,8 +44,15 @@ export default class ProgramStudents extends React.Component {
 
     return (
       <div className="program-students">
-        Students' table placeholder :D
-        {this.students.length}
+        <ul>
+          {this.state.students.map(({ id, name, surname }) => {
+            return (
+              <li key={id}>
+                <Link to={`/students/${id}`}>{surname} {name} ({id})</Link>
+              </li>
+            );
+          })}
+        </ul>
         <div className="program-students__add">
           <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
             <i className="material-icons">add</i> Add new
