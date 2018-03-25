@@ -19,6 +19,11 @@ class Program {
     return apiPrograms.post('', args)
       .then(({ data: program }) => program);
   }
+
+  static getStudents(id) {
+    return apiPrograms.get(`${id}/students/`)
+      .then(({ data: students }) => students);
+  }
 }
 
 export default Program;

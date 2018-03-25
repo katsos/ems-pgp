@@ -1,36 +1,45 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-import Http from "../../../Http";
-import {isUndefined} from "../../../utils";
+import Program from "../../../models/Program";
 import LoadingAnimation from "../../LoadingAnimation";
 
 export default class ProgramStudents extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
-    this.students = props.students;
-    this.programId = props.match.params.programId;
-    this.state = {isLoading: false};
+    this.state = {
+      isLoading: false,
+      students: null,
+    };
   }
 
-  componentWillMount() {
-    if (!isUndefined(this.students)) return;
+  // componentWillMount() {
+  //   if (!isUndefined(this.students)) return;
+  //
+  //   this.setState({isLoading: true});
+  //
+  //   this._getStudents()
+  //     .then(() => this.setState({isLoading: false}));
+  // }
+  //
+  // _getStudents() {
+  //   return Http.get(`/api/programs/${this.programId}/students`)
+  //     .then((response) => response.json())
+  //     .then(data => this.students = data);
+  // }
 
-    this.setState({isLoading: true});
+  componentDidMount() {
+    const { programId } = this.props.match.params;
 
-    this._getStudents()
-      .then(() => this.setState({isLoading: false}));
-  }
-
-  _getStudents() {
-    return Http.get(`/api/programs/${this.programId}/students`)
-      .then((response) => response.json())
-      .then(data => this.students = data);
+    Program.getStudents(programId)
+      .then(students => this.setState({ students }))
+      .catch(console.error)
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   render() {
     if (this.state.isLoading) return <LoadingAnimation/>;
+
+    if (this.state.students === null) return <h3>There was an error while fetching the students.</h3>;
 
     return (
       <div className="program-students">
@@ -45,7 +54,3 @@ export default class ProgramStudents extends React.Component {
     )
   }
 }
-
-ProgramStudents.propTypes = {
-  students: PropTypes.array
-};
