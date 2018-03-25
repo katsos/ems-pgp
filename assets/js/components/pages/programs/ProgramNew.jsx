@@ -1,35 +1,29 @@
 import React from 'react';
-
-import Http from '../../../Http';
-import FormInput from '../../FormInput';
-import {serializeForm} from "../../../utils";
+import Program from '../../../models/Program';
 
 export default class ProgramNew extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
-
-    this.currentYear = new Date().getFullYear();
+    this.state = {
+      title: '',
+      year: new Date().getFullYear(),
+    };
 
     this._handleChange = this._handleChange.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
-  _handleChange(event) {
-    this.setState({value: event.target.value});
+  _handleChange({ target: { name, value }}) {
+    this.setState({ [name]: value });
   }
 
   _handleFormSubmit(event) {
     event.preventDefault();
     // TODO: add modal to confirm that the addition was intentional
 
-    const formData = serializeForm(event.currentTarget);
-    Http.post('/api/programs', formData)
-      .then(response => response.json())
-      .then(data => this.props.history.push(`/programs/${data.id}`))
-      .catch(response => {
-        console.error(response);
-      })
+    Program.create(this.state)
+      .then(({ id }) => this.props.history.push(`/programs/${id}`))
+      .catch(console.error); // TODO: show a modal with the error
   }
 
   render() {
@@ -40,16 +34,8 @@ export default class ProgramNew extends React.Component {
           <div className="mdl-card__title">Add a new program</div>
 
           <div className="mdl-card__supporting-text">
-            <FormInput id='title'
-                       hasAutofocus
-                       isRequired
-                       onChange={this._handleChange}
-            />
-            <FormInput id='year'
-                       type='number'
-                       defaultValue={this.currentYear}
-                       onChange={this._handleChange}
-            />
+            <input name="title" type="text" placeholder="title" value={this.state.title} onChange={this._handleChange} />
+            <input name="year" type="number" placeholder="Year" min="1900" max="2050" value={this.state.year} onChange={this._handleChange} />
           </div>
 
           <div className="mdl-card__actions mdl-card__actions--right">

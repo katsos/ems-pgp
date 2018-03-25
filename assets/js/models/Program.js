@@ -9,6 +9,11 @@ class Program {
     return apiPrograms.get()
       .then(({ data: programs }) => programs);
   }
+
+  static create(args) {
+    return apiPrograms.post('', args)
+      .then(({ data: program}) => program);
+  }
 }
 
 export default Program;
