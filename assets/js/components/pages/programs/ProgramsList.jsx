@@ -4,8 +4,9 @@ import Link  from 'react-router-dom/Link';
 import {ROUTER_PREFIX} from './ProgramsRouter';
 import Http from "../../../Http";
 import LoadingAnimation from "../../LoadingAnimation";
+import Program from '../../../models/Program';
 
-export default class ProgramsList extends React.Component {
+class ProgramsList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,16 +24,13 @@ export default class ProgramsList extends React.Component {
     if (this.listState === 'active' || this.listState === 'finished')
       url += `?state=${this.listState}`;
 
-    return Http.get(url)
-      .then(response => response.json())
-      .then(data => {
-        this.programs = data.programs;
-        this.setState({isLoading: false});
-      })
-      .catch(response => {
+    return Program.getAll()
+      .then((programs) => { this.programs = programs; }) // TODO: add programs on state
+      .catch(response => { // TODO: this.state.programs = null
         console.error(response);
         this.setState({errorEncountered: true});
-      });
+      })
+      .finally(() => this.setState({isLoading: false}));
   }
 
   _renderList() {
@@ -68,3 +66,5 @@ export default class ProgramsList extends React.Component {
     )
   }
 }
+
+export default ProgramsList;
