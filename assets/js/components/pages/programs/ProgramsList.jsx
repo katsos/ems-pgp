@@ -2,7 +2,6 @@ import React from 'react';
 import Link  from 'react-router-dom/Link';
 
 import {ROUTER_PREFIX} from './ProgramsRouter';
-import Http from "../../../Http";
 import LoadingAnimation from "../../LoadingAnimation";
 import Program from '../../../models/Program';
 
@@ -11,7 +10,10 @@ class ProgramsList extends React.Component {
     super(props);
 
     this.listState = this.props.location.pathname.split('/').pop();
-    this.state = {isLoading: true};
+    this.state = {
+      isLoading: true,
+      programs: null,
+    };
   }
 
   componentWillMount() {
@@ -25,34 +27,22 @@ class ProgramsList extends React.Component {
       url += `?state=${this.listState}`;
 
     return Program.getAll()
-      .then((programs) => { this.programs = programs; }) // TODO: add programs on state
-      .catch(response => { // TODO: this.state.programs = null
+      .then((programs) => this.setState({ programs }))
+      .catch((response) => {
         console.error(response);
-        this.setState({errorEncountered: true});
+        this.setState({ programs: null });
       })
       .finally(() => this.setState({isLoading: false}));
-  }
-
-  _renderList() {
-    const listItems = this.programs.map(program => {
-      return (
-        <li key={program.id}>
-          <Link to={`${ROUTER_PREFIX}/${program.id}`}>{program.title}</Link>
-        </li>
-      );
-    });
-
-    return <ul>{listItems}</ul>
   }
 
   render() {
     if (this.state.isLoading) {
       return <LoadingAnimation/>;
     }
-    if (this.state.errorEncountered) {
+    if (this.state.programs === null) {
       return <h3>There was an error while loading programs.</h3>
     }
-    if (this.programs.length === 0) {
+    if (!this.state.programs.length) {
       return <h3>There are no {this.listState} programs available!</h3>;
     }
 
@@ -60,7 +50,15 @@ class ProgramsList extends React.Component {
       <div className="programs-list mdl-grid">
         <h3 className="programs-list__title">Active Programs</h3>
         <div className="programs-list__list">
-          {this._renderList()}
+          <ul>
+            {this.state.programs.map(({id, title}) => {
+              return (
+                <li key={id}>
+                  <Link to={`${ROUTER_PREFIX}/${id}`}>{title}</Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     )
