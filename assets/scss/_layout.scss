@@ -16,10 +16,10 @@
 
   .layout__content {
     @extend %elevated-box;
-
     margin: 20px auto;
     width: 100%;
     max-width: 1240px;
+    max-height: 85vh;
 
     /* Overwrite flex-grow */
     flex-grow:0;

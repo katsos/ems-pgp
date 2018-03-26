@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Student from '../../../models/Student';
 import LoadingAnimation from "../../LoadingAnimation";
 
@@ -9,7 +10,7 @@ class Index extends React.PureComponent {
     this.state = {
       isLoading: true,
       students: null,
-    }
+    };
   }
 
   componentDidMount() {
@@ -24,8 +25,7 @@ class Index extends React.PureComponent {
     if (this.state.students === null) return <h3>There was a problem while fetching students.</h3>;
 
     return (
-      <div>
-        <h3>Students landing page</h3>
+      <div className='Students'>
         <ul>
           {this.state.students.map(({ id, name, surname }) => {
             return (
@@ -35,6 +35,12 @@ class Index extends React.PureComponent {
             );
           })}
         </ul>
+
+        <Link to='/students/new'>
+          <button className='Students__add mdl-button mdl-js-button mdl-button--fab mdl-button--colored'>
+            <i className="material-icons">add</i>
+          </button>
+        </Link>
       </div>
     );
   }
