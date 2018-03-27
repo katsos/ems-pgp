@@ -15,3 +15,6 @@ class Program(Model):
     class Meta:
         db_table = 'programs'
         unique_together = ('title', 'year')
+
+    def __str__(self):
+        return f'{self.title} ({self.year})'

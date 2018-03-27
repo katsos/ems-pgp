@@ -11,3 +11,6 @@ class Student(Model):
 
     class Meta:
         db_table = 'students'
+
+    def __str__(self):
+        return f'{self.surname} {self.name} ({self.id})'
