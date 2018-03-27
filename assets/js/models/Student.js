@@ -9,6 +9,11 @@ class Student {
     return api.get('', { params })
       .then(({ data: students }) => students);
   }
+
+  static create(params) {
+    return api.post('', params)
+      .then(({ data: student }) => student);
+  }
 }
 
 export default Student;
