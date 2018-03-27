@@ -13,21 +13,6 @@ export default class ProgramStudents extends React.Component {
     };
   }
 
-  // componentWillMount() {
-  //   if (!isUndefined(this.students)) return;
-  //
-  //   this.setState({isLoading: true});
-  //
-  //   this._getStudents()
-  //     .then(() => this.setState({isLoading: false}));
-  // }
-  //
-  // _getStudents() {
-  //   return Http.get(`/api/programs/${this.programId}/students`)
-  //     .then((response) => response.json())
-  //     .then(data => this.students = data);
-  // }
-
   componentDidMount() {
     const { programId } = this.props.match.params;
 

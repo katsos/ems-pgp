@@ -5,8 +5,8 @@ const api = axios.create({
 });
 
 class Student {
-  static getAll() {
-    return api.get()
+  static getAll(params) {
+    return api.get('', { params })
       .then(({ data: students }) => students);
   }
 }

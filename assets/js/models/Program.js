@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Student from './Student';
 
 const apiPrograms = axios.create({
   baseURL: '/api/programs/'
@@ -20,9 +21,8 @@ class Program {
       .then(({ data: program }) => program);
   }
 
-  static getStudents(id) {
-    return apiPrograms.get(`${id}/students/`)
-      .then(({ data: students }) => students);
+  static getStudents(programId) {
+    return Student.getAll({ program_id: programId });
   }
 }
 
