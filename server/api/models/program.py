@@ -1,6 +1,7 @@
 from django.db.models import Model, AutoField, CharField, DateTimeField, PositiveSmallIntegerField
 # , ForeignKey, CASCADE
 # from django.contrib.auth.models import User
+from .registration import Registration
 
 
 class Program(Model):
@@ -18,3 +19,7 @@ class Program(Model):
 
     def __str__(self):
         return f'{self.title} ({self.year})'
+
+    @property
+    def num_of_students(self):
+        return len(Registration.objects.filter(program_id__exact=self.id))

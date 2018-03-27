@@ -39,7 +39,7 @@ class ProgramPage extends React.Component {
 
     if (this.state.error) return <h3>{this.state.error}</h3>;
 
-    const { title, year, students = [] } = this.state.program;
+    const { title, year, num_of_students: numOfStudents } = this.state.program;
     return (
       <div className="program">
         <h2 className="program__title">{title}</h2> <span>{year}</span>
@@ -47,9 +47,7 @@ class ProgramPage extends React.Component {
           <i className="material-icons">mode_edit</i> Edit Program
         </button>
         <div className="program__infos">
-          <Link to={`${this.props.match.url}/students`} students={students}>
-            {students.length} students enrolled
-          </Link>
+          <Link to={`${this.props.match.url}/students`}>{numOfStudents} students enrolled</Link>
           <div>Temporary infos table placeholder</div>
         </div>
       </div>
