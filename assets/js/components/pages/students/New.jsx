@@ -31,7 +31,7 @@ class New extends React.PureComponent {
 
   onSubmit(params) {
     Student.create(params)
-      .then(console.log)
+      .then(student => this.props.history.push(`/students/${student.id}`, { student }))
       .catch(({ response: { data: formErrors }}) => {
         this.setState({ formErrors });
       });
