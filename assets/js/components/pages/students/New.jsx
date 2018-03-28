@@ -1,6 +1,23 @@
 import React from 'react'
-import Form from './Form';
+import Form from '../../Form';
 import Student from "../../../models/Student";
+
+const FORM_SCHEMA = {
+  name: {
+    label: 'Name',
+  },
+  surname: {
+    label: 'Surname',
+  },
+  email: {
+    label: 'E-mail',
+    type: 'email',
+  },
+  registered_at: {
+    label: 'Registered at',
+    type: 'date',
+  },
+};
 
 class New extends React.PureComponent {
   constructor(props) {
@@ -23,7 +40,7 @@ class New extends React.PureComponent {
   render() {
     return (
       <div>
-        <Form errors={this.state.formErrors} onSubmit={this.onSubmit} />
+        <Form schema={FORM_SCHEMA} errors={this.state.formErrors} onSubmit={this.onSubmit} />
       </div>
     );
   }
