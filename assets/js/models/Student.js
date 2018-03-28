@@ -10,6 +10,12 @@ class Student {
       .then(({ data: students }) => students);
   }
 
+  static get(id) {
+    return api.get(`${id}/`)
+      .then(({ data: students }) => students);
+  }
+
+
   static create(params) {
     return api.post('', params)
       .then(({ data: student }) => student);
