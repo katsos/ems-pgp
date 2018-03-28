@@ -13,7 +13,7 @@ class StudentPage extends React.PureComponent {
   }
 
   componentWillMount() {
-    const { student = null } = this.props.location.state;
+    const { student = null } = this.props.location.state || {};
     this.setState({ student })
   }
   componentDidMount() {
