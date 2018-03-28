@@ -1,6 +1,6 @@
 import React from "react";
 import LoadingAnimation from "../../LoadingAnimation";
-import Student from "../../../models/Program";
+import Student from "../../../models/Student";
 
 class StudentPage extends React.PureComponent {
   constructor(props) {
