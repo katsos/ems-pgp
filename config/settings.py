@@ -17,17 +17,9 @@ BASE_DIR = os.path.join(PROJECT_DIR, 'server')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b+9s&wf&!fx3&7d0s-+%p*^*fy4j@35m_h0_!k4l$77$=bf+wf'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = ['*']
+SECRET_KEY = 'b+9s&wf&!fx3&7d0s-+%p*^*fy4j@35m_h0_!k4l$77$=bf+wf'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
