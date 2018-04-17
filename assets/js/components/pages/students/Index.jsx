@@ -27,13 +27,9 @@ class Index extends React.PureComponent {
     return (
       <div className='Students'>
         <ul>
-          {this.state.students.map(({ id, name, surname }) => {
-            return (
-              <li key={id}>
-                {surname} {name}
-              </li>
-            );
-          })}
+          {this.state.students.map(({ id, name, surname }) => (
+            <li key={id}><Link to={`/students/${id}`}>{surname} {name}</Link></li>
+          ))}
         </ul>
 
         <Link to='/students/new'>
