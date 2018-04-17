@@ -5,10 +5,10 @@ class Form extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const { schema } = props;
+    const { initialData, schema } = props;
     this.state = Object.entries(schema).reduce((state, [key, { type }]) => {
       const value = (type === 'date') ? moment().format('YYYY-MM-DD') : '';
-      return Object.assign(state, { [key]: value })
+      return Object.assign(state, { [key]: (initialData[key] || value) });
     }, {});
 
     this.onChange = this.onChange.bind(this);
@@ -48,7 +48,7 @@ class Form extends React.PureComponent {
         ))}
 
         <button onClick={this.onCancel}>Cancel</button>
-        <button onClick={this.onSubmit}>Add</button>
+        <button onClick={this.onSubmit}>Submit</button>
       </form>
     );
   }

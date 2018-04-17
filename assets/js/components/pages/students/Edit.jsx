@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../../Form';
 import Student from "../../../models/Student";
+import LoadingAnimation from "../../LoadingAnimation";
 
 const FORM_SCHEMA = {
   name: {
@@ -24,9 +25,26 @@ class Edit extends React.PureComponent {
     super(props);
 
     this.state = {
+      isLoading: true,
       formErrors: {},
+      student: null,
     };
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { student = null } = this.props.location.state || {};
+    if (student) return this.setState({ isLoading: false, student });
+
+    if (this.state.student !== null) {
+      return this.setState({ isLoading: false });
+    }
+
+    const { id } = this.props.match.params;
+    Student.get(id)
+      .then(student => this.setState({ student }))
+      .catch(console.error)
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   onSubmit(params) {
@@ -38,9 +56,12 @@ class Edit extends React.PureComponent {
   }
 
   render() {
+    const { isLoading, formErrors, student } = this.state;
+    if (isLoading) return <LoadingAnimation />;
+
     return (
       <div>
-        <Form schema={FORM_SCHEMA} errors={this.state.formErrors} onSubmit={this.onSubmit} />
+        <Form initialData={student} schema={FORM_SCHEMA} errors={formErrors} onSubmit={this.onSubmit} />
       </div>
     );
   }
