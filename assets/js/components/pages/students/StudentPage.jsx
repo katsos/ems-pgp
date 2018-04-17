@@ -54,7 +54,7 @@ class StudentPage extends React.PureComponent {
       <div className='StudentPage'>
         <VerticalTable data={student} fields={FIELDS} />
       </div>
-    )
+    );
   }
 }
 
