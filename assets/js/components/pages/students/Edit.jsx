@@ -30,6 +30,7 @@ class Edit extends React.PureComponent {
       student: null,
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.redirectToStudentPage = this.redirectToStudentPage.bind(this);
   }
 
   componentDidMount() {
@@ -49,10 +50,15 @@ class Edit extends React.PureComponent {
 
   onSubmit(params) {
     Student.create(params)
-      .then(student => this.props.history.push(`/students/${student.id}`, { student }))
+      .then(student => this.setState({ student }, this.redirectToStudentPage))
       .catch(({ response: { data: formErrors }}) => {
         this.setState({ formErrors });
       });
+  }
+
+  redirectToStudentPage() {
+    const { student } = this.state;
+    this.props.history.push(`/students/${student.id}`, { student });
   }
 
   render() {
@@ -61,7 +67,13 @@ class Edit extends React.PureComponent {
 
     return (
       <div>
-        <Form initialData={student} schema={FORM_SCHEMA} errors={formErrors} onSubmit={this.onSubmit} />
+        <Form
+          initialData={student}
+          schema={FORM_SCHEMA}
+          errors={formErrors}
+          onSubmit={this.onSubmit}
+          onCancel={this.redirectToStudentPage}
+        />
       </div>
     );
   }
