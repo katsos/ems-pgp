@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import LoadingAnimation from "../../LoadingAnimation";
 import Student from "../../../models/Student";
 import VerticalTable from "../../VerticalTable";
@@ -52,6 +53,9 @@ class StudentPage extends React.PureComponent {
 
     return (
       <div className='StudentPage'>
+        <Link to={`/students/${student.id}/edit`}>
+          <button className='StudentPage__edit'>Edit</button>
+        </Link>
         <VerticalTable data={student} fields={FIELDS} />
       </div>
     );
