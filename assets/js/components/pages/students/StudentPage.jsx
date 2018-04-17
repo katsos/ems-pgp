@@ -1,6 +1,22 @@
 import React from "react";
 import LoadingAnimation from "../../LoadingAnimation";
 import Student from "../../../models/Student";
+import VerticalTable from "../../VerticalTable";
+
+const FIELDS = [
+  {
+    variable: 'id',
+  }, {
+    variable: 'name',
+  }, {
+    variable: 'surname',
+  }, {
+    label: 'E-mail',
+    variable: 'email',
+  }, {
+    variable: 'registered_at',
+  },
+];
 
 class StudentPage extends React.PureComponent {
   constructor(props) {
@@ -31,11 +47,12 @@ class StudentPage extends React.PureComponent {
   render() {
     if (this.state.isLoading) return <LoadingAnimation />;
 
-    if (this.state.student === null) return <h3>There was a problem while fetching student data.</h3>;
+    const { student } = this.state;
+    if (student === null) return <h3>There was a problem while fetching student data.</h3>;
 
     return (
-      <div>
-        {this.state.student.id}
+      <div className='StudentPage'>
+        <VerticalTable data={student} fields={FIELDS} />
       </div>
     )
   }

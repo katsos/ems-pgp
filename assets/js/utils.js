@@ -2,11 +2,15 @@ String.prototype.capitalize = function () {
   return this[0].toUpperCase() + this.slice(1);
 };
 
-export function isUndefined(obj) {
+function isUndefined(obj) {
   return typeof obj === 'undefined';
 }
 
-export function serializeForm(node) {
+function kebabCaseToLabel(string) {
+  return string.split('_').join(' ');
+}
+
+function serializeForm(node) {
   const buttonClass = 'mdl-button';
   const inputs = node.querySelectorAll(`input:not(.${buttonClass})`); // get all inputs except buttons
 
@@ -18,3 +22,5 @@ export function serializeForm(node) {
 
   return data;
 }
+
+export { isUndefined, serializeForm, kebabCaseToLabel };
