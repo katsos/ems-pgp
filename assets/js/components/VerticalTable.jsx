@@ -6,7 +6,7 @@ function VerticalTable({ data, fields }) {
   return (
     <table>
       <tbody>
-        {fields.map(({ label, variable}) => (
+        {fields.map(({ label, variable }) => (
           <tr key={variable}>
             <th>{label || kebabCaseToLabel(variable)}</th>
             <td>{data[variable]}</td>
