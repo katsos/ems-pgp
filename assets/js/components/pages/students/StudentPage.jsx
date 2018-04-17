@@ -26,13 +26,14 @@ class StudentPage extends React.PureComponent {
     this.state = {
       isLoading: true,
       student: null,
-    }
+    };
   }
 
   componentWillMount() {
     const { student = null } = this.props.location.state || {};
-    this.setState({ student })
+    this.setState({ student });
   }
+
   componentDidMount() {
     if (this.state.student !== null) {
       return this.setState({ isLoading: false });
