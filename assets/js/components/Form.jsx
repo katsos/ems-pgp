@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 class Form extends React.PureComponent {
@@ -53,5 +54,21 @@ class Form extends React.PureComponent {
     );
   }
 }
+
+Form.propTypes = {
+  initialData: PropTypes.object,
+  errors: PropTypes.object,
+  schema: PropTypes.shape({
+    label: PropTypes.string,
+    type: PropTypes.string,
+  }),
+  onCancel: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
+
+Form.defaultProps = {
+  initialData: {},
+  errors: {},
+};
 
 export default Form;
