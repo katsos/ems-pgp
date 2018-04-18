@@ -1,13 +1,6 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
-
-import DrawerUser from "./DrawerUser";
-
-const NAV_LINKS = {
-  Home: '/',
-  Programs: '/programs',
-  Students: '/students',
-};
+import ROUTES from '../../../routes';
 
 export default function Drawer(props) {
   return (
@@ -20,14 +13,14 @@ export default function Drawer(props) {
 }
 
 function NavLinks(toggleDrawer) {
-  return Object.keys(NAV_LINKS).map((name, id) => {
+  return ROUTES.map(({ name, url }) => {
      return (
        <Link
          className="mdl-navigation__link"
-         to={NAV_LINKS[name]}
-         key={id}
+         to={url}
+         key={name}
          onClick={toggleDrawer}
        >{name}</Link>
-     )
+     );
   });
 }
