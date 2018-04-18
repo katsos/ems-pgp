@@ -6,7 +6,7 @@ export default class Header extends React.Component {
       <header className="mdl-layout__header">
         <div className="mdl-layout__header-row">
           <div className="mdl-layout-spacer"/>
-          <SearchInput id="header__search" />
+          {/*<SearchInput id="header__search" />*/}
         </div>
       </header>
     )
