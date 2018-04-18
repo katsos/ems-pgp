@@ -1,5 +1,5 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
-from .models import Program, Registration, Student
+from .models import Payment, Program, Registration, Student
 
 
 class ProgramsSerializer(HyperlinkedModelSerializer):
@@ -21,3 +21,11 @@ class RegistrationsSerializer(ModelSerializer):
     class Meta:
         model = Registration
         fields = ('id', 'program', 'student', 'created_at')
+
+
+class PaymentSerializer(HyperlinkedModelSerializer):
+    registration = RegistrationsSerializer
+
+    class Meta:
+        model = Payment
+        fields = ('id', 'amount', 'registration')
