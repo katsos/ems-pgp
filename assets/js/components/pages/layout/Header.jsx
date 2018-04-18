@@ -9,7 +9,7 @@ export default class Header extends React.Component {
           {/*<SearchInput id="header__search" />*/}
         </div>
       </header>
-    )
+    );
   }
 }
 
