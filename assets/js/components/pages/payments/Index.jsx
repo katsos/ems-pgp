@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LoadingAnimation from '../../LoadingAnimation';
 import Payment from '../../../models/Payment';
 
