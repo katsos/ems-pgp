@@ -22,4 +22,4 @@ class Payment {
 
 }
 
-export default Program;
+export default Payment;
