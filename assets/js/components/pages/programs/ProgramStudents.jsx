@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Program from "../../../models/Program";
 import LoadingAnimation from "../../LoadingAnimation";
+import { getPathname } from '../../../utils';
 
 export default class ProgramStudents extends React.Component {
   constructor() {
@@ -39,9 +40,11 @@ export default class ProgramStudents extends React.Component {
           })}
         </ul>
         <div className="program-students__add">
-          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-            <i className="material-icons">add</i> Add new
-          </button>
+          <Link to={`${getPathname()}new`}>
+            <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+              <i className="material-icons">add</i> Add new
+            </button>
+          </Link>
         </div>
       </div>
     )

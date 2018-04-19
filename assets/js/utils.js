@@ -2,6 +2,15 @@ String.prototype.capitalize = function () {
   return this[0].toUpperCase() + this.slice(1);
 };
 
+/**
+ * A safe way to get pathname with a trailing slash always.
+ * @returns {string}
+ */
+function getPathname() {
+  const pathname = window.location.pathname;
+  return pathname.endsWith('/') ? pathname : `${pathname}/`;
+}
+
 function isUndefined(obj) {
   return typeof obj === 'undefined';
 }
@@ -23,4 +32,4 @@ function serializeForm(node) {
   return data;
 }
 
-export { isUndefined, serializeForm, kebabCaseToLabel };
+export { getPathname, kebabCaseToLabel };
