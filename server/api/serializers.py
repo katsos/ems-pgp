@@ -23,6 +23,7 @@ class RegistrationsSerializer(ModelSerializer):
         fields = ('id', 'program', 'student', 'created_at')
 
 
+# TODO: register students to programs first, then implement payment endpoints
 class PaymentSerializer(HyperlinkedModelSerializer):
     registration = RegistrationsSerializer
 
