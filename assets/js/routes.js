@@ -1,6 +1,6 @@
 import Dashboard from './components/Dashboard';
 import PaymentsRouter from './components/pages/payments';
-import StudentsRouter from './components/pages/students/Router';
+import { StudentsRouter } from './components/pages/students';
 import ProgramsRouter from './components/pages/programs/ProgramsRouter';
 
 const ROUTES = [
