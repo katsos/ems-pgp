@@ -1,6 +1,4 @@
 from django.db.models import Model, AutoField, CharField, DateTimeField, PositiveSmallIntegerField
-# , ForeignKey, CASCADE
-# from django.contrib.auth.models import User
 from .registration import Registration
 
 
