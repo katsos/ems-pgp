@@ -1,4 +1,4 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, PrimaryKeyRelatedField
 from .models import Payment, Program, Registration, Student
 
 
@@ -9,9 +9,21 @@ class ProgramsSerializer(HyperlinkedModelSerializer):
 
 
 class StudentsSerializer(HyperlinkedModelSerializer):
+    programs = PrimaryKeyRelatedField(many=True, queryset=Program.objects.all())
+
     class Meta:
         model = Student
-        fields = ('id', 'name', 'surname', 'email', 'registered_at')
+        fields = ('id', 'name', 'surname', 'email', 'registered_at', 'programs')
+
+    def create(self, data):
+        programs = data.pop('programs') or []
+        student = Student.objects.create(**data)
+        student.save()
+
+        for p in programs:
+            Registration.objects.get_or_create(student=student, program=p)
+
+        return student
 
 
 class RegistrationsSerializer(ModelSerializer):
