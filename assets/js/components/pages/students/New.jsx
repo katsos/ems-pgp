@@ -1,23 +1,38 @@
 import React from 'react';
 import moment from 'moment';
 import Student from "../../../models/Student";
+import Program from "../../../models/Program";
+import LoadingAnimation from "../../LoadingAnimation";
 
 class New extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
+      isLoading: true,
       name: '',
       surname: '',
       email: 'example@domain.gr',
       registered_at: moment().format('YYYY-MM-DD'),
+      program: null,
+      programs: null,
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    Program.getAll()
+      .then(programs => {
+        const program = (programs.length) ? programs[0].id : null;
+        this.setState({ program ,programs });
+      })
+      .finally(() => this.setState({ isLoading: false }));
+  }
+
   onChange({ target: { name, value } }) {
+    debugger;
     this.setState({ [name]: value });
   }
 
@@ -29,7 +44,11 @@ class New extends React.PureComponent {
   }
 
   render() {
-    const { name, surname, email, registered_at, errors } = this.state;
+    const { isLoading, programs, program, name, surname, email, registered_at, errors } = this.state;
+
+    if (isLoading) return <LoadingAnimation />;
+
+    if (programs === null) return <h3>We were unable to fetch available programs. Try again later.</h3>;
 
     return (
       <div>
@@ -53,6 +72,15 @@ class New extends React.PureComponent {
             <label>Registered at:</label>
             <input type='date' name='registered_at' value={registered_at} onChange={this.onChange} />
             {(errors.registered_at || []).map((e) => <div key={e}>{e}</div>)}
+          </div>
+          <div>
+            <label>Program:</label>
+            <select name='program' value={program} onChange={this.onChange}>
+              {programs.map(({ id, title, year }) => (
+                <option value={id} key={`${title}_${year}`}>{`${title} (${year})`}</option>
+              ))}
+            </select>
+            {(errors.program || []).map((e) => <div key={e}>{e}</div>)}
           </div>
 
           {/*<button onClick={this.onCancel}>Cancel</button>*/}
