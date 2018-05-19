@@ -2,7 +2,7 @@ import React from 'react';
 import LoadingAnimation from '../../LoadingAnimation';
 import Payment from '../../../models/Payment';
 
-class Index extends React.PureComponent {
+class List extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -39,4 +39,4 @@ class Index extends React.PureComponent {
   }
 }
 
-export default Index;
+export default List;
