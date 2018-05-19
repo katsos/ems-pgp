@@ -32,7 +32,6 @@ class New extends React.PureComponent {
   }
 
   onChange({ target: { name, value } }) {
-    debugger;
     this.setState({ [name]: value });
   }
 
