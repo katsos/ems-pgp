@@ -27,8 +27,8 @@ class StudentsSerializer(HyperlinkedModelSerializer):
 
 
 class RegistrationsSerializer(ModelSerializer):
-    student = StudentsSerializer
-    program = ProgramsSerializer
+    student = StudentsSerializer(read_only=True)
+    programs = ProgramsSerializer(read_only=True)
 
     class Meta:
         model = Registration
