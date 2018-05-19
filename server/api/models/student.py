@@ -8,7 +8,6 @@ class Student(Model):
     registered_at = DateField()
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
-    programs = ManyToManyField('Program', through='Registration')
 
     class Meta:
         db_table = 'students'

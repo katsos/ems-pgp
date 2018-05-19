@@ -9,19 +9,20 @@ class ProgramsSerializer(HyperlinkedModelSerializer):
 
 
 class StudentsSerializer(HyperlinkedModelSerializer):
-    programs = PrimaryKeyRelatedField(queryset=Program.objects.all(), many=True)
+    program = PrimaryKeyRelatedField(queryset=Program.objects.all())
 
     class Meta:
         model = Student
-        fields = ('id', 'name', 'surname', 'email', 'registered_at', 'programs')
+        fields = ('id', 'name', 'surname', 'email', 'registered_at', 'program')
 
     def create(self, data):
-        program = [data.pop('program')] or []
-        student = Student.objects.create(**data)
-        student.save()
+        create_fields = ['name', 'surname', 'email', 'registered_at']
+        create_data = {k: v for k,v in data.items() if k in create_fields}
+        student = Student.objects.create(**create_data)
 
-        for p in program:
-            Registration.objects.get_or_create(student=student, program=p)
+        program = data.get('program', None)
+        if program is not None:
+            Registration.objects.get_or_create(student=student, program=program)
 
         return student
 
