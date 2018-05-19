@@ -8,3 +8,4 @@ class Registration(Model):
 
     class Meta:
         db_table = 'registrations'
+        unique_together = ('student', 'program')
