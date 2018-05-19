@@ -24,10 +24,7 @@ class New extends React.PureComponent {
 
   componentDidMount() {
     Program.getAll()
-      .then(programs => {
-        const program = (programs.length) ? programs[0].id : null;
-        this.setState({ program ,programs });
-      })
+      .then(programs => this.setState({ programs }))
       .finally(() => this.setState({ isLoading: false }));
   }
 
@@ -74,7 +71,8 @@ class New extends React.PureComponent {
           </div>
           <div>
             <label>Program:</label>
-            <select name='program' value={program} onChange={this.onChange}>
+            <select name='program' value={program || '-'} onChange={this.onChange}>
+              <option value='-'>---</option>
               {programs.map(({ id, title, year }) => (
                 <option value={id} key={`${title}_${year}`}>{`${title} (${year})`}</option>
               ))}
