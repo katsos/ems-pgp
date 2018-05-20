@@ -56,8 +56,13 @@ class NewPayment extends React.PureComponent {
 
   onConfirm(e) {
     e.preventDefault();
-    const { student, amount } = this.state;
-    Payment.create({ student, amount })
+    const { student, amount, registration } = this.state;
+    const data = {
+      student,
+      amount,
+      registration: registration.id,
+    };
+    Payment.create(data)
       .then(payment => {
         console.log(payment)
       })

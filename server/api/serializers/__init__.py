@@ -1,4 +1,4 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, PrimaryKeyRelatedField
 from server.api.models import Payment, Program, Registration
 from .students import StudentsSerializer
 
@@ -20,7 +20,7 @@ class RegistrationsSerializer(ModelSerializer):
 
 # TODO: register students to programs first, then implement payment endpoints
 class PaymentSerializer(HyperlinkedModelSerializer):
-    registration = RegistrationsSerializer
+    registration = PrimaryKeyRelatedField(queryset=Registration.objects.all())
 
     class Meta:
         model = Payment
