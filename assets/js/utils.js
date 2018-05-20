@@ -2,6 +2,13 @@ String.prototype.capitalize = function () {
   return this[0].toUpperCase() + this.slice(1);
 };
 
+function pick(obj, fields) {
+  return Object.entries(obj)
+    .reduce((finalObj, [key, value]) => {
+      return (fields.includes(key)) ? Object.assign(finalObj, { [key]: value }) : finalObj;
+    }, {});
+}
+
 /**
  * A safe way to get pathname with a trailing slash always.
  * @returns {string}
@@ -32,4 +39,4 @@ function serializeForm(node) {
   return data;
 }
 
-export { getPathname, kebabCaseToLabel };
+export { getPathname, kebabCaseToLabel, pick };
