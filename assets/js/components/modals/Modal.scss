@@ -1,0 +1,17 @@
+.react-modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 820;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.Modal {
+  width: 600px;
+  margin: 30px auto;
+  outline: none;
+  background-color: white;
+  box-shadow: 0 0 6px #2a2b2b;
+}
