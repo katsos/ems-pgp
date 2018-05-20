@@ -1,11 +1,12 @@
 import React from 'react';
 import Select from 'react-select';
-import { Payment, Student } from '../../../models';
+import { Payment, Registration, Student } from '../../../models';
 import './NewPayment.scss';
 
 const FORM_INIT_DATA = {
   amount: 560,
   student: null,
+  registration: null,
   errors: {},
 };
 
@@ -37,6 +38,8 @@ class NewPayment extends React.PureComponent {
   }
 
   onChangeStudent(student_id) {
+    Registration.getAll({ student: student_id })
+      .then(registrations => this.setState({ registration:  registrations[0] }));
     const { students } = this.state;
     const student = students.find(s => s.id === student_id);
     this.setState({ student });
@@ -62,7 +65,7 @@ class NewPayment extends React.PureComponent {
   }
 
   render() {
-    const { amount, student, students } = this.state;
+    const { amount, registration, student, students } = this.state;
     if (students === null) return <h3>Loading...</h3>;
 
     return (
@@ -78,6 +81,9 @@ class NewPayment extends React.PureComponent {
               onChange={this.onChangeStudent}
               filterOptions={this.filterOptions}
             />
+          </div>
+          <div>
+            {registration && <label>Reason: {`${registration.program.title} (${registration.program.year})`}</label>}
           </div>
           <div>
             <label>Amount:</label>
