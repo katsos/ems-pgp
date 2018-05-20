@@ -20,4 +20,4 @@ class Program(Model):
 
     @property
     def num_of_students(self):
-        return len(Registration.objects.filter(program_id__exact=self.id))
+        return Registration.objects.filter(program_id__exact=self.id).count()
