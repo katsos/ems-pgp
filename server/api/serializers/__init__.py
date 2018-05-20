@@ -6,7 +6,7 @@ from .students import StudentsSerializer
 class ProgramsSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Program
-        fields = ('id', 'title', 'year', 'num_of_students')
+        fields = ('id', 'title', 'year', 'num_of_students', 'total_pending_amount')
 
 
 class RegistrationsSerializer(ModelSerializer):
