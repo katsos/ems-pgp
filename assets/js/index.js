@@ -2,15 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-/* register not exported functions onto window */
-import './utils';
-
+import './utils'; // register not exported functions onto window
 import LayoutPage from "./components/pages/layout/LayoutPage";
 
 /* Import Material Design Lite */
 import 'material-design-lite/dist/material.indigo-red.min.css';
 import 'material-design-lite';
-/* Import custom styles */
+import 'react-select/dist/react-select.css';
 import '../scss/styles.scss';
 
 const appElement = document.getElementById('react-app');
