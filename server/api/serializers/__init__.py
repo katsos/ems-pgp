@@ -15,7 +15,7 @@ class RegistrationsSerializer(ModelSerializer):
 
     class Meta:
         model = Registration
-        fields = ('id', 'program', 'student', 'created_at')
+        fields = ('id', 'program', 'student', 'full_time', 'created_at')
 
 
 # TODO: register students to programs first, then implement payment endpoints

@@ -14,12 +14,15 @@ class New extends React.PureComponent {
       surname: '',
       email: 'example@domain.gr',
       registered_at: moment().format('YYYY-MM-DD'),
+      fulltime: null,
       program: null,
       programs: null,
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
+    this.onChangeProgram = this.onChangeProgram.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.toggleFullTime = this.toggleFullTime.bind(this);
   }
 
   componentDidMount() {
@@ -32,15 +35,32 @@ class New extends React.PureComponent {
     this.setState({ [name]: value });
   }
 
+  onChangeProgram(e) {
+    const { value } = e.target;
+    if (value === '-') {
+      this.setState({ fulltime: null });
+    } else if (this.state.fulltime === null) {
+      this.setState({ fulltime: true });
+    }
+    this.onChange(e);
+  }
+
+  toggleFullTime() {
+    const fulltime = !this.state.fulltime;
+    this.setState({ fulltime });
+  }
+
   onSubmit(e) {
     e.preventDefault();
-    Student.create(this.state)
+    const { name, surname, email, registered_at, fulltime, program } = this.state;
+    const data = { name, surname, email, registered_at, full_time: fulltime, program };
+    Student.create(data)
       .then(student => this.props.history.push(`/students/${student.id}`, { student }))
       .catch(({ response: { data: errors }}) => this.setState({ errors }));
   }
 
   render() {
-    const { isLoading, programs, program, name, surname, email, registered_at, errors } = this.state;
+    const { fulltime, isLoading, programs, program, name, surname, email, registered_at, errors } = this.state;
 
     if (isLoading) return <LoadingAnimation />;
 
@@ -71,7 +91,7 @@ class New extends React.PureComponent {
           </div>
           <div>
             <label>Program:</label>
-            <select name='program' value={program || '-'} onChange={this.onChange}>
+            <select name='program' value={program || '-'} onChange={this.onChangeProgram}>
               <option value='-'>---</option>
               {programs.map(({ id, title, year }) => (
                 <option value={id} key={`${title}_${year}`}>{`${title} (${year})`}</option>
@@ -79,7 +99,14 @@ class New extends React.PureComponent {
             </select>
             {(errors.program || []).map((e) => <div key={e}>{e}</div>)}
           </div>
-
+          {fulltime !== null &&
+            <div>
+              <input type='radio' value='full-time' checked={fulltime} onClick={this.toggleFullTime} />
+              <label>Full-time</label>
+              <input type='radio' value='part-time' checked={!fulltime} onClick={this.toggleFullTime} />
+              <label>Part-time</label>
+            </div>
+          }
           {/*<button onClick={this.onCancel}>Cancel</button>*/}
           <input type='submit' value='Submit' />
         </form>
