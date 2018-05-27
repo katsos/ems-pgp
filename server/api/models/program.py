@@ -30,3 +30,7 @@ class Program(Model):
     def total_pending_amount(self):
         total_income = Payment.objects.filter(registration__program=self).aggregate(Sum('amount'))['amount__sum'] or 0
         return total_income - self.total_income_expected
+
+    @property
+    def total_expenses(self):
+        return self.expenses.aggregate(Sum('amount'))['amount__sum'] or 0
