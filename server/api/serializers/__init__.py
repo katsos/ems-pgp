@@ -18,7 +18,6 @@ class RegistrationsSerializer(ModelSerializer):
         fields = ('id', 'program', 'student', 'full_time', 'created_at')
 
 
-# TODO: register students to programs first, then implement payment endpoints
 class PaymentSerializer(HyperlinkedModelSerializer):
     registration = PrimaryKeyRelatedField(queryset=Registration.objects.all())
 
