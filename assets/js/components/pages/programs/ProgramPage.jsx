@@ -56,6 +56,8 @@ class ProgramPage extends React.Component {
             </tbody>
           </table>
         </div>
+        {/* TODO: add income list */}
+        {/* TODO: add outcome list */}
       </div>
     );
   }
