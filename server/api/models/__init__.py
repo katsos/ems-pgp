@@ -1,3 +1,4 @@
+from .expense import Expense
 from .payment import Payment
 from .program import Program
 from .registration import Registration

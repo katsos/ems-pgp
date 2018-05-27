@@ -1,4 +1,4 @@
-from django.db.models import Model, AutoField, CharField, DateTimeField, PositiveSmallIntegerField, Sum
+from django.db.models import Model, AutoField, CharField, DateTimeField, ManyToManyField, PositiveSmallIntegerField, Sum
 from .payment import Payment
 from .registration import Registration
 
@@ -9,8 +9,7 @@ class Program(Model):
     year = PositiveSmallIntegerField()
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
-    # end_date = DateTimeField()
-    # admin = ForeignKey(User, on_delete=CASCADE)
+    expenses = ManyToManyField('Expense')
 
     class Meta:
         db_table = 'programs'
