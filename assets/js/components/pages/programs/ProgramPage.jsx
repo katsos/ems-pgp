@@ -40,7 +40,7 @@ class ProgramPage extends React.Component {
     if (program === null) return <h3>Couldn't retrieve program!</h3>;
     if (error) return <h3>{error}</h3>;
 
-    const { title, year, num_of_students: numOfStudents, total_pending_amount } = program;
+    const { budget, title, year, num_of_students: numOfStudents, total_pending_amount } = program;
     return (
       <div className="program">
         <h2 className="program__title">{title}</h2> <span>{year}</span>
@@ -51,6 +51,7 @@ class ProgramPage extends React.Component {
           <Link to={`${this.props.match.url}/students`}>{numOfStudents} students enrolled</Link>
           <table>
             <tbody>
+            <tr><td>Budget:</td><td>{budget}</td></tr>
             <tr><td>Total amount pending:</td><td>{total_pending_amount}</td></tr>
             {/*<tr><td>Total amount pending this semester:</td><td>{semester_pending_amount}</td></tr>*/}
             </tbody>

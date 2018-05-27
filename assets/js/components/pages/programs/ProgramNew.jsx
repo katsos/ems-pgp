@@ -10,6 +10,10 @@ const FORM_SCHEMA = {
     label: 'Year',
     type: 'number',
   },
+  budget: {
+    label: 'Budget',
+    type: 'number',
+  }
 };
 
 class ProgramNew extends React.Component {
