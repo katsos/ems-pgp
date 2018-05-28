@@ -11,7 +11,6 @@ class Program(Model):
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
     budget = DecimalField(max_digits=10, decimal_places=2)
-    expenses = ManyToManyField('Expense')
 
     class Meta:
         db_table = 'programs'
@@ -29,9 +28,12 @@ class Program(Model):
         return self.num_of_students * 2800 # TODO: add cost of program field
 
     @property
+    def total_payments(self):
+        return Payment.objects.filter(registration__program=self).aggregate(Sum('amount'))['amount__sum'] or 0
+
+    @property
     def total_pending_amount(self):
-        total_income = Payment.objects.filter(registration__program=self).aggregate(Sum('amount'))['amount__sum'] or 0
-        return total_income - self.total_income_expected
+        return self.total_payments - self.total_income_expected
 
     @property
     def total_expenses(self):

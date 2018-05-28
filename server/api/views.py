@@ -1,6 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
-from .models import Payment, Program, Registration, Student
-from .serializers import PaymentSerializer, ProgramsSerializer, RegistrationsSerializer, StudentsSerializer
+from .models import Expense, Payment, Program, Registration, Student
+from .serializers import ExpensesSerializer, PaymentSerializer, ProgramsSerializer, RegistrationsSerializer, StudentsSerializer
+
+
+class ExpensesViewSet(ModelViewSet):
+    queryset = Expense.objects.all()
+    serializer_class = ExpensesSerializer
 
 
 class PaymentsViewSet(ModelViewSet):

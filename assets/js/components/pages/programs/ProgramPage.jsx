@@ -40,7 +40,7 @@ class ProgramPage extends React.Component {
     if (program === null) return <h3>Couldn't retrieve program!</h3>;
     if (error) return <h3>{error}</h3>;
 
-    const { budget, title, year, num_of_students: numOfStudents, total_pending_amount } = program;
+    const { budget, title, year, payments, num_of_students: numOfStudents, total_pending_amount } = program;
     return (
       <div className="program">
         <h2 className="program__title">{title}</h2> <span>{year}</span>
@@ -58,6 +58,21 @@ class ProgramPage extends React.Component {
           </table>
         </div>
         {/* TODO: add income list */}
+        {/*<div className='Program__income'>*/}
+          {/*<h3>Income</h3>*/}
+          {/*<table>*/}
+            {/*<thead>*/}
+              {/*<th>id</th>*/}
+            {/*</thead>*/}
+            {/*<tbody>*/}
+              {/*{payments.map(p => (*/}
+                {/*<tr>*/}
+                  {/*<td>{p.id}</td>*/}
+                {/*</tr>*/}
+              {/*))}*/}
+            {/*</tbody>*/}
+          {/*</table>*/}
+        {/*</div>*/}
         {/* TODO: add outcome list */}
       </div>
     );
