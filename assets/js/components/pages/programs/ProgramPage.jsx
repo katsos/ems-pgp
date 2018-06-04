@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import LoadingAnimation from "../../LoadingAnimation";
 import Program from '../../../models/Program';
+import './ProgramPage.scss';
 
 class ProgramPage extends React.Component {
   constructor(props) {
@@ -42,18 +43,22 @@ class ProgramPage extends React.Component {
 
     const { budget, title, year, expenses, num_of_students: numOfStudents, total_pending_amount } = program;
     return (
-      <div className="program">
-        <h2 className="program__title">{title}</h2> <span>{year}</span>
-        <button className="mdl-button mdl-js-button mdl-button--primary program__edit" onClick={this._editProgram}>
-          <i className="material-icons">mode_edit</i> Edit Program
-        </button>
-        <div className="program__infos">
+      <div className="Program">
+
+        <div className="Program__header">
+          <h2 className="program__title">{title}</h2> <span>{year}</span>
+          <button className="mdl-button mdl-js-button mdl-button--primary program__edit" onClick={this._editProgram}>
+            <i className="material-icons">mode_edit</i> Edit Program
+          </button>
+        </div>
+
+        <div className="Program__infos">
           <Link to={`${this.props.match.url}/students`}>{numOfStudents} students enrolled</Link>
           <table>
             <tbody>
-            <tr><td>Budget:</td><td>{budget}</td></tr>
-            <tr><td>Total amount pending:</td><td>{total_pending_amount}</td></tr>
-            {/*<tr><td>Total amount pending this semester:</td><td>{semester_pending_amount}</td></tr>*/}
+              <tr><td>Budget:</td><td>{budget}</td></tr>
+              <tr><td>Total amount pending:</td><td>{total_pending_amount}</td></tr>
+              {/*<tr><td>Total amount pending this semester:</td><td>{semester_pending_amount}</td></tr>*/}
             </tbody>
           </table>
         </div>
