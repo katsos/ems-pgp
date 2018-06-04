@@ -15,4 +15,16 @@
     clear: both;
     float: left;
   }
+
+  &__outcome {
+    th {
+      text-align: center;
+    }
+    td {
+      text-align: left;
+    }
+    th, td {
+      min-width: 100px;
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
+import { dateToString } from '../../../utils';
 import LoadingAnimation from "../../LoadingAnimation";
 import Program from '../../../models/Program';
 import './ProgramPage.scss';
@@ -84,13 +85,17 @@ class ProgramPage extends React.Component {
           <table>
             <thead>
               <tr>
-                <th>id</th>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Created At</th>
               </tr>
             </thead>
             <tbody>
-              {expenses.map(({ id }) => (
+              {expenses.map(({ id, amount, created_at }) => (
                 <tr key={id}>
                   <td>{id}</td>
+                  <td>{amount}</td>
+                  <td>{dateToString(created_at)}</td>
                 </tr>
               ))}
             </tbody>

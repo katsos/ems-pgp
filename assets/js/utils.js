@@ -1,6 +1,12 @@
+import moment from 'moment';
+
 String.prototype.capitalize = function () {
   return this[0].toUpperCase() + this.slice(1);
 };
+
+function dateToString(str) {
+  return moment(str).calendar();
+}
 
 function pick(obj, fields) {
   return Object.entries(obj)
@@ -39,4 +45,4 @@ function serializeForm(node) {
   return data;
 }
 
-export { getPathname, kebabCaseToLabel, pick };
+export { dateToString, getPathname, kebabCaseToLabel, pick };
