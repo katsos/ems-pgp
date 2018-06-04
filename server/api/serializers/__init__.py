@@ -1,11 +1,11 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, PrimaryKeyRelatedField
-from server.api.models import Expense, Payment, Program, Registration
+from server.api.models import Payment, Program, Registration
 from .expenses import ExpensesSerializer
 from .students import StudentsSerializer
 
 
 class ProgramsSerializer(HyperlinkedModelSerializer):
-    expenses = ExpensesSerializer(many=True)
+    expenses = ExpensesSerializer(many=True, read_only=True)
 
     class Meta:
         model = Program
