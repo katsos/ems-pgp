@@ -82,6 +82,7 @@ class ProgramPage extends React.Component {
         {/* TODO: add outcome list */}
         <div className='Program__outcome'>
           <h3>Outcome</h3>
+          <Link to={`${location.pathname}/new_expense`}>New</Link>
           <table>
             <thead>
               <tr>
