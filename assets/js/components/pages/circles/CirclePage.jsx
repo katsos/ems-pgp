@@ -47,7 +47,7 @@ class CirclePage extends React.PureComponent {
               <td>{circle.funding_source}</td>
             </tr>
             <tr>
-              <td>Διάρκει προγράμματος</td>
+              <td>Διάρκεια προγράμματος</td>
               <td>{`Από ${moment(circle.starts_at).format('L')} εώς ${moment(circle.ends_at).format('L')}`}</td>
             </tr>
           </tbody>
