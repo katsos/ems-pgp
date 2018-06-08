@@ -9,7 +9,7 @@ class BudgetFieldsSerializer(HyperlinkedModelSerializer):
 
 
 class BudgetsSerializer(HyperlinkedModelSerializer):
-    fields = BudgetFieldsSerializer(source='budgetfield_set', many=True)
+    fields = BudgetFieldsSerializer(many=True)
 
     class Meta:
         model = Budget

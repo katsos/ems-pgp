@@ -1,5 +1,5 @@
 from django.db.models import Model, DateTimeField, ForeignKey, CASCADE
-
+from .budget_field import BudgetField
 
 class Budget(Model):
     circle = ForeignKey('Circle', on_delete=CASCADE)
@@ -7,3 +7,7 @@ class Budget(Model):
 
     class Meta:
         db_table = 'budgets'
+
+    @property
+    def fields(self):
+        return BudgetField.objects.filter(budget=self)
