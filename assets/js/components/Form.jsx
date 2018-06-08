@@ -57,7 +57,7 @@ class Form extends React.PureComponent {
 
 Form.propTypes = {
   initialData: PropTypes.object,
-  errors: PropTypes.object,
+  errors: PropTypes.object.isRequired,
   schema: PropTypes.shape({
     label: PropTypes.string,
     type: PropTypes.string,
@@ -68,7 +68,6 @@ Form.propTypes = {
 
 Form.defaultProps = {
   initialData: {},
-  errors: {},
 };
 
 export default Form;
