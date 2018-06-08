@@ -52,6 +52,27 @@ class CirclePage extends React.PureComponent {
             </tr>
           </tbody>
         </table>
+        <div>
+          <h3>Προϋπολογισμός</h3>
+          <div>Δημιουργήθηκε στις {moment(circle.budget.created_at).format('L')}</div>
+          <table>
+            <thead>
+              <tr>
+                <th colSpan='2'>Κατηγορίες Δαπανών</th>
+                <th>Προυπολογυσμός</th>
+              </tr>
+            </thead>
+            <tbody>
+              {circle.budget.fields.map(({ code, title, amount }) => (
+                <tr>
+                  <td>{code}</td>
+                  <td>{title}</td>
+                  <td>{amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
