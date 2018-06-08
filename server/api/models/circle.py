@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, DateField, DateTimeField, DecimalField, TextField, SmallIntegerField
+from django.db.models import Model, CharField, DateField, DateTimeField, SmallIntegerField
 
 
 class Circle(Model):
