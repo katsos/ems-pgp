@@ -61,7 +61,7 @@ class CirclePage extends React.PureComponent {
             </thead>
             <tbody>
               {circle.budget.fields.map(({ code, title, amount }) => (
-                <tr>
+                <tr key={code}>
                   <td>{code}</td>
                   <td>{title}</td>
                   <td>{amount}</td>
