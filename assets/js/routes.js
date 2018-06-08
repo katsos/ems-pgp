@@ -1,4 +1,5 @@
 import Dashboard from './components/Dashboard';
+import { Router as CirclesRouter } from './components/pages/circles';
 import PaymentsRouter from './components/pages/payments';
 import { StudentsRouter } from './components/pages/students';
 import ProgramsRouter from './components/pages/programs/ProgramsRouter';
@@ -9,6 +10,10 @@ const ROUTES = [
     url: '/',
     component: Dashboard,
     isDefault: true,
+  }, {
+    name: 'Κύκλοι',
+    url: '/circles',
+    component: CirclesRouter,
   }, {
     name: 'payments',
     url: '/payments',
