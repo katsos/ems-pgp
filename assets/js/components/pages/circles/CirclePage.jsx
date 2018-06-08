@@ -28,6 +28,7 @@ class CirclePage extends React.PureComponent {
 
     return (
       <div>
+        <h3>{circle.title}</h3>
         <table>
           <tbody>
             <tr>
@@ -37,10 +38,6 @@ class CirclePage extends React.PureComponent {
             <tr>
               <td>Επιστημονικός υπεύθυνος</td>
               <td>{circle.manager}</td>
-            </tr>
-            <tr>
-              <td>Τίτλος προγράμματος</td>
-              <td>{circle.title}</td>
             </tr>
             <tr>
               <td>Φορέας χρηματοδότησης</td>
