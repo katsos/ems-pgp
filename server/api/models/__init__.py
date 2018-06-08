@@ -1,3 +1,4 @@
+from .circle import Circle
 from .expense import Expense
 from .payment import Payment
 from .program import Program
