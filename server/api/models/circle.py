@@ -19,4 +19,4 @@ class Circle(Model):
 
     @property
     def budget(self):
-        return Budget.objects.get(circle=self)
+        return Budget.objects.filter(circle=self).latest('id')
