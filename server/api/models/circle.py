@@ -1,6 +1,7 @@
 from django.db.models import Model, CharField, DateField, DateTimeField, SmallIntegerField
 from .budget import Budget
 
+
 class Circle(Model):
     id = SmallIntegerField(primary_key=True)
     manager = CharField(max_length=256, null=True)
