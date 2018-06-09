@@ -1,13 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
+from .circles_viewset import CirclesViewSet
 from .registrations_viewset import RegistrationsViewSet
 from .students_viewset import StudentsViewSet
-from ..models import Circle, Expense, Payment, Program
-from ..serializers import CirclesSerializer, ExpensesSerializer, PaymentSerializer, ProgramsSerializer
-
-
-class CirclesViewSet(ModelViewSet):
-    queryset = Circle.objects.all()
-    serializer_class = CirclesSerializer
+from ..models import Expense, Payment, Program
+from ..serializers import ExpensesSerializer, PaymentSerializer, ProgramsSerializer
 
 
 class ExpensesViewSet(ModelViewSet):
