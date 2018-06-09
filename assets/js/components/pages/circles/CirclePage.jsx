@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Circle } from '../../../models';
 import LoadingAnimation from '../../LoadingAnimation';
+import './CirclePage.scss';
 
 class CirclePage extends React.PureComponent {
   constructor(props) {
@@ -25,9 +26,10 @@ class CirclePage extends React.PureComponent {
     const { isLoading, circle } = this.state;
 
     if (isLoading) return <LoadingAnimation />;
+    const editBtnClassName = 'mdl-button mdl-js-button mdl-button--primary CirclePage__budget__header__edit';
 
     return (
-      <div>
+      <div className='CirclePage'>
         <h3>{circle.title}</h3>
         <table>
           <tbody>
@@ -49,10 +51,15 @@ class CirclePage extends React.PureComponent {
             </tr>
           </tbody>
         </table>
-        <div>
-          <h3>Προϋπολογισμός</h3>
+        <div className='CirclePage__budget'>
+
+          <div className='CirclePage__budget__header'>
+            <h3>Προϋπολογισμός</h3>
+            <button className={editBtnClassName}><i className="material-icons">mode_edit</i></button>
+          </div>
           <div>Δημιουργήθηκε στις {moment(circle.budget.created_at).format('L')}</div>
-          <table>
+
+          <table className='CirclePage__budget__table'>
             <thead>
               <tr>
                 <th colSpan='2'>Κατηγορίες Δαπανών</th>
