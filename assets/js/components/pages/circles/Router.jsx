@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NewCircleForm from './New';
+import BudgetPage from './Budget';
 import CircleList from './List';
 import CirclePage from './CirclePage';
 
@@ -11,6 +12,7 @@ export default function Router() {
     <Switch>
       <Route path={`${ROUTER_PREFIX}/new`} component={NewCircleForm}/>
       <Route exact path={`${ROUTER_PREFIX}/:id`} component={CirclePage}/>
+            <Route path={`${ROUTER_PREFIX}/:id/budget`} component={BudgetPage}/>
       <Route component={CircleList}/>
     </Switch>
   );

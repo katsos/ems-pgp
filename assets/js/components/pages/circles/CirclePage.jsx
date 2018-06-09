@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { Circle } from '../../../models';
 import LoadingAnimation from '../../LoadingAnimation';
@@ -24,8 +25,9 @@ class CirclePage extends React.PureComponent {
 
   render() {
     const { isLoading, circle } = this.state;
-
     if (isLoading) return <LoadingAnimation />;
+
+    const { budget } = circle;
     const editBtnClassName = 'mdl-button mdl-js-button mdl-button--primary CirclePage__budget__header__edit';
 
     return (
@@ -55,9 +57,17 @@ class CirclePage extends React.PureComponent {
 
           <div className='CirclePage__budget__header'>
             <h3>Προϋπολογισμός</h3>
-            <button className={editBtnClassName}><i className="material-icons">mode_edit</i></button>
+            <Link
+              className={editBtnClassName}
+              to={{
+                pathname: `/circles/${this.circleId}/budget`,
+                state: { budget },
+              }}
+            >
+              <i className="material-icons">mode_edit</i>
+            </Link>
           </div>
-          <div>Δημιουργήθηκε στις {moment(circle.budget.created_at).format('L')}</div>
+          <div>Δημιουργήθηκε στις {moment(budget.created_at).format('L')}</div>
 
           <table className='CirclePage__budget__table'>
             <thead>
@@ -67,7 +77,7 @@ class CirclePage extends React.PureComponent {
               </tr>
             </thead>
             <tbody>
-              {circle.budget.fields.map(({ code, title, amount }) => (
+              {budget.fields.map(({ code, title, amount }) => (
                 <tr key={code}>
                   <td>{code}</td>
                   <td>{title}</td>
