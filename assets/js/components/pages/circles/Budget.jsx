@@ -33,6 +33,12 @@ class Budget extends React.Component {
     this.setState({ isNewFieldEnabled: true });
   }
 
+  onClickDelete(code) {
+    const { budget } = this.state;
+    const fields = budget.fields.filter(f => f.code !== code);
+    this.setState({ budget: Object.assign(budget, { fields })});
+  }
+
   onClickFieldConfirm({ code, title, amount }) {
     const { budget } = this.state;
     budget.fields.push({ code, title, amount });
@@ -53,7 +59,7 @@ class Budget extends React.Component {
                 <td>{title}</td>
                 <td>{amount}</td>
                 <td><button>Επεξεργασία</button></td>
-                <td><button>Διαγραφή</button></td>
+                <td><button onClick={() => this.onClickDelete(code)}>Διαγραφή</button></td>
               </tr>
             ))}
             {isNewFieldEnabled && (
