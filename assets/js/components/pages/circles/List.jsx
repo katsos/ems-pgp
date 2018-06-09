@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Circle } from '../../../models';
 import LoadingAnimation from '../../LoadingAnimation';
 
@@ -22,7 +23,13 @@ class List extends React.PureComponent {
     const { circles, isLoading } = this.state;
     if (isLoading) return <LoadingAnimation />;
 
-    return <h3>{circles.length}</h3>;
+    return (
+      <ul>
+        {circles.map(({ id, title }) => (
+          <li key={id}><Link to={`/circles/${id}`}>{title}</Link></li>
+        ))}
+      </ul>
+    );
   }
 }
 
