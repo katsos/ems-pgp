@@ -9,6 +9,11 @@ class CirclesViewSet(ModelViewSet):
     queryset = Circle.objects.all()
     serializer_class = CirclesSerializer
 
+    @action(methods=['get'], detail=True)
+    def budget(self, request, pk=None):
+        circle = self.get_object()
+        return Response(BudgetsSerializer(circle.budget).data)
+
     @action(methods=['post'], detail=True)
     def set_budget(self, request, pk=None):
         circle = self.get_object()

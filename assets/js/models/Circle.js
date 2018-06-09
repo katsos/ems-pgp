@@ -19,6 +19,11 @@ class Circle {
     return api.post('', args)
       .then(({ data: circle }) => circle);
   }
+
+  static getBudget(circleId) {
+    return api.get(`${circleId}/budget/`)
+      .then(({ data: budget}) => budget);
+  }
 }
 
 export default Circle;
