@@ -33,6 +33,14 @@ class Budget extends React.Component {
     this.setState({ isNewFieldEnabled: true });
   }
 
+  toggleFieldEditMode(code, enable) {
+    const { budget } = this.state;
+    const { fields } = budget;
+    fields.find(f => f.code === code)
+      .editMode = enable;
+    this.setState({ budget: Object.assign(budget, { fields }) });
+  }
+
   onClickDelete(code) {
     const { budget } = this.state;
     const fields = budget.fields.filter(f => f.code !== code);
@@ -45,6 +53,12 @@ class Budget extends React.Component {
     this.setState({ budget, isNewFieldEnabled: false });
   }
 
+  onClickFieldConfirmReplace(index, field) {
+    const { budget } = this.state;
+    budget.fields[index] = field;
+    this.setState({ budget });
+  }
+
   render() {
     const { isLoading, budget, isNewFieldEnabled } = this.state;
     if (isLoading) return <LoadingAnimation />;
@@ -53,14 +67,22 @@ class Budget extends React.Component {
       <div>
         <table>
           <tbody>
-            {budget.fields.map(({ code, title, amount }) => (
-              <tr key={code}>
-                <td>{code}</td>
-                <td>{title}</td>
-                <td>{amount}</td>
-                <td><button>Επεξεργασία</button></td>
-                <td><button onClick={() => this.onClickDelete(code)}>Διαγραφή</button></td>
-              </tr>
+            {budget.fields.map((f, index) => (
+              (f.editMode) ? (
+                <BudgetFieldEdit
+                  field={f}
+                  onConfirm={f => this.onClickFieldConfirmReplace(index, f)}
+                  onCancel={() => this.toggleFieldEditMode(f.code, false)}
+                />
+              ) : (
+                <tr>
+                  <td>{f.code}</td>
+                  <td>{f.title}</td>
+                  <td>{f.amount}</td>
+                  <td><button onClick={() => this.toggleFieldEditMode(f.code, true)}>Επεξεργασία</button></td>
+                  <td><button onClick={() => this.onClickDelete(f.code)}>Διαγραφή</button></td>
+                </tr>
+              )
             ))}
             {isNewFieldEnabled && (
               <BudgetFieldEdit
