@@ -1,14 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class BudgetFieldEdit extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      code: '',
-      title: '',
-      amount: 0,
-    };
+    const { code = '', title = '', amount = 0 } = this.props.field;
+    this.state = { code, title, amount };
     this.onChange = this.onChange.bind(this);
   }
 
@@ -31,5 +29,19 @@ class BudgetFieldEdit extends React.Component {
     );
   }
 }
+
+BudgetFieldEdit.propTypes = {
+  field: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+  }),
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+BudgetFieldEdit.defaultProps = {
+  field: {},
+};
 
 export default BudgetFieldEdit;
