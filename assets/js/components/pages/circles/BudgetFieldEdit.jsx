@@ -34,7 +34,7 @@ BudgetFieldEdit.propTypes = {
   field: PropTypes.shape({
     code: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    amount: PropTypes.number.isRequired,
+    amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   }),
   onConfirm: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
