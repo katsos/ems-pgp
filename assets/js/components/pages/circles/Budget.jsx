@@ -16,6 +16,7 @@ class Budget extends React.Component {
       fields: null,
       isNewFieldEnabled: false,
     };
+    this.confirmChanges = this.confirmChanges.bind(this);
     this.onClickAddField = this.onClickAddField.bind(this);
     this.onClickFieldConfirm = this.onClickFieldConfirm.bind(this);
   }
@@ -64,6 +65,13 @@ class Budget extends React.Component {
     return !isEqual(this.fields, fields) && !fields.find(f => f.editMode);
   }
 
+  confirmChanges() {
+    const fields = this.state.fields
+      .map(({ code, title, amount }) => Object({ code, title, amount: parseFloat(amount) }));
+    Circle.setBudget(this.circleId, fields)
+      .then(() => this.props.history.push(`/circles/${this.circleId}`));
+  }
+
   render() {
     const { isLoading, fields, isNewFieldEnabled } = this.state;
     if (isLoading) return <LoadingAnimation />;
@@ -104,7 +112,7 @@ class Budget extends React.Component {
            <p>Υπάρχουν αλλαγές στις κατηγορίες δαπανών του προϋπολογισμού.
              <br /> Για οριστικοποίηση πατήστε το κουμπί επιβεβαίωσης.
            </p>
-           <button>Επιβεβαίωση</button>
+           <button onClick={this.confirmChanges}>Επιβεβαίωση</button>
          </div>
         )}
       </div>

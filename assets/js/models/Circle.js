@@ -24,6 +24,11 @@ class Circle {
     return api.get(`${circleId}/budget/`)
       .then(({ data: budget}) => budget);
   }
+
+  static setBudget(circleId, fields) {
+    return api.post(`${circleId}/set_budget/`, { fields })
+      .then(({ data: budget }) => budget);
+  }
 }
 
 export default Circle;
