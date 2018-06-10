@@ -2,7 +2,6 @@ import Dashboard from './components/Dashboard';
 import { Router as CirclesRouter } from './components/pages/circles';
 import PaymentsRouter from './components/pages/payments';
 import { StudentsRouter } from './components/pages/students';
-import ProgramsRouter from './components/pages/programs/ProgramsRouter';
 
 const ROUTES = [
   {
@@ -18,10 +17,6 @@ const ROUTES = [
     name: 'payments',
     url: '/payments',
     component: PaymentsRouter,
-  }, {
-    name: 'programs',
-    url: '/programs',
-    component: ProgramsRouter,
   }, {
     name: 'students',
     url: '/students',
