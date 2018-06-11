@@ -51,7 +51,7 @@ class CirclePage extends React.PureComponent {
             </tr>
           </tbody>
         </table>
-        {budget ? <BudgetSection budget={budget} /> : (
+        {budget ? <BudgetSection budget={budget} circleId={this.circleId} /> : (
           <div className='CirclePage'>
             <hr />
             <p>Δεν έχει καταχωρηθέι προϋπολογισμός για αυτό το πρόγραμμα. <br />
@@ -69,7 +69,7 @@ class CirclePage extends React.PureComponent {
   }
 }
 
-function BudgetSection({ budget }) {
+function BudgetSection({ budget, circleId }) {
   return (
     <div className='CirclePage__budget'>
 
@@ -77,10 +77,7 @@ function BudgetSection({ budget }) {
         <h3>Προϋπολογισμός</h3>
         <Link
           className='mdl-button mdl-js-button mdl-button--primary CirclePage__budget__header__edit'
-          to={{
-            pathname: `/circles/${this.circleId}/budget`,
-            state: { budget },
-          }}
+          to={{ pathname: `/circles/${circleId}/budget`, state: { budget }, }}
         >
           <i className="material-icons">mode_edit</i>
         </Link>
