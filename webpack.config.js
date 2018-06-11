@@ -1,4 +1,5 @@
 const path = require('path');
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
 module.exports = {
   devtool: 'source-map',
@@ -41,5 +42,8 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new WebpackBuildNotifierPlugin(),
+  ]
 };
