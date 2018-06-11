@@ -24,11 +24,23 @@ class List extends React.PureComponent {
     if (isLoading) return <LoadingAnimation />;
 
     return (
-      <ul>
-        {circles.map(({ id, title }) => (
-          <li key={id}><Link to={`/circles/${id}`}>{title}</Link></li>
-        ))}
-      </ul>
+      <div>
+        {(circles.length) ? (
+          <ul>
+            {circles.map(({ id, title }) => (
+              <li key={id}><Link to={`/circles/${id}`}>{title}</Link></li>
+            ))}
+          </ul>
+        ) : (
+          <React.Fragment>
+            <p>Δεν έχετε δημιουργήσει κάποιο κύκλο σπουδών εώς τώρα.</p>
+            <button
+              className='mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
+              onClick={() => this.props.history.push('/circles/new')}
+            >Δημιουργια κυκλου</button>
+          </React.Fragment>
+        )}
+      </div>
     );
   }
 }
