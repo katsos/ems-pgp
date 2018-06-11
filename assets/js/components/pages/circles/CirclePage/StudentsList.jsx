@@ -5,7 +5,7 @@ function StudentsList({ students, cycleId }) {
   if (students.length === 0) return (
     <div>
       <p>Δεν υπάρχουν καταχωρημένοι φοιτητές στο παρόν κύκλο.</p>
-      <Link to={`/cirlces/${cycleId}/new_students`}>ΠΡΟΣΘΗΚΗ ΦΟΙΤΗΤΩΝ</Link>
+      <Link to={`/circles/${cycleId}/new_students`}>ΠΡΟΣΘΗΚΗ ΦΟΙΤΗΤΩΝ</Link>
     </div>
   );
 
