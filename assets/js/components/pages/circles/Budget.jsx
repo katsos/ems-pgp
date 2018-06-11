@@ -28,7 +28,10 @@ class Budget extends React.Component {
     this.setState({ isLoading: true });
     Circle.getBudget(this.circleId)
       .then(({ fields }) => this.setState({ fields }))
-      // TODO: catch
+      .catch(({ response: { data, status } }) => {
+        if (status === 404) return this.setState({ fields: [] });
+        console.error(data);
+      })
       .finally(() =>  this.setState({ isLoading: false }));
   }
 
@@ -62,7 +65,8 @@ class Budget extends React.Component {
 
   isDiffSectionVisible() {
     const { fields } = this.state;
-    return !isEqual(this.fields, fields) && !fields.find(f => f.editMode);
+    return (this.fields === null && fields.length) ||
+      (this.fields !== null && !isEqual(this.fields, fields) && !fields.find(f => f.editMode));
   }
 
   confirmChanges() {
