@@ -51,9 +51,9 @@ class CirclePage extends React.PureComponent {
             </tr>
           </tbody>
         </table>
-        <hr />
         {budget ? <BudgetSection budget={budget} /> : (
           <div className='CirclePage'>
+            <hr />
             <p>Δεν έχει καταχωρηθέι προϋπολογισμός για αυτό το πρόγραμμα. <br />
               Δημιουργήστε τον προϋπολογισμό πατώντας το κουμπί. <br />
               <span>Δεν θα μπορείτε να καταγράψετε συναλλαγές έως ώτου υπάρξει επιτυχής καταχώρηση.</span>
