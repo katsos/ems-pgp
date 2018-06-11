@@ -19,4 +19,5 @@ class Circle(Model):
 
     @property
     def budget(self):
-        return Budget.objects.filter(circle=self).latest('id')
+        budgets = Budget.objects.filter(circle=self)
+        return budgets.latest('id') if budgets else None
