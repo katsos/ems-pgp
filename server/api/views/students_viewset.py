@@ -12,6 +12,6 @@ class StudentsViewSet(ModelViewSet):
 
         program_id = self.request.query_params.get('program_id')
         if program_id is not None:
-            students = students.filter(registration__program__id=program_id)
+            students = students.filter(program__id=program_id)
 
         return students

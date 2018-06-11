@@ -1,6 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
 from .circles_viewset import CirclesViewSet
-from .registrations_viewset import RegistrationsViewSet
 from .students_viewset import StudentsViewSet
 from ..models import Expense, Payment
 from ..serializers import ExpensesSerializer, PaymentSerializer

@@ -1,11 +1,12 @@
-from django.db.models import Model, CharField, DateField, DateTimeField, EmailField, ManyToManyField
+from django.db.models import Model, BooleanField, CharField, DateTimeField, ForeignKey, CASCADE
 
 
 class Student(Model):
     name = CharField(max_length=256)
     surname = CharField(max_length=256)
-    email = EmailField(unique=True)
-    registered_at = DateField()
+    full_time = BooleanField()
+    circle = ForeignKey('Circle', on_delete=CASCADE)
+
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 

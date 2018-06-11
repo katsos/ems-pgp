@@ -1,7 +1,7 @@
 from django.db.models import Model, AutoField, CharField, DateTimeField, DecimalField, \
     ManyToManyField, PositiveSmallIntegerField, Sum
 from .payment import Payment
-from .registration import Registration
+from .student import Student
 
 
 class Program(Model):
@@ -21,7 +21,7 @@ class Program(Model):
 
     @property
     def num_of_students(self):
-        return Registration.objects.filter(program_id__exact=self.id).count()
+        return Student.objects.filter(program=self).count()
 
     @property
     def total_income_expected(self):
@@ -29,7 +29,7 @@ class Program(Model):
 
     @property
     def total_payments(self):
-        return Payment.objects.filter(registration__program=self).aggregate(Sum('amount'))['amount__sum'] or 0
+        return Payment.objects.filter(student__program=self).aggregate(Sum('amount'))['amount__sum'] or 0
 
     @property
     def total_pending_amount(self):

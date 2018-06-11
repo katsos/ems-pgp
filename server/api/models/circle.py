@@ -25,4 +25,4 @@ class Circle(Model):
 
     @property
     def students(self):
-        return Student.objects.filter(registration__circle=self)
+        return Student.objects.filter(circle=self)
