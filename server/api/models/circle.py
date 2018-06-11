@@ -1,5 +1,6 @@
 from django.db.models import Model, AutoField, CharField, DateField, DateTimeField
 from .budget import Budget
+from .student import Student
 
 
 class Circle(Model):
@@ -21,3 +22,7 @@ class Circle(Model):
     def budget(self):
         budgets = Budget.objects.filter(circle=self)
         return budgets.latest('id') if budgets else None
+
+    @property
+    def students(self):
+        return Student.objects.filter(registration__circle=self)
