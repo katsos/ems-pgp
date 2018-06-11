@@ -12,10 +12,9 @@ class StudentsListEdit extends React.Component {
     this.onConfirm = this.onConfirm.bind(this);
   }
 
-  onChange({ target: { name, value }}, index) {
+  onChange({ target: { name, value, checked }}, index) {
     const { students } = this.state;
-    students[index][name] = value;
-
+    students[index][name] = (name === 'full_time') ? checked : value;
     this.setState({ students });
   }
 
@@ -25,7 +24,7 @@ class StudentsListEdit extends React.Component {
 
   onAddRow() {
     const { students } = this.state;
-    students.push({ name: '', surname: '' });
+    students.push({ name: '', surname: '', full_time: false });
     this.setState({ students });
   }
 
@@ -42,10 +41,18 @@ class StudentsListEdit extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {students.map(({ name, surname }, index) => (
+            {students.map(({ name, surname, fullTime }, index) => (
               <tr key={index}>
                 <td><input name='surname' value={surname} onChange={e => this.onChange(e, index)} /></td>
                 <td><input name='name' value={name} onChange={e => this.onChange(e, index)} /></td>
+                <td>
+                  <input
+                    name='full_time'
+                    value={fullTime}
+                    onChange={e => this.onChange(e, index)}
+                    type='checkbox'
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
