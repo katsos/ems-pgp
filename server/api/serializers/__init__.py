@@ -1,5 +1,5 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, PrimaryKeyRelatedField
-from server.api.models import Payment, Program, Registration
+from server.api.models import Payment, Registration
 from .budgets import BudgetsSerializer
 from .circles import CirclesSerializer
 from .expenses import ExpensesSerializer
