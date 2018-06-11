@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,7 +13,10 @@ class CirclesViewSet(ModelViewSet):
     @action(methods=['get'], detail=True)
     def budget(self, request, pk=None):
         circle = self.get_object()
-        return Response(BudgetsSerializer(circle.budget).data)
+        budget = circle.budget
+        if not budget:
+            raise Http404
+        return Response(BudgetsSerializer(budget).data)
 
     @action(methods=['post'], detail=True)
     def set_budget(self, request, pk=None):
