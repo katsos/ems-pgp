@@ -27,9 +27,7 @@ class CirclePage extends React.PureComponent {
     const { isLoading, circle } = this.state;
     if (isLoading) return <LoadingAnimation />;
 
-    const { budget } = circle;
-    const editBtnClassName = 'mdl-button mdl-js-button mdl-button--primary CirclePage__budget__header__edit';
-
+    const { budget = null } = circle;
     return (
       <div className='CirclePage'>
         <h3>{circle.title}</h3>
@@ -53,43 +51,61 @@ class CirclePage extends React.PureComponent {
             </tr>
           </tbody>
         </table>
-        <div className='CirclePage__budget'>
-
-          <div className='CirclePage__budget__header'>
-            <h3>Προϋπολογισμός</h3>
+        <hr />
+        {budget ? <BudgetSection budget={budget} /> : (
+          <div className='CirclePage'>
+            <p>Δεν έχει καταχωρηθέι προϋπολογισμός για αυτό το πρόγραμμα. <br />
+              Δημιουργήστε τον προϋπολογισμό πατώντας το κουμπί. <br />
+              <span>Δεν θα μπορείτε να καταγράψετε συναλλαγές έως ώτου υπάρξει επιτυχής καταχώρηση.</span>
+            </p>
             <Link
-              className={editBtnClassName}
-              to={{
-                pathname: `/circles/${this.circleId}/budget`,
-                state: { budget },
-              }}
-            >
-              <i className="material-icons">mode_edit</i>
-            </Link>
+              className='mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
+              to={`/circles/${this.circleId}/budget`}
+            >ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ</Link>
           </div>
-          <div>Δημιουργήθηκε στις {moment(budget.created_at).format('L')}</div>
-
-          <table className='CirclePage__budget__table'>
-            <thead>
-              <tr>
-                <th colSpan='2'>Κατηγορίες Δαπανών</th>
-                <th>Προυπολογυσμός</th>
-              </tr>
-            </thead>
-            <tbody>
-              {budget.fields.map(({ code, title, amount }) => (
-                <tr key={code}>
-                  <td>{code}</td>
-                  <td>{title}</td>
-                  <td>{amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        )}
       </div>
     );
   }
+}
+
+function BudgetSection({ budget }) {
+  return (
+    <div className='CirclePage__budget'>
+
+      <div className='CirclePage__budget__header'>
+        <h3>Προϋπολογισμός</h3>
+        <Link
+          className='mdl-button mdl-js-button mdl-button--primary CirclePage__budget__header__edit'
+          to={{
+            pathname: `/circles/${this.circleId}/budget`,
+            state: { budget },
+          }}
+        >
+          <i className="material-icons">mode_edit</i>
+        </Link>
+      </div>
+      <div>Δημιουργήθηκε στις {moment(budget.created_at).format('L')}</div>
+
+      <table className='CirclePage__budget__table'>
+        <thead>
+        <tr>
+          <th colSpan='2'>Κατηγορίες Δαπανών</th>
+          <th>Προυπολογυσμός</th>
+        </tr>
+        </thead>
+        <tbody>
+        {budget.fields.map(({code, title, amount}) => (
+          <tr key={code}>
+            <td>{code}</td>
+            <td>{title}</td>
+            <td>{amount}</td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 export default CirclePage;
