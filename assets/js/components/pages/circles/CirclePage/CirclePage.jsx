@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Circle } from '../../../models';
-import LoadingAnimation from '../../LoadingAnimation';
+import { Circle } from '../../../../models';
+import LoadingAnimation from '../../../LoadingAnimation';
 import './CirclePage.scss';
 
 class CirclePage extends React.PureComponent {
