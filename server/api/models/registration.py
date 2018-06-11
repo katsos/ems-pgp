@@ -3,10 +3,10 @@ from django.db.models import Model, BooleanField, DateTimeField, ForeignKey, CAS
 
 class Registration(Model):
     student = ForeignKey('Student', on_delete=CASCADE)
-    program = ForeignKey('Program', on_delete=CASCADE)
+    circle = ForeignKey('Circle', on_delete=CASCADE)
     full_time = BooleanField(null=False)
     created_at = DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'registrations'
-        unique_together = ('student', 'program')
+        unique_together = ('student', 'circle')
