@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import StudentListRow from './StudentListRow';
 
 function StudentsList({ students, cycleId }) {
   if (students.length === 0) return (
@@ -12,18 +13,14 @@ function StudentsList({ students, cycleId }) {
   return (
     <table>
       <thead>
-        <tr>
-          <td>ΕΠΩΝΥΜΟ</td>
-          <td>ΟΝΟΜΑ</td>
-        </tr>
+      <tr>
+        <th>Επώνυμο</th>
+        <th>Όνομα</th>
+        <th/>
+      </tr>
       </thead>
       <tbody>
-      {students.map(({ id, name, surname }) => (
-        <tr key={id}>
-          <td>{surname}</td>
-          <td>{name}</td>
-        </tr>
-      ))}
+        {students.map(s => <StudentListRow key={s.id} student={s}/>)}
       </tbody>
     </table>
   );
