@@ -42,6 +42,7 @@ class StudentsListEdit extends React.Component {
             <tr>
               <th>ΕΠΩΝΥΜΟ</th>
               <th>ΟΝΟΜΑ</th>
+              <th>Full-time</th>
             </tr>
           </thead>
           <tbody>
