@@ -10,16 +10,23 @@ function StudentsList({ students, cycleId }) {
   );
 
   return (
-      <table>
-        <tbody>
-        {students.map(s => (
-          <tr key={s.id}>
-            <td>s.id</td>
-          </tr>
-        ))}
-        </tbody>
-      </table>
-    );
+    <table>
+      <thead>
+        <tr>
+          <td>ΕΠΩΝΥΜΟ</td>
+          <td>ΟΝΟΜΑ</td>
+        </tr>
+      </thead>
+      <tbody>
+      {students.map(({ id, name, surname }) => (
+        <tr key={id}>
+          <td>{surname}</td>
+          <td>{name}</td>
+        </tr>
+      ))}
+      </tbody>
+    </table>
+  );
 }
 
 export default StudentsList;
