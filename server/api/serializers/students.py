@@ -1,10 +1,8 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, PrimaryKeyRelatedField, BooleanField
-from server.api.models import Program, Student
+from rest_framework.serializers import ModelSerializer
+from server.api.models import Student
 
 
-class StudentsSerializer(HyperlinkedModelSerializer):
-    full_time = BooleanField(write_only=True)
-
+class StudentsSerializer(ModelSerializer):
     class Meta:
         model = Student
         fields = ('id', 'name', 'surname', 'full_time', 'circle')

@@ -1,9 +1,12 @@
 import React from 'react';
+import { Circle } from '../../../models';
+import { ROUTER_PREFIX } from './Router';
 
 class StudentsListEdit extends React.Component {
   constructor(props) {
     super(props);
 
+    this.cycleId = this.props.match.params.id;
     this.state = {
       students: [],
     };
@@ -19,7 +22,8 @@ class StudentsListEdit extends React.Component {
   }
 
   onConfirm() {
-
+    Circle.setStudents(this.cycleId, this.state.students)
+      .then(() => this.props.history.push(`${ROUTER_PREFIX}/${this.cycleId}`));
   }
 
   onAddRow() {

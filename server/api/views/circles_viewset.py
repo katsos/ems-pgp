@@ -2,8 +2,8 @@ from django.http import Http404
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from ..models import Budget, BudgetField, Circle
-from ..serializers import BudgetsSerializer, CirclesSerializer
+from ..models import Budget, BudgetField, Circle, Student
+from ..serializers import BudgetsSerializer, CirclesSerializer, StudentsSerializer
 
 
 class CirclesViewSet(ModelViewSet):
@@ -31,4 +31,16 @@ class CirclesViewSet(ModelViewSet):
             BudgetField.objects.create(budget=budget, **f)
 
         return Response(BudgetsSerializer(budget).data)
+        # TODO: transaction end
+
+    @action(methods=['post'], detail=True)
+    def students(self, request, pk=None):
+        circle = self.get_object()
+        # TODO: transaction start
+        students = request.data.get('students', [])
+        for s in students:
+            # TODO: field validation
+            Student.objects.create(circle=circle, **s)
+
+        return Response(StudentsSerializer(circle.students, many=True).data)
         # TODO: transaction end
