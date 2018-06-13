@@ -4,7 +4,6 @@ import { Circle } from '../../../../models';
 import LoadingAnimation from '../../../LoadingAnimation';
 import BudgetSection from './BudgetSection';
 import './CirclePage.scss';
-import ExpensesSection from './ExpensesSection';
 import StudentsSection from "./StudentsSection";
 
 class CirclePage extends React.PureComponent {
@@ -57,8 +56,6 @@ class CirclePage extends React.PureComponent {
         <BudgetSection budget={budget} circleId={this.circleId} />
 
         <StudentsSection students={students} cycleId={this.circleId} />
-
-        <ExpensesSection expenses={expenses} cycleId={this.cycleId} />
       </div>
     );
   }
