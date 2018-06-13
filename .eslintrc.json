@@ -1,12 +1,6 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
+  "extends": "airbnb",
   "rules": {
-    "semi": 2
+    "jsx-quotes": ["warn", "prefer-single"]
   }
 }
