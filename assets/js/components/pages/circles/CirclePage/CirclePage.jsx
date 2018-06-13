@@ -28,7 +28,7 @@ class CirclePage extends React.PureComponent {
     const { isLoading, circle } = this.state;
     if (isLoading) return <LoadingAnimation />;
 
-    const { budget, students, expenses } = circle;
+    const { budget, students } = circle;
     return (
       <div className='CirclePage'>
         <h3>{circle.title}</h3>
