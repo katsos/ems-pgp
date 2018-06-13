@@ -1,6 +1,5 @@
 from django.db.models import Model, AutoField, CharField, DateField, DateTimeField
 from .budget import Budget
-from .expense import Expense
 from .student import Student
 
 
