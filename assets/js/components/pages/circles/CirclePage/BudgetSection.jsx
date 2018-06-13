@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import BudgetFieldRow from './BudgetFieldRow';
 
 function BudgetSection({ budget, circleId }) {
   if (!budget) return (
@@ -36,16 +37,11 @@ function BudgetSection({ budget, circleId }) {
         <tr>
           <th colSpan='2'>Κατηγορίες Δαπανών</th>
           <th>Προυπολογυσμός</th>
+          <th />
         </tr>
         </thead>
         <tbody>
-        {budget.fields.map(({code, title, amount}) => (
-          <tr key={code}>
-            <td>{code}</td>
-            <td>{title}</td>
-            <td>{amount}</td>
-          </tr>
-        ))}
+          {budget.fields.map(f => <BudgetFieldRow key={f.id} field={f} />)}
         </tbody>
       </table>
     </div>
