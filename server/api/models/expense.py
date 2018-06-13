@@ -2,7 +2,7 @@ from django.db.models import Model, CharField, DateTimeField, DecimalField, Fore
 
 
 class Expense(Model):
-    budget_field = ForeignKey('BudgetField', on_delete=CASCADE, null=True)
+    budget_field = ForeignKey('BudgetField', on_delete=CASCADE)
     type = CharField(max_length=256, null=False)
     notes = CharField(max_length=512, null=True)
     amount = DecimalField(max_digits=8, decimal_places=2)

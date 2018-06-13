@@ -5,7 +5,7 @@ from ..models import Budget, BudgetField
 class BudgetFieldsSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = BudgetField
-        fields = ('code', 'title', 'amount')
+        fields = ('id', 'code', 'title', 'amount')
 
 
 class BudgetsSerializer(HyperlinkedModelSerializer):
