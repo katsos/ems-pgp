@@ -1,5 +1,6 @@
 from django.db.models import Model, AutoField, CharField, DateField, DateTimeField
 from .budget import Budget
+from .expense import Expense
 from .student import Student
 
 
@@ -26,3 +27,7 @@ class Circle(Model):
     @property
     def students(self):
         return Student.objects.filter(circle=self)
+
+    @property
+    def expenses(self):
+        return Expense.objects.filter(budget_field__budget__circle=self)
