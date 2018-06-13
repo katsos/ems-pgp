@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Dialog, DialogTitle, IconButton, Menu, MenuItem, withStyles } from '@material-ui/core';
+import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
+import PaymentDialog from './PaymentDialog';
 
 const ACTIONS = [
   {
@@ -27,9 +28,9 @@ class StudentListRow extends React.PureComponent {
     this.state = {
       anchorEl: null,
       isPaymentDialogOpen: false,
-      paymentAmount: 0,
     };
     this.onCloseMenu = this.onCloseMenu.bind(this);
+    this.onPaymentConfirm = this.onPaymentConfirm.bind(this);
     this.onClickMenuButton = this.onClickMenuButton.bind(this);
   }
 
@@ -52,9 +53,14 @@ class StudentListRow extends React.PureComponent {
     }
   }
 
+  onPaymentConfirm() {
+    // not implemented yet
+  }
+
   render() {
-    const { anchorEl, isPaymentDialogOpen, paymentAmount } = this.state;
-    const { classes, student: { id, name, surname } } = this.props;
+    const { anchorEl, isPaymentDialogOpen } = this.state;
+    const { student } = this.props;
+    const { id, name, surname } = student;
 
     return (
       <React.Fragment>
@@ -82,39 +88,18 @@ class StudentListRow extends React.PureComponent {
             </Menu>
           </td>
         </tr>
-        <Dialog open={isPaymentDialogOpen}>
-          <DialogTitle id="simple-dialog-title">Νέα πληρωμή</DialogTitle>
-          <table>
-            <tbody>
-              <tr><td>Φοιτητής:</td><td>{`${surname} ${name} (#${id})`}</td></tr>
-              <tr><td>Κύκλος:</td><td>#{this.cycleId}</td></tr>
-              <tr>
-                <td>Ποσό:</td>
-                <td>
-                  <input
-                    name='payment_amount'
-                    value={paymentAmount}
-                    type='number'
-                    onChange={e => this.setState({ paymentAmount: e.target.value })}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <Button
-              color='secondary'
-              className={classes.button}
-              onClick={() => this.setState({ isPaymentDialogOpen: false })}
-            >ΑΚΥΡΩΣΗ</Button>
-            <Button color='primary' className={classes.button}>ΕΠΙΒΕΒΑΙΩΣΗ</Button>
-          </div>
-        </Dialog>
+
+        <PaymentDialog
+          student={student}
+          isOpen={isPaymentDialogOpen}
+          onConfirm={() => this.setState({ isPaymentDialogOpen: false })}
+          onCancel={() => this.setState({ isPaymentDialogOpen: false })}
+        />
+
       </React.Fragment>
     );
   }
 }
 
-const StudentListRowWithStyles = withStyles()(StudentListRow);
-const StudentListRowWithRouter = withRouter(StudentListRowWithStyles);
+const StudentListRowWithRouter = withRouter(StudentListRow);
 export default StudentListRowWithRouter;

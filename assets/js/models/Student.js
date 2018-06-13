@@ -20,6 +20,11 @@ class Student {
     return api.post('', params)
       .then(({ data: student }) => student);
   }
+
+  static setPayment(studentId, params) {
+    return api.post(`${studentId}/set_payment/`, params)
+      .then(({ data: payment }) => payment);
+  }
 }
 
 export default Student;
