@@ -4,7 +4,7 @@ import { Circle } from '../../../../models';
 import LoadingAnimation from '../../../LoadingAnimation';
 import BudgetSection from './BudgetSection';
 import './CirclePage.scss';
-import StudentsSection from "./StudentsSection";
+import StudentsSection from './StudentsSection';
 
 class CirclePage extends React.PureComponent {
   constructor(props) {
