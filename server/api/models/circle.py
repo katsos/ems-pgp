@@ -27,7 +27,3 @@ class Circle(Model):
     @property
     def students(self):
         return Student.objects.filter(circle=self)
-
-    @property
-    def expenses(self):
-        return Expense.objects.filter(budget_field__budget__circle=self)

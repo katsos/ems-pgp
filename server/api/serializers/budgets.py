@@ -1,14 +1,9 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
-from ..models import Budget, BudgetField
+from rest_framework.serializers import ModelSerializer
+from ..models import Budget
+from .budget_fields import BudgetFieldsSerializer
 
 
-class BudgetFieldsSerializer(HyperlinkedModelSerializer):
-    class Meta:
-        model = BudgetField
-        fields = ('id', 'code', 'title', 'amount')
-
-
-class BudgetsSerializer(HyperlinkedModelSerializer):
+class BudgetsSerializer(ModelSerializer):
     fields = BudgetFieldsSerializer(many=True)
 
     class Meta:
