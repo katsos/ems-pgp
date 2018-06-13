@@ -28,6 +28,7 @@ class BudgetFieldRow extends React.PureComponent {
         <td>{title}</td>
         <td>{amount}</td>
         <td><BudgetActions onSelect={this.onAction} /></td>
+        <ExpenseDialog isOpen={isExpenseDialogOpen} onCancel={() => this.setState({ isExpenseDialogOpen: false })}/>
       </tr>
     );
   }
