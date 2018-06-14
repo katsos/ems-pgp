@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Dialog, DialogTitle, withStyles } from '@material-ui/core';
+import { Button, Dialog, DialogTitle } from '@material-ui/core';
 import { Student } from '../../../../models';
 
 class PaymentDialog extends React.PureComponent {
@@ -28,7 +28,7 @@ class PaymentDialog extends React.PureComponent {
   }
 
   render() {
-    const { classes, student: { id, name, surname }, isOpen, onCancel } = this.props;
+    const { student: { id, name, surname }, isOpen, onCancel } = this.props;
     const { amount, notes } = this.state;
 
     return (
@@ -55,14 +55,13 @@ class PaymentDialog extends React.PureComponent {
           </tbody>
         </table>
         <div>
-          <Button color='secondary' className={classes.button} onClick={onCancel}>ΑΚΥΡΩΣΗ</Button>
-          <Button color='primary' className={classes.button} onClick={this.onConfirm}>ΕΠΙΒΕΒΑΙΩΣΗ</Button>
+          <Button color='secondary' onClick={onCancel}>ΑΚΥΡΩΣΗ</Button>
+          <Button color='primary' onClick={this.onConfirm}>ΕΠΙΒΕΒΑΙΩΣΗ</Button>
         </div>
       </Dialog>
     );
   }
 }
 
-const PaymentDialogWithStyles = withStyles()(PaymentDialog);
-const PaymentDialogWithRouter = withRouter(PaymentDialogWithStyles);
+const PaymentDialogWithRouter = withRouter(PaymentDialog);
 export default PaymentDialogWithRouter;

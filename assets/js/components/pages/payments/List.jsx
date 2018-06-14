@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Link from 'react-router-dom/Link';
-import { Button, Table, TableHead, TableCell, TableRow, TableBody, withStyles } from '@material-ui/core';
+import { Button, Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ListActionsButton from './ListActionsButton';
 import LoadingAnimation from '../../LoadingAnimation';
@@ -80,5 +80,4 @@ class List extends React.PureComponent {
   }
 }
 
-const ListWithStyles = withStyles()(List);
-export default ListWithStyles;
+export default List;
