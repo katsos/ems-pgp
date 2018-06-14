@@ -83,6 +83,17 @@ class Budget extends React.Component {
     return (
       <div>
         <table>
+          {(fields.length || isNewFieldEnabled) && (
+            <thead>
+              <tr>
+                <th>Κωδικός</th>
+                <th>Όνομα</th>
+                <th>Ποσό</th>
+                <th />
+                <th />
+              </tr>
+            </thead>
+          )}
           <tbody>
             {fields.map((f, index) => (
               (f.editMode) ? (
