@@ -2,6 +2,7 @@
   "extends": "airbnb",
   "rules": {
     "max-len": ["warn", 120],
+    "class-methods-use-this": "warn",
     "jsx-quotes": ["warn", "prefer-single"]
   }
 }
