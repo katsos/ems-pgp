@@ -1,13 +1,12 @@
 import React from 'react';
 import Select from 'react-select';
-import { Payment, Registration, Student } from '../../../models';
+import { Payment, Student } from '../../../models';
 import './NewPayment.scss';
 import InfoModal from "../../modals/InfoModal";
 
 const FORM_INIT_DATA = {
   amount: 560,
   student: null,
-  registration: null,
   errors: {},
 };
 
@@ -41,15 +40,13 @@ class NewPayment extends React.PureComponent {
     return options.filter(v => v.label.includes(filter));
   }
 
-  onChangeStudent(student_id) {
-    Registration.getAll({ student: student_id })
-      .then(registrations => this.setState({ registration:  registrations[0] }));
+  onChangeStudent(studentId) {
     const { students } = this.state;
-    const student = students.find(s => s.id === student_id);
+    const student = students.find(s => s.id === studentId);
     this.setState({ student });
   }
 
-  onChange({ target: { name, value }}) {
+  onChange({ target: { name, value } }) {
     this.setState({ [name]: value });
   }
 
@@ -60,11 +57,10 @@ class NewPayment extends React.PureComponent {
 
   onConfirm(e) {
     e.preventDefault();
-    const { student, amount, registration } = this.state;
+    const { student, amount } = this.state;
     const data = {
       student,
       amount,
-      registration: registration.id,
     };
     Payment.create(data)
       .then(payment => this.setState({ payment, isInfoModalOpen: true }))
@@ -76,7 +72,7 @@ class NewPayment extends React.PureComponent {
   }
 
   render() {
-    const { amount, isInfoModalOpen, registration, payment, student, students } = this.state;
+    const { amount, isInfoModalOpen, payment, student, students } = this.state;
     if (students === null) return <h3>Loading...</h3>;
 
     return (
@@ -92,9 +88,6 @@ class NewPayment extends React.PureComponent {
               onChange={this.onChangeStudent}
               filterOptions={this.filterOptions}
             />
-          </div>
-          <div>
-            {registration && <label>Reason: {`${registration.program.title} (${registration.program.year})`}</label>}
           </div>
           <div>
             <label>Amount:</label>
