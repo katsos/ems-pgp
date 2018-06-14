@@ -6,4 +6,9 @@
     a { color: white }
   }
 
+  &__table {
+    &__id {
+      width: 25px;
+    }
+  }
 }
