@@ -1,7 +1,6 @@
 import React from 'react';
-import pick from 'lodash';
 import { Button, Input, InputAdornment } from '@material-ui/core';
-import { Payment, Student } from '../../../models';
+import { Student } from '../../../models';
 import './NewPayment.scss';
 import InfoModal from '../../modals/InfoModal';
 import SelectStudent from '../../SelectStudent';
@@ -9,7 +8,7 @@ import SelectStudent from '../../SelectStudent';
 const FORM_INIT_DATA = {
   amount: '',
   notes: '',
-  student: null,
+  student_id: null,
   errors: {},
 };
 
@@ -39,7 +38,8 @@ class NewPayment extends React.Component {
 
   onConfirm(e) {
     e.preventDefault();
-    Payment.create(pick(this.state, ['student', 'amount', 'notes']))
+    const { student_id, amount, notes } = this.state;
+    Student.setPayment(student_id, { amount, notes })
       .then(payment => this.setState({ payment, isInfoModalOpen: true }))
       .catch(({ response: { data: errors } }) => this.setState({ errors }));
   }
@@ -56,7 +56,7 @@ class NewPayment extends React.Component {
         <form className='NewPayment__form'>
           <div>
             <SelectStudent
-              onChange={studentId => this.setState({ student: studentId })}
+              onChange={student_id => this.setState({ student_id })}
             />
           </div>
           <Input
