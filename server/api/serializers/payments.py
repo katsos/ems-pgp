@@ -1,10 +1,11 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
-from server.api.models import Payment, Student
+from server.api.models import Payment
+from .students import StudentsSerializer
 
 
 class PaymentSerializer(ModelSerializer):
-    student = PrimaryKeyRelatedField(queryset=Student.objects.all())
+    student = StudentsSerializer(read_only=True)
 
     class Meta:
         model = Payment
-        fields = ('id', 'amount', 'student')
+        fields = ('id', 'amount', 'notes', 'created_at', 'student')
