@@ -1,6 +1,5 @@
-from django.db.models import Model, AutoField, CharField, DateField, DateTimeField, Sum
+from django.db.models import Model, AutoField, CharField, DateField, DateTimeField, DecimalField, Sum
 from .budget import Budget
-from .budget_field import BudgetField
 from .expense import Expense
 from .payment import Payment
 from .student import Student
@@ -11,6 +10,7 @@ class Circle(Model):
     manager = CharField(max_length=256, null=True)
     title = CharField(max_length=512, null=False)
     funding_source = CharField(max_length=512, null=True, default='')
+    tuition = DecimalField(max_digits=8, decimal_places=2)
 
     starts_at = DateField(null=False)
     ends_at = DateField(null=False)
@@ -44,7 +44,7 @@ class Circle(Model):
 
     @property
     def total_income_expectation(self):
-        return Student.objects.filter(circle=self).count() * 500  # TODO: add variable tuition fee
+        return Student.objects.filter(circle=self).count() * self.tuition
 
     @property
     def total_income(self):
