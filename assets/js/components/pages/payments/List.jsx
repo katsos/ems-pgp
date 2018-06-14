@@ -23,7 +23,6 @@ class List extends React.PureComponent {
   }
 
   render() {
-    const { classes } = this.props;
     const { isLoading, payments } = this.state;
 
     if (isLoading) return <LoadingAnimation />;
@@ -36,11 +35,11 @@ class List extends React.PureComponent {
       <div className='PaymentList'>
         <div className='PaymentList__header'>
           <h3>ΠΛΗΡΩΜΕΣ</h3>
-          <Button variant='fab' color='primary' aria-label='add' className={classes.button}>
-            <Link to='/payments/new'><AddIcon /></Link>
-          </Button>
+          <Link to='/payments/new'>
+            <Button variant='fab' color='primary' aria-label='add'><AddIcon /></Button>
+          </Link>
         </div>
-        <Table className={classes.table}>
+        <Table className='PaymentList__table'>
           <TableHead>
             <TableRow>
               <TableCell>ΑΜΣ</TableCell>
