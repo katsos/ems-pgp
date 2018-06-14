@@ -54,6 +54,17 @@ class ExpenseDialog extends React.PureComponent {
             <label>Ποσό:</label>
             <input name='amount' value={amount} onChange={this.onChange} />
           </div>
+          {/* TODO */}
+          {/*<FormControlLabel*/}
+            {/*control={*/}
+              {/*<Checkbox*/}
+                {/*name='is_completed'*/}
+                {/*checked={is_completed}*/}
+                {/*onChange={() => this.setState({ is_completed: !is_completed })}*/}
+              {/*/>*/}
+            {/*}*/}
+            {/*label='ΟΛΟΚΛΗΡΩΜΕΝΗ'*/}
+          {/*/>*/}
           <div>
             <label>Σχόλια:</label>
             <input name='notes' value={notes} onChange={this.onChange} />
