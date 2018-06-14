@@ -39,7 +39,7 @@ class ExpenseDialog extends React.PureComponent {
 
     // TODO: show form errors
     return (
-      <Dialog open={true} className='ExpenseDialog'>
+      <Dialog open={isOpen} className='ExpenseDialog'>
         <DialogTitle className='ExpenseDialog__title'>
           Νέo έξοδο
           <p>{`${field.code} ${field.title}`}</p>
