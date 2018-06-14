@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, Dialog, DialogTitle, TextField,
-  FormControl, Input, InputLabel, InputAdornment
+  Button, Checkbox, Dialog, DialogTitle, TextField,
+  FormControl, FormControlLabel, Input, InputLabel, InputAdornment
 } from '@material-ui/core';
 import { Expense } from '../../../../models';
 import './ExpenseDialog.scss';
@@ -15,6 +15,7 @@ class ExpenseDialog extends React.PureComponent {
       type: '',
       amount: '',
       notes: '',
+      is_completed: false,
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,11 +35,11 @@ class ExpenseDialog extends React.PureComponent {
 
   render() {
     const { isOpen, field, onCancel } = this.props;
-    const { type, amount, notes } = this.state;
+    const { type, amount, notes, is_completed: isCompleted } = this.state;
 
     // TODO: show form errors
     return (
-      <Dialog open={isOpen} className='ExpenseDialog'>
+      <Dialog open={true} className='ExpenseDialog'>
         <DialogTitle className='ExpenseDialog__title'>
           Νέo έξοδο
           <p>{`${field.code} ${field.title}`}</p>
@@ -59,18 +60,16 @@ class ExpenseDialog extends React.PureComponent {
             />
           </FormControl>
 
-
-          {/* TODO */}
-          {/*<FormControlLabel*/}
-            {/*control={*/}
-              {/*<Checkbox*/}
-                {/*name='is_completed'*/}
-                {/*checked={is_completed}*/}
-                {/*onChange={() => this.setState({ is_completed: !is_completed })}*/}
-              {/*/>*/}
-            {/*}*/}
-            {/*label='ΟΛΟΚΛΗΡΩΜΕΝΗ'*/}
-          {/*/>*/}
+          <FormControlLabel
+            control={
+              <Checkbox
+                name='is_completed'
+                checked={isCompleted}
+                onChange={() => this.setState({ is_completed: !isCompleted })}
+              />
+            }
+            label='ΟΛΟΚΛΗΡΩΜΕΝΗ'
+          />
 
           <TextField
             name='notes'
@@ -82,8 +81,8 @@ class ExpenseDialog extends React.PureComponent {
           />
 
           <div className='ExpenseDialog__form__buttons'>
+            <Button variant='contained' color='primary' onClick={this.onSubmit}>ΥΠΟΒΟΛΗ</Button>
             <Button color='secondary' onClick={onCancel}>ΑΚΥΡΩΣΗ</Button>
-            <Button color='primary' onClick={this.onSubmit}>ΥΠΟΒΟΛΗ</Button>
           </div>
         </form>
       </Dialog>
