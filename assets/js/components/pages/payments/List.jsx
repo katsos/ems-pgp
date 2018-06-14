@@ -3,6 +3,7 @@ import moment from 'moment';
 import Link from 'react-router-dom/Link';
 import { Button, Table, TableHead, TableCell, TableRow, TableBody, withStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import ListActionsButton from './ListActionsButton';
 import LoadingAnimation from '../../LoadingAnimation';
 import Payment from '../../../models/Payment';
 import './List.scss';
@@ -58,8 +59,8 @@ class List extends React.PureComponent {
                 <TableCell>{`${p.student.surname} ${p.student.name}`}</TableCell>
                 <TableCell numeric>{p.student.circle}</TableCell>
                 <TableCell numeric>{p.amount}</TableCell>
-                <TableCell>TODO: actions</TableCell>
                 <TableCell numeric>{moment(p.created_at).format('L')}</TableCell>
+                <TableCell><ListActionsButton /></TableCell>
               </TableRow>
             ))}
           </TableBody>
