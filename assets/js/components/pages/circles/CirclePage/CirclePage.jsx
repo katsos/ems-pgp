@@ -56,18 +56,22 @@ class CirclePage extends React.PureComponent {
               <td>Διάρκεια προγράμματος:</td>
               <td>{`Από ${moment(circle.starts_at).format('L')} εώς ${moment(circle.ends_at).format('L')}`}</td>
             </tr>
-            <tr>
-              <td>Συνολικός προϋπολογισμος εξόδων:</td>
-              <td>{totalOutcomeExpectation}</td>
-            </tr>
+            {totalOutcomeExpectation !== null && (
+              <tr>
+                <td>Συνολικός προϋπολογισμος εξόδων:</td>
+                <td>{totalOutcomeExpectation}</td>
+              </tr>
+            )}
             <tr>
               <td>Συνολικά έξοδα:</td>
               <td>{totalOutcome}</td>
             </tr>
-            <tr>
-              <td>Συνολικός προϋπολογισμός εσόδων:</td>
-              <td>{totalIncomeExpectation}</td>
-            </tr>
+            {totalIncomeExpectation !== null && (
+              <tr>
+                <td>Συνολικός προϋπολογισμός εσόδων:</td>
+                <td>{totalIncomeExpectation}</td>
+              </tr>
+            )}
             <tr>
               <td>Συνολικά έσοδα:</td>
               <td>{totalIncome}</td>
