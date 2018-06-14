@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import Link from 'react-router-dom/Link';
 import { Button, Table, TableHead, TableCell, TableRow, TableBody, withStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
@@ -42,21 +43,23 @@ class List extends React.PureComponent {
         <Table className='PaymentList__table'>
           <TableHead>
             <TableRow>
-              <TableCell>ΑΜΣ</TableCell>
+              <TableCell className='PaymentList__table__id'>ΑΜΣ</TableCell>
               <TableCell>ΟΝΟΜΑΤΕΠΩΝΥΜΟ</TableCell>
+              <TableCell numeric>ΚΥΚΛΟΣ</TableCell>
               <TableCell numeric>ΠΟΣΟ</TableCell>
-              <TableCell>ΗΜΕΡΟΜΗΝΙΑ ΚΑΤΑΧΩΡΗΣΗΣ</TableCell>
+              <TableCell numeric>ΗΜΕΡΟΜΗΝΙΑ ΚΑΤΑΧΩΡΗΣΗΣ</TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
             {payments.map(p => (
               <TableRow key={p.id}>
-                <TableCell>{p.id}</TableCell>
-                <TableCell>TODO</TableCell>
+                <TableCell className='PaymentList__table__id'>{p.id}</TableCell>
+                <TableCell>{`${p.student.surname} ${p.student.name}`}</TableCell>
+                <TableCell numeric>{p.student.circle}</TableCell>
                 <TableCell numeric>{p.amount}</TableCell>
-                <TableCell>TODO</TableCell>
                 <TableCell>TODO: actions</TableCell>
+                <TableCell numeric>{moment(p.created_at).format('L')}</TableCell>
               </TableRow>
             ))}
           </TableBody>
