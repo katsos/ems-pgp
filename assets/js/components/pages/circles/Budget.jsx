@@ -1,5 +1,6 @@
 import React from 'react';
 import { isEqual } from 'lodash';
+import Button from '@material-ui/core/Button';
 import Circle from '../../../models/Circle';
 import BudgetFieldEdit from './BudgetFieldEdit';
 import LoadingAnimation from '../../LoadingAnimation';
@@ -8,7 +9,7 @@ class Budget extends React.Component {
   constructor(props) {
     super(props);
 
-    this.fields = (this.props.location.state &&  this.props.location.state.budget) ?
+    this.fields = (this.props.location.state && this.props.location.state.budget) ?
       this.props.location.state.budget.fields : null;
     this.circleId = this.props.match.params.id;
     this.state = {
@@ -32,7 +33,7 @@ class Budget extends React.Component {
         if (status === 404) return this.setState({ fields: [] });
         console.error(data);
       })
-      .finally(() =>  this.setState({ isLoading: false }));
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   onClickAddField() {
@@ -90,7 +91,6 @@ class Budget extends React.Component {
                 <th>Όνομα</th>
                 <th>Ποσό</th>
                 <th />
-                <th />
               </tr>
             </thead>
           )}
@@ -107,8 +107,10 @@ class Budget extends React.Component {
                   <td>{f.code}</td>
                   <td>{f.title}</td>
                   <td>{f.amount}</td>
-                  <td><button onClick={() => this.toggleFieldEditMode(f.code, true)}>Επεξεργασία</button></td>
-                  <td><button onClick={() => this.onClickDelete(f.code)}>Διαγραφή</button></td>
+                  <td>
+                    <Button color='primary' onClick={() => this.toggleFieldEditMode(f.code, true)}>ΕΠΕΞΕΡΓΑΣΙΑ</Button>
+                    <Button onClick={() => this.onClickDelete(f.code)}>ΔΙΑΓΡΑΦΗ</Button>
+                  </td>
                 </tr>
               )
             ))}
@@ -120,15 +122,16 @@ class Budget extends React.Component {
             )}
           </tbody>
         </table>
-        <button onClick={this.onClickAddField}>Προσθήκη νέας κατηγορίας</button>
+        <Button variant='contained' color='primary' onClick={this.onClickAddField}>ΠΡΟΣΘΗΚΗ ΚΑΤΗΓΟΡΙΑΣ</Button>
 
         {this.isDiffSectionVisible() && (
-         <div>
-           <p>Υπάρχουν αλλαγές στις κατηγορίες δαπανών του προϋπολογισμού.
-             <br /> Για οριστικοποίηση πατήστε το κουμπί επιβεβαίωσης.
-           </p>
-           <button onClick={this.confirmChanges}>Επιβεβαίωση</button>
-         </div>
+          <div>
+            <hr />
+            <p>Υπάρχουν αλλαγές στις κατηγορίες δαπανών του προϋπολογισμού.
+              <br />Για οριστικοποίηση πατήστε το κουμπί επιβεβαίωσης.
+            </p>
+            <Button variant='contained' color='primary' onClick={this.confirmChanges}>ΕΠΙΒΕΒΑΙΩΣΗ</Button>
+          </div>
         )}
       </div>
     );

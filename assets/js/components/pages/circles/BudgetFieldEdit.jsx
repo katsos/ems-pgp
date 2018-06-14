@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import './BudgetFieldEdit.scss';
 
 class BudgetFieldEdit extends React.Component {
   constructor(props) {
@@ -18,13 +21,34 @@ class BudgetFieldEdit extends React.Component {
     const { code, title, amount } = this.state;
 
     return (
-      <tr>
-        <td><input name='code' value={code} onChange={this.onChange} /></td>
-        <td><input name='title' value={title} onChange={this.onChange} /></td>
-        <td><input name='amount' value={amount} onChange={this.onChange} type='number' /></td>
+      <tr className='BudgetFieldEdit'>
+        <td>
+          <TextField
+            name='code'
+            value={code}
+            onChange={this.onChange}
+          />
+        </td>
+        <td>
+          <TextField
+            name='title'
+            value={title}
+            onChange={this.onChange}
+          />
+        </td>
+        <td>
+          <TextField
+            name='amount'
+            value={amount}
+            onChange={this.onChange}
+            type='number'
+          />
+        </td>
 
-        <td><button onClick={() => this.props.onConfirm(this.state)}>Εισαγωγή</button></td>
-        <td><button onClick={this.props.onCancel}>Ακύρωση</button></td>
+        <td>
+          <Button color='primary' onClick={() => this.props.onConfirm(this.state)}>ΕΙΣΑΓΩΓΗ</Button>
+          <Button onClick={this.props.onCancel}>ΑΚΥΡΩΣΗ</Button>
+        </td>
       </tr>
     );
   }
