@@ -1,16 +1,18 @@
 import React from 'react';
 import Select from 'react-select';
+import { Button, Input, InputAdornment } from '@material-ui/core';
 import { Payment, Student } from '../../../models';
 import './NewPayment.scss';
 import InfoModal from "../../modals/InfoModal";
 
 const FORM_INIT_DATA = {
-  amount: 560,
+  amount: '',
+  notes: '',
   student: null,
   errors: {},
 };
 
-class NewPayment extends React.PureComponent {
+class NewPayment extends React.Component {
   constructor(props) {
     super(props);
 
@@ -72,14 +74,13 @@ class NewPayment extends React.PureComponent {
   }
 
   render() {
-    const { amount, isInfoModalOpen, payment, student, students } = this.state;
+    const { amount, notes, isInfoModalOpen, payment, student, students } = this.state;
     if (students === null) return <h3>Loading...</h3>;
 
     return (
       <div className='NewPayment'>
-        <form>
+        <form className='NewPayment__form'>
           <div>
-            <label>Student:</label>
             <Select
               options={students}
               valueKey='id'
@@ -87,15 +88,26 @@ class NewPayment extends React.PureComponent {
               value={student}
               onChange={this.onChangeStudent}
               filterOptions={this.filterOptions}
+              placeholder='Επιλέξτε φοιτητή'
             />
           </div>
-          <div>
-            <label>Amount:</label>
-            <input name='amount' type='number' value={amount} onChange={this.onChange} />
-          </div>
-          <div>
-            <button onClick={this.onReset}>Reset</button>
-            <button onClick={this.onConfirm}>Confirm</button>
+          <Input
+            name='amount'
+            value={amount}
+            onChange={this.onChange}
+            placeholder='Ποσό'
+            className='NewPayment__form__amount'
+            endAdornment={<InputAdornment position='end'>&euro;</InputAdornment>}
+          />
+          <Input
+            name='notes'
+            value={notes}
+            onChange={this.onChange}
+            placeholder='Παρατηρήσεις'
+          />
+          <div className='NewPayment__form__buttons'>
+            <Button color='primary' onClick={this.onConfirm}>ΥΠΟΒΟΛΗ</Button>
+            <Button onClick={this.onReset}>ΚΑΘΑΡΙΣΜΑ</Button>
           </div>
         </form>
         {payment &&

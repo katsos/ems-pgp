@@ -1,5 +1,19 @@
 .NewPayment {
-  form {
-    width: 50%;
+  &__form {
+    max-width: 400px;
+
+    > div {
+      width: 100%;
+      margin-bottom: 10px;
+
+      &.NewPayment__form__amount {
+        width: 50%;
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      flex-direction: row-reverse;
+    }
   }
 }
