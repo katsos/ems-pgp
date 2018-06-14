@@ -1,5 +1,8 @@
-from django.db.models import Model, AutoField, CharField, DateField, DateTimeField
+from django.db.models import Model, AutoField, CharField, DateField, DateTimeField, Sum
 from .budget import Budget
+from .budget_field import BudgetField
+from .expense import Expense
+from .payment import Payment
 from .student import Student
 
 
@@ -26,3 +29,24 @@ class Circle(Model):
     @property
     def students(self):
         return Student.objects.filter(circle=self)
+
+    @property
+    def total_outcome_expectation(self):
+        budget = self.budget
+        if budget is None:
+            return None
+        return budget.fields.aggregate(Sum('amount'))['amount__sum'] or 0
+
+    @property
+    def total_outcome(self):
+        return Expense.objects.filter(budget_field__budget__circle=self) \
+            .aggregate(Sum('amount'))['amount__sum'] or 0
+
+    @property
+    def total_income_expectation(self):
+        return Student.objects.filter(circle=self).count() * 500  # TODO: add variable tuition fee
+
+    @property
+    def total_income(self):
+        return Payment.objects.filter(student__circle=self) \
+            .aggregate(Sum('amount'))['amount__sum'] or 0

@@ -10,4 +10,5 @@ class CirclesSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = Circle
-        fields = ('id', 'manager', 'title', 'funding_source', 'starts_at', 'ends_at', 'budget', 'students')
+        fields = ('id', 'manager', 'title', 'funding_source', 'starts_at', 'ends_at', 'budget', 'students',
+                  'total_outcome_expectation', 'total_outcome', 'total_income_expectation', 'total_income')
