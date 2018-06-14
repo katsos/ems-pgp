@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
+import { Payment } from '../../../models';
 
 const MENU_ID = 'payment-actions';
 const ACTIONS = [
@@ -19,6 +22,16 @@ class ListActionsButton extends React.PureComponent {
     this.state = {
       anchorEl: null,
     };
+  }
+
+  onAction(action) {
+    const { afterAction, payment } = this.props;
+    const paymentId = payment.id;
+    if (action === 'delete') {
+      return Payment.delete(paymentId)
+        .then(afterAction);
+    }
+    this.props.history.push(`/payments/${paymentId}/edit`, { payment });
   }
 
   render() {
@@ -49,4 +62,12 @@ class ListActionsButton extends React.PureComponent {
   }
 }
 
-export default ListActionsButton;
+ListActionsButton.propTypes = {
+  afterAction: PropTypes.func.isRequired,
+  payment: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+const ListActionsButtonWithRouter = withRouter(ListActionsButton);
+export default ListActionsButtonWithRouter;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: '/api/payments/'
+  baseURL: '/api/payments/',
 });
 
 class Payment {
@@ -20,6 +20,9 @@ class Payment {
       .then(({ data: payment }) => payment);
   }
 
+  static delete(id) {
+    return API.delete(`${id}/`);
+  }
 }
 
 export default Payment;

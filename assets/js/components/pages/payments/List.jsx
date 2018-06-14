@@ -16,9 +16,15 @@ class List extends React.PureComponent {
       isLoading: true,
       payments: null,
     };
+    this.fetchPayments = this.fetchPayments.bind(this);
   }
 
   componentDidMount() {
+    this.fetchPayments();
+  }
+
+  fetchPayments() {
+    this.setState({ isLoading: true });
     Payment.getAll()
       .then(payments => this.setState({ payments }))
       .finally(() => this.setState({ isLoading: false }));
@@ -60,7 +66,7 @@ class List extends React.PureComponent {
                 <TableCell numeric>{p.student.circle}</TableCell>
                 <TableCell numeric>{p.amount}</TableCell>
                 <TableCell numeric>{moment(p.created_at).format('L')}</TableCell>
-                <TableCell><ListActionsButton /></TableCell>
+                <TableCell><ListActionsButton payment={p} afterAction={this.fetchPayments} /></TableCell>
               </TableRow>
             ))}
           </TableBody>
