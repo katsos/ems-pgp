@@ -1,6 +1,7 @@
 {
   "extends": "airbnb",
   "rules": {
+    "max-len": ["warn", 120],
     "jsx-quotes": ["warn", "prefer-single"]
   }
 }
