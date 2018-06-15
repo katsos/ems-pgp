@@ -22,11 +22,10 @@ def get_secret(setting):
         raise ImproperlyConfigured(error_msg)
 
 
+DEBUG = get_secret('DEBUG')
 ALLOWED_HOSTS = [get_secret('HOST')]
 
 DATABASES['default'].update({
     'USER': get_secret('DB_USER'),
     'PASSWORD': get_secret('DB_PASS'),
 })
-
-
