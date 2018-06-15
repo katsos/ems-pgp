@@ -6,21 +6,25 @@ import { StudentsRouter } from './components/pages/students';
 const ROUTES = [
   {
     name: 'home',
+    label: 'ΑΡΧΙΚΗ',
     url: '/',
     component: Dashboard,
     isDefault: true,
   }, {
-    name: 'Κύκλοι',
+    name: 'circles',
+    label: 'ΚΥΚΛΟΙ',
     url: '/circles',
     component: CirclesRouter,
   }, {
-    name: 'payments',
-    url: '/payments',
-    component: PaymentsRouter,
-  }, {
     name: 'students',
+    label: 'ΦΟΙΤΗΤΕΣ',
     url: '/students',
     component: StudentsRouter,
+  }, {
+    name: 'payments',
+    label: 'ΠΛΗΡΩΜΕΣ ΦΟΙΤΗΤΩΝ',
+    url: '/payments',
+    component: PaymentsRouter,
   },
 ];
 

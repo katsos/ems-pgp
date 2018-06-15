@@ -7,14 +7,14 @@ function Drawer({ toggleDrawer }) {
   return (
     <div className='mdl-layout__drawer'>
       <nav className='mdl-navigation'>
-        {ROUTES.map(({ name, url }) => (
+        {ROUTES.map(({ name, label, url }) => (
           <Link
             className='mdl-navigation__link'
             to={url}
             key={name}
             onClick={toggleDrawer}
           >
-            {name}
+            {label}
           </Link>
          ))}
       </nav>
