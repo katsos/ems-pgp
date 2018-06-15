@@ -4,6 +4,7 @@
   "description": "Economic management system for PostGraduate programs",
   "scripts": {
     "start": "./node_modules/.bin/webpack --mode development --watch --hot",
+    "build": "./node_modules/.bin/webpack --mode production",
     "clean": "rm -Rf node_modules"
   },
   "repository": {
