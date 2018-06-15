@@ -1,5 +1,5 @@
-from django.db.models import Model, BooleanField, CharField, DateTimeField, ForeignKey, CASCADE
-
+from django.db.models import Model, BooleanField, CharField, DateTimeField, ForeignKey, CASCADE, Sum
+from server.api.utils import get_sum_of
 
 class Student(Model):
     name = CharField(max_length=256)
@@ -15,3 +15,7 @@ class Student(Model):
 
     def __str__(self):
         return f'{self.surname} {self.name} ({self.id})'
+
+    @property
+    def total_payments(self):
+        return get_sum_of(self.payments, 'amount')

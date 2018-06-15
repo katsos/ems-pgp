@@ -1,4 +1,5 @@
 from django.db.models import Model, AutoField, CharField, DateField, DateTimeField, DecimalField, Sum
+from server.api.utils import get_sum_of
 from .budget import Budget
 from .expense import Expense
 from .payment import Payment
@@ -35,12 +36,12 @@ class Circle(Model):
         budget = self.budget
         if budget is None:
             return None
-        return budget.fields.aggregate(Sum('amount'))['amount__sum'] or 0
+        return get_sum_of(budget.fields, 'amount')
 
     @property
     def total_outcome(self):
-        return Expense.objects.filter(budget_field__budget__circle=self) \
-            .aggregate(Sum('amount'))['amount__sum'] or 0
+        expenses = Expense.objects.filter(budget_field__budget__circle=self)
+        return get_sum_of(expenses, 'amount')
 
     @property
     def total_income_expectation(self):
@@ -48,5 +49,5 @@ class Circle(Model):
 
     @property
     def total_income(self):
-        return Payment.objects.filter(student__circle=self) \
-            .aggregate(Sum('amount'))['amount__sum'] or 0
+        payments = Payment.objects.filter(student__circle=self)
+        return get_sum_of(payments, 'amount')

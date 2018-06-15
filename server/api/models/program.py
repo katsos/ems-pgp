@@ -1,5 +1,5 @@
-from django.db.models import Model, AutoField, CharField, DateTimeField, DecimalField, \
-    ManyToManyField, PositiveSmallIntegerField, Sum
+from django.db.models import Model, AutoField, CharField, DateTimeField, DecimalField, PositiveSmallIntegerField, Sum
+from server.api.utils import get_sum_of
 from .payment import Payment
 from .student import Student
 
@@ -29,7 +29,8 @@ class Program(Model):
 
     @property
     def total_payments(self):
-        return Payment.objects.filter(student__program=self).aggregate(Sum('amount'))['amount__sum'] or 0
+        payments = Payment.objects.filter(student__program=self)
+        return get_sum_of(payments, 'amount')
 
     @property
     def total_pending_amount(self):
@@ -37,4 +38,4 @@ class Program(Model):
 
     @property
     def total_expenses(self):
-        return self.expenses.aggregate(Sum('amount'))['amount__sum'] or 0
+        return get_sum_of(self.expenses, 'amount')
