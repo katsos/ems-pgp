@@ -1,6 +1,6 @@
 import json
 from django.core.exceptions import ImproperlyConfigured
-from django.core.management.utils import get_random_string
+from django.core.management.utils import get_random_secret_key
 from .base import *
 
 SETTINGS_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -8,7 +8,7 @@ with open(os.path.join(SETTINGS_PATH, 'production.json')) as f:
     prod_variables = json.loads(f.read())
 
 
-SECRET_KEY = get_random_string()
+SECRET_KEY = get_random_secret_key()
 with open(os.path.join(SETTINGS_PATH, 'SECRET_KEY.txt'), 'w') as f:
     print(SECRET_KEY, file=f)
 
