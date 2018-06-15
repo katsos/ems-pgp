@@ -1,14 +1,17 @@
-#project
+# Project
 .env
 .idea
 
 # Python
 __pycache__
 
+# Django
+config/settings/production.json
+config/settings/SECRET_KEY.txt
+
 # npm
 node_modules
 npm-debug.log
 
-# parcel
-.cache
+# Webpack
 static
