@@ -8,10 +8,10 @@ const FORM_SCHEMA = {
     type: 'number',
   },
   manager: {
-    label: 'Επιστημονικός υπεύθυνος'
+    label: 'Επιστημονικός υπεύθυνος',
   },
   title: {
-    label: 'Τίτλος προγράμματος'
+    label: 'Τίτλος προγράμματος',
   },
   starts_at: {
     label: 'Ημερομηνία έναρξης',
@@ -22,7 +22,11 @@ const FORM_SCHEMA = {
     type: 'date',
   },
   funding_source: {
-    label: 'Φορέας χρηματοδότησης'
+    label: 'Φορέας χρηματοδότησης',
+  },
+  tuition: {
+    label: 'Δίδακτρα (Συνολικά)',
+    type: 'number',
   },
 };
 
