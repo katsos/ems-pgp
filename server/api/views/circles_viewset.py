@@ -33,11 +33,17 @@ class CirclesViewSet(ModelViewSet):
         return Response(BudgetsSerializer(budget).data)
         # TODO: transaction end
 
-    @action(methods=['post'], detail=True)
+    @action(methods=['get'], detail=True)
     def students(self, request, pk=None):
         circle = self.get_object()
-        # TODO: transaction start
+        return Response(StudentsSerializer(circle.students, many=True).data)
+
+    @action(methods=['post'], detail=True)
+    def set_students(self, request):
+        circle = self.get_object()
         students = request.data.get('students', [])
+
+        # TODO: transaction start
         for s in students:
             # TODO: field validation
             Student.objects.create(circle=circle, **s)

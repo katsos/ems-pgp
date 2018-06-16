@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api/circles/'
+  baseURL: '/api/circles/',
 });
 
 class Circle {
@@ -30,8 +30,13 @@ class Circle {
       .then(({ data: budget }) => budget);
   }
 
+  static getStudents(circleId) {
+    return api.get(`${circleId}/students/`)
+      .then(({ data: students }) => students);
+  }
+
   static setStudents(circleId, students) {
-    return api.post(`${circleId}/students/`, { students })
+    return api.post(`${circleId}/set_students/`, { students })
       .then(({ data: students }) => students);
   }
 }
