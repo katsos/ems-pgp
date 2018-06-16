@@ -39,7 +39,7 @@ class CirclesViewSet(ModelViewSet):
         return Response(StudentsSerializer(circle.students, many=True).data)
 
     @action(methods=['post'], detail=True)
-    def set_students(self, request):
+    def set_students(self, request, pk=None):
         circle = self.get_object()
         students = request.data.get('students', [])
 
