@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import Link from 'react-router-dom/Link';
 import { Circle } from '../../../../models';
 import LoadingAnimation from '../../../LoadingAnimation';
 import BudgetSection from './BudgetSection';
@@ -40,6 +41,11 @@ class CirclePage extends React.PureComponent {
         <h3>{circle.title}</h3>
         <table>
           <tbody>
+            <tr>
+              <td>
+                <Link to={`/circles/${circle.id}/students`}>{`${circle.students.length} καταχωρημένοι φοιτητές`}</Link>
+              </td>
+            </tr>
             <tr>
               <td>Κωδικός προγράμματος:</td>
               <td>{circle.id}</td>

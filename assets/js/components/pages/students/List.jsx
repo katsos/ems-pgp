@@ -2,14 +2,16 @@ import React from 'react';
 import moment from 'moment';
 import sumBy from 'lodash/sumBy';
 import Link from 'react-router-dom/Link';
+import Button from '@material-ui/core/Button';
 import { Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
-import Student from '../../../models/Student';
+import { Circle, Student } from '../../../models';
 import LoadingAnimation from '../../LoadingAnimation';
 
-class Index extends React.PureComponent {
+class StudentList extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    this.cycleId = this.props.match.params.id;
     this.state = {
       isLoading: true,
       students: null,
@@ -17,7 +19,10 @@ class Index extends React.PureComponent {
   }
 
   componentDidMount() {
-    Student.getAll()
+    const resource = (this.cycleId) ?
+      Circle.getStudents(this.cycleId) : Student.getAll();
+
+    resource
       .then(students => this.setState({ students }))
       .finally(() => this.setState({ isLoading: false }));
   }
@@ -42,11 +47,17 @@ class Index extends React.PureComponent {
         {students.length === 0 ? (
           <div>
             <p>Δεν υπάρχει κανένας καταχωρημένος φοιτητής εώς τώρα.</p>
-            <ol>
-              <li>Πηγαίνετε στη <Link to='/circles'>λίστα κύκλων</Link></li>
-              <li>Επιλέξτε τον κύκλο που θέλετε να εγγράψετε τον νέο φοιτητή</li>
-              <li>Στις ενέργειες του κύκλου, επιλέξτε "Προσθήκη φοιτητή"</li>
-            </ol>
+            {this.cycleId ? (
+              <Button color='primary' variant='contained'>
+                <Link to={`/circles/${this.cycleId}/new_students`}>ΠΡΟΣΘΗΚΗ ΦΟΙΤΗΤΩΝ</Link>
+              </Button>
+            ) : (
+              <ol>
+                <li>Πηγαίνετε στη <Link to='/circles'>λίστα κύκλων</Link></li>
+                <li>Επιλέξτε τον κύκλο που θέλετε να εγγράψετε τον νέο φοιτητή</li>
+                <li>Στις ενέργειες του κύκλου, επιλέξτε "Προσθήκη φοιτητή"</li>
+              </ol>
+            )}
           </div>
         ) : (
           <Table className='StudentList__table'>
@@ -83,4 +94,4 @@ class Index extends React.PureComponent {
   }
 }
 
-export default Index;
+export default StudentList;

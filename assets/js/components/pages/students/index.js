@@ -1,4 +1,4 @@
-import StudentsNew from './New';
+import StudentsList from './List';
 import StudentsRouter from './Router';
 
-export { StudentsRouter, StudentsNew };
+export { StudentsList, StudentsRouter };
