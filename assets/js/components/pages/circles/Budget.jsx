@@ -1,5 +1,5 @@
 import React from 'react';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import Button from '@material-ui/core/Button';
 import Circle from '../../../models/Circle';
 import BudgetFieldEdit from './BudgetFieldEdit';
