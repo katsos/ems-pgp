@@ -2,7 +2,7 @@ import React from 'react';
 import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';
 import Edit from './Edit';
-import List from './List';
+import List from './StudentList';
 import StudentPage from './StudentPage';
 
 const ROUTER_PREFIX = '/students';
