@@ -2,15 +2,13 @@ import React from 'react';
 import moment from 'moment';
 import sumBy from 'lodash/sumBy';
 import Link from 'react-router-dom/Link';
-import AddIcon from '@material-ui/icons/Add';
-import { Button, Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
+import { Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
 import Student from '../../../models/Student';
 import LoadingAnimation from '../../LoadingAnimation';
-import './StudentList.scss';
 
 class Index extends React.PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       isLoading: true,
@@ -40,14 +38,16 @@ class Index extends React.PureComponent {
       <div className='StudentList'>
         <div className='StudentList__header'>
           <h3>Φοιτητές</h3>
-          <Link to='/students/new'>
-            <Button variant='fab' color='primary' aria-label='add'><AddIcon /></Button>
-          </Link>
         </div>
         {students.length === 0 ? (
-          <p>Δεν υπάρχει κανένας καταχωρημένος φοιτητής εώς τώρα.<br />
-            Πατήστε το κουμπί στα δεξιά για να εισάγετε νέο.
-          </p>
+          <div>
+            <p>Δεν υπάρχει κανένας καταχωρημένος φοιτητής εώς τώρα.</p>
+            <ol>
+              <li>Πηγαίνετε στη <Link to='/circles'>λίστα κύκλων</Link></li>
+              <li>Επιλέξτε τον κύκλο που θέλετε να εγγράψετε τον νέο φοιτητή</li>
+              <li>Στις ενέργειες του κύκλου, επιλέξτε "Προσθήκη φοιτητή"</li>
+            </ol>
+          </div>
         ) : (
           <Table className='StudentList__table'>
             <TableHead>
