@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { kebabCaseToLabel } from '../utils';
+import './VerticalTable.scss';
 
 function VerticalTable({ data, fields }) {
   return (
-    <table>
+    <table className='VerticalTable'>
       <tbody>
-        {fields.map(({ label, variable }) => (
-          <tr key={variable}>
-            <th>{label || kebabCaseToLabel(variable)}</th>
-            <td>{data[variable]}</td>
+        {fields.map(({ name, label }) => (
+          <tr key={name}>
+            <th>{label}</th>
+            <td>{data[name]}</td>
           </tr>
         ))}
       </tbody>
@@ -20,9 +20,9 @@ function VerticalTable({ data, fields }) {
 VerticalTable.propTypes = {
   data: PropTypes.object.isRequired,
   fields: PropTypes.arrayOf(PropTypes.shape({
-    variable: PropTypes.string.isRequired,
-    label: PropTypes.string,
-  })),
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default VerticalTable;

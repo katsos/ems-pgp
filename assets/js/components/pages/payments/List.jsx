@@ -1,11 +1,10 @@
 import React from 'react';
-import moment from 'moment';
 import Link from 'react-router-dom/Link';
-import { Button, Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import ListActionsButton from './ListActionsButton';
 import LoadingAnimation from '../../LoadingAnimation';
 import Payment from '../../../models/Payment';
+import PaymentList from '../../PaymentList';
 import './List.scss';
 
 class List extends React.PureComponent {
@@ -50,30 +49,7 @@ class List extends React.PureComponent {
             Πατήστε το κουμπί δεξιά για να εισάγετε νέα.
           </p>
         ) : (
-          <Table className='PaymentList__table'>
-            <TableHead>
-              <TableRow>
-                <TableCell className='PaymentList__table__id'>ΑΜΣ</TableCell>
-                <TableCell>ΟΝΟΜΑΤΕΠΩΝΥΜΟ</TableCell>
-                <TableCell numeric>ΚΥΚΛΟΣ</TableCell>
-                <TableCell numeric>ΠΟΣΟ</TableCell>
-                <TableCell numeric>ΗΜΕΡΟΜΗΝΙΑ ΚΑΤΑΧΩΡΗΣΗΣ</TableCell>
-                <TableCell />
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {payments.map(p => (
-                <TableRow key={p.id}>
-                  <TableCell className='PaymentList__table__id'>{p.id}</TableCell>
-                  <TableCell>{`${p.student.surname} ${p.student.name}`}</TableCell>
-                  <TableCell numeric>{p.student.circle}</TableCell>
-                  <TableCell numeric>{p.amount}</TableCell>
-                  <TableCell numeric>{moment(p.created_at).format('L')}</TableCell>
-                  <TableCell><ListActionsButton payment={p} afterAction={this.fetchPayments} /></TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <PaymentList payments={payments} afterAction={this.fetchPayments} />
         )}
       </div>
     );

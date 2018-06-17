@@ -1,10 +1,10 @@
 from rest_framework.serializers import ModelSerializer
 from server.api.models import Payment
-from .students_shallow import StudentsSerializerShallow
+from .students_circle import StudentsCircleSerializer
 
 
 class PaymentSerializer(ModelSerializer):
-    student = StudentsSerializerShallow(read_only=True)
+    student = StudentsCircleSerializer(read_only=True)
 
     class Meta:
         model = Payment
