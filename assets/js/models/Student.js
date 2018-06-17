@@ -21,6 +21,10 @@ class Student {
       .then(({ data: student }) => student);
   }
 
+  static delete(id) {
+    return api.delete(`${id}/`);
+  }
+
   static setPayment(studentId, params) {
     return api.post(`${studentId}/set_payment/`, params)
       .then(({ data: payment }) => payment);

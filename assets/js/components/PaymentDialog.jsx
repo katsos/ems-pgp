@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Button, Dialog, DialogTitle } from '@material-ui/core';
-import { Student } from '../../../../models';
+import { Student } from '../models/index';
 
 class PaymentDialog extends React.PureComponent {
   constructor(props) {
@@ -22,7 +23,7 @@ class PaymentDialog extends React.PureComponent {
 
   onConfirm() {
     Student.setPayment(this.props.student.id, { ...this.state })
-      .then(() => this.props.onConfirm());
+      .then(this.props.onConfirm);
       // TODO: update cycle page
       // TODO: catch
   }
@@ -62,6 +63,10 @@ class PaymentDialog extends React.PureComponent {
     );
   }
 }
+
+PaymentDialog.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+};
 
 const PaymentDialogWithRouter = withRouter(PaymentDialog);
 export default PaymentDialogWithRouter;

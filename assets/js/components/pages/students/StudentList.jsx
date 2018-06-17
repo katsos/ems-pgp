@@ -8,8 +8,9 @@ import { Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/c
 import { Circle, Student } from '../../../models';
 import LoadingAnimation from '../../LoadingAnimation';
 import './StudentList.scss';
+import StudentListActions from './StudentListActions';
 
-class StudentList extends React.PureComponent {
+class StudentList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,6 +19,8 @@ class StudentList extends React.PureComponent {
       isLoading: true,
       students: null,
     };
+    this.onDelete = this.onDelete.bind(this);
+    this.onPayment = this.onPayment.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +30,18 @@ class StudentList extends React.PureComponent {
     resource
       .then(students => this.setState({ students }))
       .finally(() => this.setState({ isLoading: false }));
+  }
+
+  onDelete(studentId) {
+    const students = this.state.students.filter(s => s.id !== studentId);
+    this.setState({ students });
+  }
+
+  onPayment(studentId, payment) {
+    const { students } = this.state;
+    const studentIndex = students.findIndex(s => s.id === studentId);
+    students[studentIndex].payment = payment;
+    this.setState({ students });
   }
 
   render() {
@@ -79,25 +94,37 @@ class StudentList extends React.PureComponent {
                 <TableCell numeric>ΣΥΝΟΛΟ ΠΛΗΡΩΜΩΝ</TableCell>
                 <TableCell numeric>ΥΠΟΛΟΙΠΟ</TableCell>
                 <TableCell numeric>ΗΜΕΡΟΜΗΝΙΑ ΚΑΤΑΧΩΡΗΣΗΣ</TableCell>
+                <TableCell />
               </TableRow>
             </TableHead>
             <TableBody>
-              {students.map(s => (
-                <TableRow key={s.id}>
-                  <TableCell>
-                    <Link to={`/students/${s.id}`}>{`${s.surname} ${s.name}`}</Link>
-                  </TableCell>
-                  {!this.cycleId && (
+              {students.map((s) => {
+                const fullname = `${s.surname} ${s.name}`;
+                const totalPayments = s.payments.reduce((sum, { amount }) => sum + parseFloat(amount), 0);
+                return (
+                  <TableRow key={s.id}>
                     <TableCell>
-                      <Link to={`/circles/${s.circle.id}`}>{s.circle.title}</Link>
+                      <Link to={`/students/${s.id}`}>{fullname}</Link>
                     </TableCell>
-                  )}
-                  <TableCell numeric>{s.payments.length}</TableCell>
-                  <TableCell numeric>{sumBy(s.payments, 'amount')}</TableCell>
-                  <TableCell numeric>{s.circle.tuition - sumBy(s.payments, 'amount')}</TableCell>
-                  <TableCell numeric>{moment(s.created_at).format('L')}</TableCell>
-                </TableRow>
-              ))}
+                    {!this.cycleId && (
+                      <TableCell>
+                        <Link to={`/circles/${s.circle.id}`}>{s.circle.title}</Link>
+                      </TableCell>
+                    )}
+                    <TableCell numeric>{s.payments.length}</TableCell>
+                    <TableCell numeric>{totalPayments}</TableCell>
+                    <TableCell numeric>{s.circle.tuition - totalPayments}</TableCell>
+                    <TableCell numeric>{moment(s.created_at).format('L')}</TableCell>
+                    <TableCell>
+                      <StudentListActions
+                        student={s}
+                        onDelete={this.onDelete}
+                        onPayment={this.onPayment}
+                      />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         )}
