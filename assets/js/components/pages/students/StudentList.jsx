@@ -7,8 +7,8 @@ import Button from '@material-ui/core/Button';
 import { Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
 import { Circle, Student } from '../../../models';
 import LoadingAnimation from '../../LoadingAnimation';
+import StudentListRow from './StudentListRow';
 import './StudentList.scss';
-import StudentListActions from './StudentListActions';
 
 class StudentList extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class StudentList extends React.Component {
       students: null,
     };
     this.onDelete = this.onDelete.bind(this);
-    this.onPayment = this.onPayment.bind(this);
+    this.onAddPayment = this.onAddPayment.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +37,7 @@ class StudentList extends React.Component {
     this.setState({ students });
   }
 
-  onPayment(studentId, payment) {
+  onAddPayment(studentId, payment) {
     const { students } = this.state;
     const studentIndex = students.findIndex(s => s.id === studentId);
     students[studentIndex].payment = payment;
@@ -98,33 +98,14 @@ class StudentList extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {students.map((s) => {
-                const fullname = `${s.surname} ${s.name}`;
-                const totalPayments = s.payments.reduce((sum, { amount }) => sum + parseFloat(amount), 0);
-                return (
-                  <TableRow key={s.id}>
-                    <TableCell>
-                      <Link to={`/students/${s.id}`}>{fullname}</Link>
-                    </TableCell>
-                    {!this.cycleId && (
-                      <TableCell>
-                        <Link to={`/circles/${s.circle.id}`}>{s.circle.title}</Link>
-                      </TableCell>
-                    )}
-                    <TableCell numeric>{s.payments.length}</TableCell>
-                    <TableCell numeric>{totalPayments}</TableCell>
-                    <TableCell numeric>{s.circle.tuition - totalPayments}</TableCell>
-                    <TableCell numeric>{moment(s.created_at).format('L')}</TableCell>
-                    <TableCell>
-                      <StudentListActions
-                        student={s}
-                        onDelete={this.onDelete}
-                        onPayment={this.onPayment}
-                      />
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              {students.map(s => (
+                <StudentListRow
+                  key={s.id}
+                  student={s}
+                  onDelete={this.onDelete}
+                  onAddPayment={this.onAddPayment}
+                />
+              ))}
             </TableBody>
           </Table>
         )}
