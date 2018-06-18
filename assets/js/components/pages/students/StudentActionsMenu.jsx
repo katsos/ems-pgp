@@ -62,7 +62,7 @@ class StudentActionsMenu extends React.PureComponent {
 }
 
 StudentActionsMenu.propTypes = {
-  onAction: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default StudentActionsMenu;
