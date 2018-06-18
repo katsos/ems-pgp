@@ -5,7 +5,7 @@ import Student from '../../../models/Student';
 import LoadingAnimation from '../../LoadingAnimation';
 import PaymentList from '../../PaymentList';
 import PaymentDialog from '../../PaymentDialog';
-import StudentPageActions from './StudentPageActions';
+import StudentActionsMenu from './StudentActionsMenu';
 import './StudentPage.scss';
 
 class StudentPage extends React.Component {
@@ -65,7 +65,7 @@ class StudentPage extends React.Component {
       <div className='StudentPage'>
         <div className='StudentPage__header'>
           <h4>{`${student.surname} ${student.name} #${student.id}`}</h4>
-          <StudentPageActions onSelect={this.onAction} />
+          <StudentActionsMenu onSelect={this.onAction} />
         </div>
 
         <p>Ανήκει στον κύκλο <Link to={`/circles/${circle.id}`}>{`"${circle.title}"`}</Link></p>

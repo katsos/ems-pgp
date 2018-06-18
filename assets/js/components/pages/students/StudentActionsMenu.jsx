@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,7 +19,7 @@ const ACTIONS = [
   },
 ];
 
-class StudentPageActions extends React.PureComponent {
+class StudentActionsMenu extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -60,4 +61,8 @@ class StudentPageActions extends React.PureComponent {
   }
 }
 
-export default StudentPageActions;
+StudentActionsMenu.propTypes = {
+  onAction: PropTypes.func.isRequired,
+};
+
+export default StudentActionsMenu;
