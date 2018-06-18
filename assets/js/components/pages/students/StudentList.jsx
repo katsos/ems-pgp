@@ -1,6 +1,4 @@
 import React from 'react';
-import moment from 'moment';
-import sumBy from 'lodash/sumBy';
 import Link from 'react-router-dom/Link';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
