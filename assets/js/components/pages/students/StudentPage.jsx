@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
-import Button from '@material-ui/core/Button';
 import Student from '../../../models/Student';
 import LoadingAnimation from '../../LoadingAnimation';
-import './StudentPage.scss';
 import PaymentList from '../../PaymentList';
+import PaymentDialog from '../../PaymentDialog';
+import StudentPageActions from './StudentPageActions';
+import './StudentPage.scss';
 
-class StudentPage extends React.PureComponent {
+class StudentPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,14 +16,36 @@ class StudentPage extends React.PureComponent {
     const { student = null } = this.props.location.state || {};
     this.state = {
       isLoading: true,
+      isPaymentDialogOpen: false,
       student,
     };
+    this.onAction = this.onAction.bind(this);
+    this.onAddPayment = this.onAddPayment.bind(this);
     this.fetchStudent = this.fetchStudent.bind(this);
   }
 
   componentDidMount() {
     if (this.state.student !== null) return this.setState({ isLoading: false });
     this.fetchStudent();
+  }
+
+  onAction(action) {
+    switch (action) {
+      case 'edit':
+        return this.props.history.push(`/students/${this.studentId}/edit`);
+      case 'delete':
+        return Student.delete(this.studentId)
+          .then(() => this.props.history.push('/circles'));
+      case 'payment':
+        this.setState({ isPaymentDialogOpen: true });
+    }
+  }
+
+  onAddPayment(payment) {
+    const { student } = this.state;
+    const payments = [...student.payments, payment];
+    Object.assign(student, { payments });
+    this.setState({ student, isPaymentDialogOpen: false });
   }
 
   fetchStudent() {
@@ -35,20 +58,26 @@ class StudentPage extends React.PureComponent {
   render() {
     if (this.state.isLoading) return <LoadingAnimation />;
 
-    const { student, student: { circle } } = this.state;
+    const { student, student: { circle }, isPaymentDialogOpen } = this.state;
     if (student === null) return <h3>There was a problem while fetching student data.</h3>;
 
     return (
       <div className='StudentPage'>
         <div className='StudentPage__header'>
           <h4>{`${student.surname} ${student.name} #${student.id}`}</h4>
-          <Link to={`/students/${student.id}/edit`}>
-            <Button className='StudentPage__edit'>Edit</Button>
-          </Link>
+          <StudentPageActions onSelect={this.onAction} />
         </div>
 
         <p>Ανήκει στον κύκλο <Link to={`/circles/${circle.id}`}>{`"${circle.title}"`}</Link></p>
-        <PaymentList student={student} afterAction={this.fetchStudent} />
+
+        {Boolean(student.payments.length) && <PaymentList student={student} afterAction={this.fetchStudent} />}
+
+        <PaymentDialog
+          isOpen={isPaymentDialogOpen}
+          student={student}
+          onConfirm={this.onAddPayment}
+          onCancel={() => this.setState({ isPaymentDialogOpen: false })}
+        />
       </div>
     );
   }

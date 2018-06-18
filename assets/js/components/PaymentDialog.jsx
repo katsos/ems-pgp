@@ -65,7 +65,9 @@ class PaymentDialog extends React.PureComponent {
 }
 
 PaymentDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
   onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 const PaymentDialogWithRouter = withRouter(PaymentDialog);
