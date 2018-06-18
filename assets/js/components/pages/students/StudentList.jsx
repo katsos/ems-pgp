@@ -40,7 +40,7 @@ class StudentList extends React.Component {
   onAddPayment(studentId, payment) {
     const { students } = this.state;
     const studentIndex = students.findIndex(s => s.id === studentId);
-    students[studentIndex].payment = payment;
+    students[studentIndex].payments.push(payment);
     this.setState({ students });
   }
 
