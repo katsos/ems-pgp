@@ -12,23 +12,29 @@ import Student from '../../../models/Student';
 class StudentListRow extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.studentId = this.props.student.id;
     this.state = {
       isPaymentDialogOpen: false,
     };
     this.onAction = this.onAction.bind(this);
+    this.onPayment = this.onPayment.bind(this);
   }
 
   onAction(action) {
-    const studentId = this.props.student.id;
     switch (action) {
       case 'edit':
-        return this.props.history.push(`/students/${studentId}/edit`);
+        return this.props.history.push(`/students/${this.studentId}/edit`);
       case 'delete':
-        return Student.delete(studentId)
-          .then(() => this.props.onDelete(studentId));
+        return Student.delete(this.studentId)
+          .then(() => this.props.onDelete(this.studentId));
       case 'payment':
         this.setState({ isPaymentDialogOpen: true });
     }
+  }
+
+  onPayment(payment) {
+    this.props.onAddPayment(this.studentId, payment);
+    this.setState({ isPaymentDialogOpen: false });
   }
 
   render() {
@@ -58,7 +64,7 @@ class StudentListRow extends React.PureComponent {
           <PaymentDialog
             isOpen={isPaymentDialogOpen}
             student={student}
-            onConfirm={payment => this.props.onAddPayment(student.id, payment)}
+            onConfirm={this.onPayment}
             onCancel={() => this.setState({ isPaymentDialogOpen: false })}
           />
         </TableCell>
