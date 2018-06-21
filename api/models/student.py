@@ -1,5 +1,5 @@
 from django.db.models import Model, BooleanField, CharField, DateTimeField, ForeignKey, CASCADE
-from server.api.utils import get_sum_of
+from ..utils import get_sum_of
 
 
 class Student(Model):

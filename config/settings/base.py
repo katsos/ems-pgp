@@ -5,8 +5,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
-PROJECT_DIR = os.path.abspath('.')
-BASE_DIR = os.path.join(PROJECT_DIR, 'server')
+BASE_DIR = os.path.abspath('.')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,7 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'server.api',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -101,4 +100,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

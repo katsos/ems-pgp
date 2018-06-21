@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from server.api.models import Student
+from api.models import Student
 from .payments_shallow import PaymentSerializerShallow
 from .circles_shallow import CirclesSerializerShallow
 

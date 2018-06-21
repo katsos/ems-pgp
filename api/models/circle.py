@@ -1,5 +1,5 @@
 from django.db.models import Model, AutoField, CharField, DateField, DateTimeField, DecimalField, Sum
-from server.api.utils import get_sum_of
+from ..utils import get_sum_of
 from .budget import Budget
 from .expense import Expense
 from .payment import Payment

@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
-from server.api.models import Expense
+from api.models import Expense
 
 
 class ExpensesSerializer(ModelSerializer):
