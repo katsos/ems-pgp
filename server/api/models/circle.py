@@ -20,7 +20,7 @@ class Circle(Model):
     updated_at = DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'circles'
+        db_table = 'cycles'
 
     @property
     def budget(self):
