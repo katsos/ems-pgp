@@ -1,8 +1,9 @@
-from django.db.models import Model, BooleanField, CharField, DateTimeField, ForeignKey, CASCADE, Sum
+from django.db.models import Model, BooleanField, CharField, DateTimeField, ForeignKey, CASCADE
 from server.api.utils import get_sum_of
 
 
 class Student(Model):
+    id_university = CharField(max_length=20, default='')
     name = CharField(max_length=256)
     surname = CharField(max_length=256)
     full_time = BooleanField()

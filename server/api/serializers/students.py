@@ -10,6 +10,6 @@ class StudentsSerializer(ModelSerializer):
 
     class Meta:
         model = Student
-        fields = ('id', 'name', 'surname', 'full_time', 'circle', 'payments')
+        fields = ('id', 'id_university', 'name', 'surname', 'full_time', 'circle', 'payments')
 
 
