@@ -87,6 +87,7 @@ class StudentList extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell>ΟΝΟΜΑΤΕΠΩΝΥΜΟ</TableCell>
+                <TableCell numeric>ΑΡ. ΜΗΤΡΩΟΥ</TableCell>
                 {!this.cycleId && <TableCell>ΚΥΚΛΟΣ</TableCell>}
                 <TableCell numeric>ΑΡΙΘΜΟΣ ΠΛΗΡΩΜΩΝ</TableCell>
                 <TableCell numeric>ΣΥΝΟΛΟ ΠΛΗΡΩΜΩΝ</TableCell>
