@@ -1,10 +1,24 @@
 import React from 'react';
 import moment from 'moment';
 import Link from 'react-router-dom/Link';
-import { Circle } from '../../../../models';
-import LoadingAnimation from '../../../LoadingAnimation';
 import BudgetSection from './BudgetSection';
+import ActionMenu from '../../../ActionMenu';
+import LoadingAnimation from '../../../LoadingAnimation';
+import { Circle } from '../../../../models';
 import './CirclePage.scss';
+
+const ACTIONS = [
+  {
+    name: 'edit',
+    label: 'Επεξεργασία',
+  }, {
+    name: 'edit_budget',
+    label: 'Επεξεργασία Προϋπολογισμού',
+  }, {
+    name: 'delete',
+    label: 'Διαγραφή',
+  }
+];
 
 class CirclePage extends React.PureComponent {
   constructor(props) {
@@ -15,6 +29,7 @@ class CirclePage extends React.PureComponent {
       circle: null,
       isLoading: true,
     };
+    this.onAction = this.onAction.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +38,21 @@ class CirclePage extends React.PureComponent {
       // TODO: .catch()
       .finally(() => this.setState({ isLoading: false }));
   }
+
+  onAction(action) {
+    const { history } = this.props;
+
+    switch (action) {
+      case 'edit':
+        return history.push(`/circles/${this.circleId}/edit`);
+      case 'edit_budget':
+        return history.push(`/circles/${this.circleId}/budget`);
+      case 'delete':
+        Circle.delete(this.circleId)
+          .then(() => this.props.history.push('/circles'));
+    }
+  }
+
 
   render() {
     const { isLoading, circle } = this.state;
@@ -40,6 +70,7 @@ class CirclePage extends React.PureComponent {
     return (
       <div className='CirclePage'>
         <h3>{circle.title}</h3>
+        <ActionMenu actions={ACTIONS} onAction={this.onAction}/>
         <table>
           <tbody>
             <tr>
