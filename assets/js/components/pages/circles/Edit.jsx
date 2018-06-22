@@ -51,7 +51,7 @@ class Edit extends React.Component {
   }
 
   onSubmit(formData) {
-    Circle.create(formData)
+    Circle.update(this.cycleId, formData)
       .then(({ id }) => this.props.history.push(`/circles/${id}`))
       .catch(({ response: { data: formErrors }}) => this.setState({ formErrors }));
   }

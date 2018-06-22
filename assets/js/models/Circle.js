@@ -20,6 +20,11 @@ class Circle {
       .then(({ data: circle }) => circle);
   }
 
+  static update(id, args) {
+    return api.put(`${id}/`, args)
+      .then(({ data: circle }) => circle);
+  }
+
   static getBudget(circleId) {
     return api.get(`${circleId}/budget/`)
       .then(({ data: budget}) => budget);
