@@ -27,12 +27,6 @@ function BudgetSection({ budget, circleId }) {
 
       <div className='CirclePage__budget__header'>
         <h3>Προϋπολογισμός</h3>
-        <Link
-          className='mdl-button mdl-js-button mdl-button--primary CirclePage__budget__header__edit'
-          to={{ pathname: `/circles/${circleId}/budget`, state: { budget } }}
-        >
-          <i className='material-icons'>mode_edit</i>
-        </Link>
       </div>
       <div>Δημιουργήθηκε στις {moment(budget.created_at).format('L')}</div>
 
