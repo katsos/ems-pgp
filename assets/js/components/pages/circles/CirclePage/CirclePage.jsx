@@ -1,11 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 import Link from 'react-router-dom/Link';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
 import BudgetSection from './BudgetSection';
 import ActionMenu from '../../../ActionMenu';
 import LoadingAnimation from '../../../LoadingAnimation';
 import { Circle } from '../../../../models';
 import './CirclePage.scss';
+import PaymentActions from '../../../PaymentActions';
 
 const ACTIONS = [
   {
@@ -67,6 +73,11 @@ class CirclePage extends React.PureComponent {
       total_outcome_expectation: totalOutcomeExpectation,
     } = circle;
 
+    const payments = students.reduce((arr, student) => {
+      return arr.concat(student.payments.map(p => Object.assign(p, { student })));
+    }, [])
+      .sort((a, b) => Date(a.created_at) > Date(b.created_at));
+
     return (
       <div className='CirclePage'>
         <div className='CirclePage__header'>
@@ -121,6 +132,43 @@ class CirclePage extends React.PureComponent {
         </table>
 
         <BudgetSection budget={budget} circleId={this.circleId} />
+
+        {Boolean(payments.length) && (
+          <div>
+            <h4>Πληρωμές φοιτητών</h4>
+            <Table className='PaymentList__table'>
+              <TableHead>
+                <TableRow>
+                  <TableCell className='PaymentList__table__id'>ΑΜΣ</TableCell>
+                  <TableCell>ΟΝΟΜΑΤΕΠΩΝΥΜΟ</TableCell>
+                  <TableCell numeric>ΠΟΣΟ</TableCell>
+                  <TableCell numeric>ΗΜΕΡΟΜΗΝΙΑ ΚΑΤΑΧΩΡΗΣΗΣ</TableCell>
+                  <TableCell />
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {payments.map((p) => {
+                  const { student } = p;
+
+                  return (
+                    <TableRow key={p.id}>
+                      <TableCell className='PaymentList__table__id'>{p.id}</TableCell>
+                      <TableCell>
+                        <Link to={`/students/${student.id}`}>{`${student.surname} ${student.name}`}</Link>
+                      </TableCell>
+                      <TableCell numeric>{p.amount}</TableCell>
+                      <TableCell numeric>{moment(p.created_at).format('L')}</TableCell>
+                      <TableCell>
+                        <PaymentActions payment={p} afterAction={this.onPaymentAction} />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </div>
+        )}
+
       </div>
     );
   }
