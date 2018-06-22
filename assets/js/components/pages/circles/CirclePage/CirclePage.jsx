@@ -69,8 +69,11 @@ class CirclePage extends React.PureComponent {
 
     return (
       <div className='CirclePage'>
-        <h3>{circle.title}</h3>
-        <ActionMenu actions={ACTIONS} onAction={this.onAction} />
+        <div className='CirclePage__header'>
+          <h3>{circle.title}</h3>
+          <ActionMenu actions={ACTIONS} onAction={this.onAction} />
+        </div>
+
         <table>
           <tbody>
             <tr>
