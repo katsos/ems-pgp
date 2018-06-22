@@ -28,7 +28,9 @@ class CirclePage extends React.PureComponent {
     const { isLoading, circle } = this.state;
     if (isLoading) return <LoadingAnimation />;
 
-    const { budget, students,
+    const {
+      budget,
+      students,
       total_income: totalIncome,
       total_income_expectation: totalIncomeExpectation,
       total_outcome: totalOutcome,
@@ -42,7 +44,7 @@ class CirclePage extends React.PureComponent {
           <tbody>
             <tr>
               <td>
-                <Link to={`/circles/${circle.id}/students`}>{`${circle.students.length} καταχωρημένοι φοιτητές`}</Link>
+                <Link to={`/circles/${circle.id}/students`}>{`${students.length} καταχωρημένοι φοιτητές`}</Link>
               </td>
             </tr>
             <tr>
