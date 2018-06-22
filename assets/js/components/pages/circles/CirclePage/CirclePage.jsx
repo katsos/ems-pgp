@@ -49,7 +49,7 @@ class CirclePage extends React.PureComponent {
         return history.push(`/circles/${this.circleId}/budget`);
       case 'delete':
         Circle.delete(this.circleId)
-          .then(() => this.props.history.push('/circles'));
+          .then(() => history.push('/circles'));
     }
   }
 
@@ -70,7 +70,7 @@ class CirclePage extends React.PureComponent {
     return (
       <div className='CirclePage'>
         <h3>{circle.title}</h3>
-        <ActionMenu actions={ACTIONS} onAction={this.onAction}/>
+        <ActionMenu actions={ACTIONS} onAction={this.onAction} />
         <table>
           <tbody>
             <tr>
