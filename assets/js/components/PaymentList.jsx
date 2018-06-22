@@ -40,7 +40,7 @@ function PaymentList(props) {
               </TableCell>
               <TableCell numeric>{p.amount}</TableCell>
               <TableCell numeric>{moment(p.created_at).format('L')}</TableCell>
-              <TableCell><PaymentActions payment={p} afterAction={props.afterAction} /></TableCell>
+              <TableCell><PaymentActions onAction={action => props.afterAction(action, p)} /></TableCell>
             </TableRow>
           );
         })}

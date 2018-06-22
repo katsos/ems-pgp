@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
-import { Payment } from '../models/index';
 
 const MENU_ID = 'payment-actions';
 const ACTIONS = [
@@ -22,16 +22,6 @@ class PaymentActions extends React.PureComponent {
     this.state = {
       anchorEl: null,
     };
-  }
-
-  onAction(action) {
-    const { afterAction, payment } = this.props;
-    const paymentId = payment.id;
-    if (action === 'delete') {
-      return Payment.delete(paymentId)
-        .then(afterAction);
-    }
-    this.props.history.push(`/payments/${paymentId}/edit`, { payment });
   }
 
   render() {
@@ -54,7 +44,7 @@ class PaymentActions extends React.PureComponent {
           onClose={() => this.setState({ anchorEl: null })}
         >
           {ACTIONS.map(({ name, label }) => (
-            <MenuItem key={name} onClick={() => this.onAction(name)}>{label}</MenuItem>
+            <MenuItem key={name} onClick={() => this.props.onAction(name)}>{label}</MenuItem>
           ))}
         </Menu>
       </div>
@@ -63,11 +53,7 @@ class PaymentActions extends React.PureComponent {
 }
 
 PaymentActions.propTypes = {
-  afterAction: PropTypes.func.isRequired,
-  payment: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  }).isRequired,
+  onAction: PropTypes.func.isRequired,
 };
 
-const ListActionsButtonWithRouter = withRouter(PaymentActions);
-export default ListActionsButtonWithRouter;
+export default PaymentActions;

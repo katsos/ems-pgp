@@ -9,7 +9,7 @@ import TableBody from '@material-ui/core/TableBody';
 import BudgetSection from './BudgetSection';
 import ActionMenu from '../../../ActionMenu';
 import LoadingAnimation from '../../../LoadingAnimation';
-import { Circle } from '../../../../models';
+import { Circle, Payment } from '../../../../models';
 import './CirclePage.scss';
 import PaymentActions from '../../../PaymentActions';
 
@@ -23,7 +23,7 @@ const ACTIONS = [
   }, {
     name: 'delete',
     label: 'Διαγραφή',
-  }
+  },
 ];
 
 class CirclePage extends React.PureComponent {
@@ -36,13 +36,11 @@ class CirclePage extends React.PureComponent {
       isLoading: true,
     };
     this.onAction = this.onAction.bind(this);
+    this.onPaymentAction = this.onPaymentAction.bind(this);
   }
 
   componentDidMount() {
-    Circle.get(this.circleId)
-      .then(circle => this.setState({ circle }))
-      // TODO: .catch()
-      .finally(() => this.setState({ isLoading: false }));
+    this.fetchCircle();
   }
 
   onAction(action) {
@@ -59,6 +57,25 @@ class CirclePage extends React.PureComponent {
     }
   }
 
+  onPaymentAction(action, payment) {
+    const { history } = this.props;
+
+    switch (action) {
+      case 'edit':
+        return history.push(`/payments/${payment.id}/edit`);
+      case 'delete':
+        Payment.delete(payment.id)
+          .then(() => this.fetchCircle());
+    }
+  }
+
+  fetchCircle() {
+    this.setState({ isLoading: true });
+    Circle.get(this.circleId)
+      .then(circle => this.setState({ circle }))
+      // TODO: .catch()
+      .finally(() => this.setState({ isLoading: false }));
+  }
 
   render() {
     const { isLoading, circle } = this.state;
@@ -159,7 +176,7 @@ class CirclePage extends React.PureComponent {
                       <TableCell numeric>{p.amount}</TableCell>
                       <TableCell numeric>{moment(p.created_at).format('L')}</TableCell>
                       <TableCell>
-                        <PaymentActions payment={p} afterAction={this.onPaymentAction} />
+                        <PaymentActions onAction={action => this.onPaymentAction(action, p)} />
                       </TableCell>
                     </TableRow>
                   );

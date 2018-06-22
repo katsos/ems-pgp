@@ -15,11 +15,23 @@ class List extends React.PureComponent {
       isLoading: true,
       payments: null,
     };
-    this.fetchPayments = this.fetchPayments.bind(this);
+    this.onAction = this.onAction.bind(this);
   }
 
   componentDidMount() {
     this.fetchPayments();
+  }
+
+  onAction(action, payment) {
+    const { history } = this.props;
+
+    switch (action) {
+      case 'edit':
+        return history.push(`/payments/${payment.id}/edit`);
+      case 'delete':
+        Payment.delete(payment.id)
+          .then(() => this.fetchPayments());
+    }
   }
 
   fetchPayments() {
@@ -49,7 +61,7 @@ class List extends React.PureComponent {
             Πατήστε το κουμπί δεξιά για να εισάγετε νέα.
           </p>
         ) : (
-          <PaymentList payments={payments} afterAction={this.fetchPayments} />
+          <PaymentList payments={payments} afterAction={this.onAction} />
         )}
       </div>
     );
