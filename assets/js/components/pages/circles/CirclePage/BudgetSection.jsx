@@ -47,7 +47,7 @@ function BudgetSection({ budget, circleId }) {
 }
 
 BudgetSection.propTypes = {
-  circleId: PropTypes.number.isRequired,
+  circleId: PropTypes.string.isRequired,
   budget: PropTypes.shape({
     fields: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
