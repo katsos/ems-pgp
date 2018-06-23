@@ -61,7 +61,11 @@ BudgetSection.propTypes = {
     fields: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
     })).isRequired,
-  }).isRequired,
+  }),
+};
+
+BudgetSection.defaultProps = {
+  budget: null,
 };
 
 export default BudgetSection;
