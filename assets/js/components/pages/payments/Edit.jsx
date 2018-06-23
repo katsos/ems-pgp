@@ -40,7 +40,14 @@ class Edit extends React.Component {
     if (isLoading) return <LoadingAnimation />;
 
     const { payment } = this.state;
-    return <PaymentForm payment={payment} onChange={this.onChange} onConfirm={this.onConfirm} />;
+    return (
+      <PaymentForm
+        payment={payment}
+        onChange={this.onChange}
+        onConfirm={this.onConfirm}
+        onCancel={this.props.history.goBack}
+      />
+    );
   }
 }
 
