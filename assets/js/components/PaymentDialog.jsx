@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
-import { Button, Dialog, DialogTitle } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { Student } from '../models/index';
+import PaymentForm from './pages/payments/PaymentForm';
 
 class PaymentDialog extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.cycleId = this.props.match.params.id;
     this.state = {
       amount: 0,
       notes: '',
@@ -29,36 +29,18 @@ class PaymentDialog extends React.PureComponent {
   }
 
   render() {
-    const { student: { id, name, surname }, isOpen, onCancel } = this.props;
+    const { student, isOpen, onCancel } = this.props;
     const { amount, notes } = this.state;
 
     return (
       <Dialog open={isOpen}>
         <DialogTitle id="simple-dialog-title">Νέα πληρωμή</DialogTitle>
-        <table>
-          <tbody>
-          <tr>
-            <td>Φοιτητής:</td>
-            <td>{`${surname} ${name} (#${id})`}</td>
-          </tr>
-          <tr>
-            <td>Κύκλος:</td>
-            <td>#{this.cycleId}</td>
-          </tr>
-          <tr>
-            <td>Ποσό:</td>
-            <td><input name='amount' value={amount} type='number' onChange={this.onChange}/></td>
-          </tr>
-          <tr>
-            <td>Σχόλια:</td>
-            <td><input name='notes' value={notes} onChange={this.onChange} /></td>
-          </tr>
-          </tbody>
-        </table>
-        <div>
-          <Button color='secondary' onClick={onCancel}>ΑΚΥΡΩΣΗ</Button>
-          <Button color='primary' onClick={this.onConfirm}>ΕΠΙΒΕΒΑΙΩΣΗ</Button>
-        </div>
+        <PaymentForm
+          payment={{ amount, notes, student }}
+          onChange={this.onChange}
+          onConfirm={this.onConfirm}
+          onCancel={onCancel}
+        />
       </Dialog>
     );
   }
@@ -70,5 +52,4 @@ PaymentDialog.propTypes = {
   onCancel: PropTypes.func.isRequired,
 };
 
-const PaymentDialogWithRouter = withRouter(PaymentDialog);
-export default PaymentDialogWithRouter;
+export default PaymentDialog;

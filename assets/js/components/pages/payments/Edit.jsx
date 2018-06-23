@@ -1,8 +1,7 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import { Payment } from '../../../models';
 import LoadingAnimation from '../../LoadingAnimation';
-import './PaymentForm.scss';
+import PaymentForm from './PaymentForm';
 
 class Edit extends React.Component {
   constructor(props) {
@@ -39,35 +38,9 @@ class Edit extends React.Component {
   render() {
     const { isLoading } = this.state;
     if (isLoading) return <LoadingAnimation />;
-    const { payment: { amount, notes, student } } = this.state;
 
-    return (
-      <form className='PaymentForm'>
-        <table>
-          <tbody>
-          <tr>
-            <td>Φοιτητής:</td>
-            <td>{`${student.surname} ${student.name} (#${student.id})`}</td>
-          </tr>
-          <tr>
-            <td>Κύκλος:</td>
-            <td>#{student.circle.id}</td>
-          </tr>
-          <tr>
-            <td>Ποσό:</td>
-            <td><input name='amount' value={amount} type='number' onChange={this.onChange}/></td>
-          </tr>
-          <tr>
-            <td>Σχόλια:</td>
-            <td><input name='notes' value={notes} onChange={this.onChange} /></td>
-          </tr>
-          </tbody>
-        </table>
-        <div className='PaymentForm__buttons'>
-          <Button color='primary' onClick={this.onConfirm}>ΕΠΙΒΕΒΑΙΩΣΗ</Button>
-        </div>
-      </form>
-    );
+    const { payment } = this.state;
+    return <PaymentForm payment={payment} onChange={this.onChange} onConfirm={this.onConfirm} />;
   }
 }
 
