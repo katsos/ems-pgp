@@ -8,10 +8,11 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import BudgetSection from './BudgetSection';
 import ActionMenu from '../../../ActionMenu';
+import ExpensesSection from './ExpensesSection';
+import PaymentActions from '../../../PaymentActions';
 import LoadingAnimation from '../../../LoadingAnimation';
 import { Circle, Payment } from '../../../../models';
 import './CirclePage.scss';
-import PaymentActions from '../../../PaymentActions';
 
 const ACTIONS = [
   {
@@ -149,6 +150,8 @@ class CirclePage extends React.PureComponent {
         </table>
 
         <BudgetSection budget={budget} circleId={this.circleId} />
+
+        <ExpensesSection budget={budget} />
 
         {Boolean(payments.length) && (
           <div>
