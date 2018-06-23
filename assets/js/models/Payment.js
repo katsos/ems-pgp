@@ -20,6 +20,11 @@ class Payment {
       .then(({ data: payment }) => payment);
   }
 
+  static update(id, args) {
+    return API.put(`${id}/`, args)
+      .then(({ data: payment }) => payment);
+  }
+
   static delete(id) {
     return API.delete(`${id}/`);
   }
