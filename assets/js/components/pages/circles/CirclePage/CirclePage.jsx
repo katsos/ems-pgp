@@ -151,7 +151,7 @@ class CirclePage extends React.PureComponent {
 
         <BudgetSection budget={budget} circleId={this.circleId} />
 
-        <ExpensesSection budget={budget} />
+        {budget && <ExpensesSection budget={budget} />}
 
         {Boolean(payments.length) && (
           <div>
