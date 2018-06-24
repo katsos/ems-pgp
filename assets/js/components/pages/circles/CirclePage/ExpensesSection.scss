@@ -1,0 +1,6 @@
+// used th, td to override material-ui classes without using JSS
+th, td {
+  &.ExpensesSection__table__completed {
+    text-align: center;
+  }
+}

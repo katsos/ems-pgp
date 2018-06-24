@@ -5,8 +5,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
-PROJECT_DIR = os.path.abspath('.')
-BASE_DIR = os.path.join(PROJECT_DIR, 'server')
+BASE_DIR = os.path.abspath('.')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,7 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'server.api',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +81,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -97,8 +102,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

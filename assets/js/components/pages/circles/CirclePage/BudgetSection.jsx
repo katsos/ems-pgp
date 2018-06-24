@@ -1,7 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableBody from '@material-ui/core/TableBody';
 import BudgetFieldRow from './BudgetFieldRow';
 
 function BudgetSection({ budget, circleId }) {
@@ -24,41 +29,43 @@ function BudgetSection({ budget, circleId }) {
 
   return (
     <div className='CirclePage__budget'>
-
       <div className='CirclePage__budget__header'>
-        <h3>Προϋπολογισμός</h3>
-        <Link
-          className='mdl-button mdl-js-button mdl-button--primary CirclePage__budget__header__edit'
-          to={{ pathname: `/circles/${circleId}/budget`, state: { budget } }}
-        >
-          <i className='material-icons'>mode_edit</i>
-        </Link>
+        <h4>Προϋπολογισμός</h4>
       </div>
       <div>Δημιουργήθηκε στις {moment(budget.created_at).format('L')}</div>
 
-      <table className='CirclePage__budget__table'>
-        <thead>
-          <tr>
-            <th colSpan='2'>Κατηγορίες Δαπανών</th>
-            <th>Προυπολογυσμός</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {budget.fields.map(f => <BudgetFieldRow key={f.id} field={f} />)}
-        </tbody>
-      </table>
+      <Table className='CirclePage__budget__table'>
+        <TableHead>
+          <TableRow>
+            <TableCell colSpan='2'>Κατηγορίες Δαπανών</TableCell>
+            <TableCell numeric>ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ</TableCell>
+            <TableCell numeric>ΕΞΟΔΑ</TableCell>
+            <TableCell numeric>ΔΙΑΘΕΣΙΜΟ ΥΠΟΛΟΙΠΟ</TableCell>
+            <TableCell />
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {budget.fields
+            .sort((a, b) => a.id > b.id) // sort by id ascending
+            .map(f => <BudgetFieldRow key={f.id} field={f} />)
+          }
+        </TableBody>
+      </Table>
     </div>
   );
 }
 
 BudgetSection.propTypes = {
-  circleId: PropTypes.number.isRequired,
+  circleId: PropTypes.string.isRequired,
   budget: PropTypes.shape({
     fields: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
     })).isRequired,
-  }).isRequired,
+  }),
+};
+
+BudgetSection.defaultProps = {
+  budget: null,
 };
 
 export default BudgetSection;

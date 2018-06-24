@@ -47,6 +47,7 @@ class StudentListRow extends React.PureComponent {
         <TableCell>
           <Link to={`/students/${student.id}`}>{fullname}</Link>
         </TableCell>
+        <TableCell numeric>{student.id_university}</TableCell>
         {!this.props.match.params.id && (
           <TableCell>
             <Link to={`/circles/${student.circle.id}`}>{student.circle.title}</Link>

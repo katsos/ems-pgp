@@ -17,6 +17,9 @@ function Drawer({ toggleDrawer }) {
             {label}
           </Link>
          ))}
+          <a className='mdl-navigation__link' href='/logout'>
+             ΑΠΟΣΥΝΔΕΣΗ
+          </a>
       </nav>
     </div>
   );

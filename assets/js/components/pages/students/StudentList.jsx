@@ -1,6 +1,4 @@
 import React from 'react';
-import moment from 'moment';
-import sumBy from 'lodash/sumBy';
 import Link from 'react-router-dom/Link';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
@@ -89,6 +87,7 @@ class StudentList extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell>ΟΝΟΜΑΤΕΠΩΝΥΜΟ</TableCell>
+                <TableCell numeric>ΑΡ. ΜΗΤΡΩΟΥ</TableCell>
                 {!this.cycleId && <TableCell>ΚΥΚΛΟΣ</TableCell>}
                 <TableCell numeric>ΑΡΙΘΜΟΣ ΠΛΗΡΩΜΩΝ</TableCell>
                 <TableCell numeric>ΣΥΝΟΛΟ ΠΛΗΡΩΜΩΝ</TableCell>

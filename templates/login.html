@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+      html {
+        height: 100%;
+        background-color: #F5F5F5;
+        font-family: sans-serif;
+      }
+      form {
+        width: 350px;
+        margin: 60px auto;
+        padding: 15px;
+        background: radial-gradient(white, #F5F5F5);
+        box-shadow: 0 0 10px;
+      }
+
+      form input {
+        width: 100%;
+      }
+    </style>
+</head>
+<body>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+
+</body>
+</html>
+
+

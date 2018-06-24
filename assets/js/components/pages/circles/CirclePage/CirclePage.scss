@@ -1,13 +1,12 @@
-.CirclePage__budget__header {
+.CirclePage__header {
   display: flex;
+  justify-content: space-between;
 
-  h3 {
-    display: inline-block;
-    margin-bottom: 0;
-  }
-  &__edit {
-    align-self: flex-end;
-  }
+  h3 { margin: 10px 0 }
+}
+
+.CirclePage__budget__header {
+  h3 { margin-bottom: 0 }
 }
 
 .CirclePage__budget__table {

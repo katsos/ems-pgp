@@ -28,7 +28,7 @@ class StudentsListEdit extends React.Component {
 
   onAddRow() {
     const { students } = this.state;
-    students.push({ name: '', surname: '', full_time: false });
+    students.push({ id_university: '', name: '', surname: '', full_time: false });
     this.setState({ students });
   }
 
@@ -40,14 +40,16 @@ class StudentsListEdit extends React.Component {
         <table>
           <thead>
             <tr>
+              <th>ΑΡ. ΜΗΤΡΩΟΥ</th>
               <th>ΕΠΩΝΥΜΟ</th>
               <th>ΟΝΟΜΑ</th>
               <th>Full-time</th>
             </tr>
           </thead>
           <tbody>
-            {students.map(({ name, surname, fullTime }, index) => (
+            {students.map(({ id_university, name, surname, fullTime }, index) => (
               <tr key={index}>
+                <td><input name='id_university' value={id_university} onChange={e => this.onChange(e, index)} /></td>
                 <td><input name='surname' value={surname} onChange={e => this.onChange(e, index)} /></td>
                 <td><input name='name' value={name} onChange={e => this.onChange(e, index)} /></td>
                 <td>
