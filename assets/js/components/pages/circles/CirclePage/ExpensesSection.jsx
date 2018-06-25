@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -29,6 +30,7 @@ function ExpensesSection({ budget }) {
               ΟΛΟΚΛΗΡΩΜΕΝΟ
             </TableCell>
             <TableCell>ΠΑΡΑΤΗΡΗΣΕΙΣ</TableCell>
+            <TableCell numeric>ΚΑΤΑΧΩΡΗΘΗΚΕ</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,6 +43,7 @@ function ExpensesSection({ budget }) {
                 {e.is_completed ? <CheckMark /> : null}
               </TableCell>
               <TableCell>{e.notes}</TableCell>
+              <TableCell numeric>{moment(e.created_at).format('L')}</TableCell>
             </TableRow>
           ))}
         </TableBody>
