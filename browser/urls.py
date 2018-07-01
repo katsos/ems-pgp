@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, re_path
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -9,5 +10,5 @@ urlpatterns = [
     path('logout', LogoutView.as_view(), name='logout'),
 
     # let front-end router handle the rest
-    re_path('.*', TemplateView.as_view(template_name='index.html')),
+    re_path('.*', login_required(TemplateView.as_view(template_name='index.html'))),
 ]
