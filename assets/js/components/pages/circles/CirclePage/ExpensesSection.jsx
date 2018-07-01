@@ -35,7 +35,7 @@ function ExpensesSection({ budget }) {
         </TableHead>
         <TableBody>
           {expenses.map(e => (
-            <TableRow>
+            <TableRow key={e.id}>
               <TableCell>{e.id}</TableCell>
               <TableCell>{e.type}</TableCell>
               <TableCell numeric>{e.amount}</TableCell>

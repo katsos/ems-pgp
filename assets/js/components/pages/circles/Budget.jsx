@@ -98,12 +98,13 @@ class Budget extends React.Component {
             {fields.map((f, index) => (
               (f.editMode) ? (
                 <BudgetFieldEdit
+                  key={f.id}
                   field={f}
                   onConfirm={f => this.onClickFieldConfirmReplace(index, f)}
                   onCancel={() => this.toggleFieldEditMode(f.code, false)}
                 />
               ) : (
-                <tr>
+                <tr key={f.id}>
                   <td>{f.code}</td>
                   <td>{f.title}</td>
                   <td>{f.amount}</td>
