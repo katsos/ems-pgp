@@ -1,4 +1,5 @@
 import React from 'react';
+import withRouter from 'react-router-dom/withRouter';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,6 +19,9 @@ class BudgetFieldRow extends React.PureComponent {
     switch (action) {
       case 'expense':
         return this.setState({ isExpenseDialogOpen: true });
+      case 'edit':
+        const { pathname } = this.props.history.location;
+        return this.props.history.push(`${pathname}/budget`);
     }
   }
 
@@ -57,4 +61,5 @@ BudgetFieldRow.propTypes = {
   }).isRequired,
 };
 
-export default BudgetFieldRow;
+const BudgetFieldRowWithRouter = withRouter(BudgetFieldRow);
+export default BudgetFieldRowWithRouter;

@@ -10,10 +10,7 @@ const ACTIONS = [
   }, {
     name: 'edit',
     label: 'Επεξεργασία',
-  }, {
-    name: 'delete',
-    label: 'Διαγραφή',
-  }
+  },
 ];
 
 class BudgetActions extends React.PureComponent {
