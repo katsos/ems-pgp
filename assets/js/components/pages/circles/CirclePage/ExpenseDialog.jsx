@@ -29,7 +29,7 @@ class ExpenseDialog extends React.PureComponent {
     const { id: budget_field } = this.props.field;
     Expense.create({ ...this.state, budget_field })
       // TODO: inform for the successful POST
-      .then(this.props.onCancel);
+      .then(() => window.location.reload());
       // TODO: catch
   }
 
