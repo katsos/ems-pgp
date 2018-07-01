@@ -28,7 +28,10 @@ class Budget extends React.Component {
 
     this.setState({ isLoading: true });
     Circle.getBudget(this.circleId)
-      .then(({ fields }) => this.setState({ fields }))
+      .then(({ fields }) => {
+        this.fields = JSON.parse(JSON.stringify(fields));
+        this.setState({ fields });
+      })
       .catch(({ response: { data, status } }) => {
         if (status === 404) return this.setState({ fields: [] });
         console.error(data);
